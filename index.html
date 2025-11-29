@@ -438,9 +438,7 @@
 
         // 从Release中查找APK文件
         function findApkAsset(release) {
-            return release.assets.find(asset => {
-                return asset.name.toLowerCase().endsWith('.apk');
-            });
+          return release.assets.find(asset => { return asset.name.toLowerCase().includes('.apk');s });
         }
 
         // 更新版本选择器
