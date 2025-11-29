@@ -310,7 +310,7 @@
         </div>
         
         <footer>
-            <p id="footerText">&copy; 2023 您的公司名称. 保留所有权利.</p>
+            <p id="footerText">&copy; 2023 深圳市众视达创新科技有限公司. 保留所有权利.</p>
         </footer>
     </div>
 
@@ -385,14 +385,18 @@
             }
         };
 
-        // GitHub配置 - 修改这里！
-        const githubConfig = {
-            // 你的GitHub用户名
-            username: 'ZONESTAR3D',
-            // 你的仓库名
-            repository: 'EggAPK',
-            // APK文件名的模式（支持通配符，如 *-release.apk）
-            apkPattern: '*.apk'
+        // 支持多平台的配置
+        const platformConfig = {
+            github: {
+                username: 'ZONESTAR3D',
+                repository: 'EggAPK',
+                enabled: true
+            },
+            gitee: {
+                username: 'zonestar3D',
+                repository: 'EggAPK', 
+                enabled: true
+            }
         };
 
         // 应用配置信息
@@ -407,7 +411,7 @@
             },
             companyName: {
                 zh: '深圳市众视达创新科技有限公司',
-                en: 'Shenzhen Zhongshida Innovation Technology Co., Ltd'
+                en: 'Shenzhen ZONESTAR Innovation Technology Co., Ltd'
             }
         };
 
@@ -421,28 +425,71 @@
             }
         }
 
-        // 获取GitHub Releases
-        async function fetchReleases() {
-            try {
-                const response = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repository}/releases`);
-                if (!response.ok) {
-                    throw new Error('Failed to fetch releases');
+        // 智能选择下载平台
+        async function smartFetchReleases(currentLang) {
+            const platforms = ['github', 'gitee'];
+            
+            for (const platform of platforms) {
+                if (!platformConfig[platform].enabled) continue;
+                
+                try {
+                    console.log(`尝试从 ${platform} 获取Releases...`);
+                    const releases = await fetchReleasesFromPlatform(platform);
+                    if (releases && releases.length > 0) {
+                        console.log(`成功从 ${platform} 获取到 ${releases.length} 个Release`);
+                        return { releases, platform };
+                    }
+                } catch (error) {
+                    console.warn(`${platform} 获取失败:`, error);
                 }
-                const releases = await response.json();
-                return releases;
-            } catch (error) {
-                console.error('Error fetching releases:', error);
-                return [];
             }
+            
+            throw new Error('所有平台都无法获取Releases');
         }
 
-        // 从Release中查找APK文件
+        // 从指定平台获取Releases
+        async function fetchReleasesFromPlatform(platform) {
+            const config = platformConfig[platform];
+            let apiUrl;
+            
+            if (platform === 'github') {
+                apiUrl = `https://api.github.com/repos/${config.username}/${config.repository}/releases`;
+            } else if (platform === 'gitee') {
+                apiUrl = `https://gitee.com/api/v5/repos/${config.username}/${config.repository}/releases`;
+            }
+            
+            const response = await fetch(apiUrl);
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            
+            const releases = await response.json();
+            
+            // Gitee API返回的数据结构不同，需要适配
+            if (platform === 'gitee') {
+                return releases.map(release => ({
+                    ...release,
+                    // 适配字段名
+                    tag_name: release.tag_name,
+                    assets: release.assets || []
+                }));
+            }
+            
+            return releases;
+        }
+
+        // 从Release中查找APK文件 - 修复版本
         function findApkAsset(release) {
-          return release.assets.find(asset => { return asset.name.toLowerCase().includes('.apk');s });
+            if (!release.assets || release.assets.length === 0) {
+                return null;
+            }
+            
+            // 查找APK文件
+            return release.assets.find(asset => {
+                return asset.name.toLowerCase().endsWith('.apk');
+            });
         }
 
         // 更新版本选择器
-        function updateVersionSelector(releases, currentLang) {
+        function updateVersionSelector(releases, currentLang, platform) {
             const select = document.getElementById('versionSelect');
             select.innerHTML = '';
             
@@ -454,29 +501,51 @@
                 return;
             }
             
-            releases.forEach((release, index) => {
+            // 过滤出有APK文件的Release
+            const releasesWithApk = releases.filter(release => findApkAsset(release));
+            
+            if (releasesWithApk.length === 0) {
+                const option = document.createElement('option');
+                option.value = '';
+                option.textContent = translations[currentLang].noReleases;
+                select.appendChild(option);
+                return;
+            }
+            
+            releasesWithApk.forEach((release, index) => {
                 const apkAsset = findApkAsset(release);
                 if (apkAsset) {
                     const option = document.createElement('option');
                     option.value = index;
                     option.textContent = `${release.tag_name} - ${apkAsset.name}`;
-                    option.dataset.downloadUrl = apkAsset.browser_download_url;
+                    
+                    // 设置下载URL
+                    if (platform === 'gitee') {
+                        // Gitee的下载URL格式
+                        option.dataset.downloadUrl = `https://gitee.com/${platformConfig.gitee.username}/${platformConfig.gitee.repository}/releases/download/${release.tag_name}/${apkAsset.name}`;
+                    } else {
+                        // GitHub的下载URL格式
+                        option.dataset.downloadUrl = apkAsset.browser_download_url;
+                    }
+                    
                     option.dataset.releaseData = JSON.stringify({
                         tag_name: release.tag_name,
                         name: release.name,
                         body: release.body,
-                        download_count: apkAsset.download_count,
+                        download_count: apkAsset.download_count || 0,
                         size: apkAsset.size,
-                        created_at: release.created_at
+                        created_at: release.created_at || release.published_at,
+                        apk_name: apkAsset.name,
+                        platform: platform
                     });
                     select.appendChild(option);
                 }
             });
             
             // 默认选择最新版本
-            if (releases.length > 0) {
+            if (releasesWithApk.length > 0) {
                 select.selectedIndex = 0;
-                updateReleaseInfo(0, releases, currentLang);
+                updateReleaseInfo(0, releasesWithApk, currentLang);
             }
         }
 
@@ -500,17 +569,19 @@
                     <p>${releaseData.body || '暂无版本说明'}</p>
                     <p><strong>${translations[currentLang].downloadCount}</strong> ${releaseData.download_count}</p>
                     <p><strong>文件大小:</strong> ${fileSize} MB</p>
+                    <p><strong>文件名:</strong> ${releaseData.apk_name}</p>
+                    <p><strong>数据源:</strong> ${releaseData.platform === 'github' ? 'GitHub' : 'Gitee'}</p>
                     <p><strong>发布时间:</strong> ${new Date(releaseData.created_at).toLocaleDateString()}</p>
                 </div>
             `;
             
             // 更新下载链接和二维码
             const downloadUrl = selectedOption.dataset.downloadUrl;
-            updateDownloadLinks(downloadUrl, currentLang);
+            updateDownloadLinks(downloadUrl, currentLang, releaseData);
         }
 
         // 更新下载链接和二维码
-        function updateDownloadLinks(downloadUrl, currentLang) {
+        function updateDownloadLinks(downloadUrl, currentLang, releaseData) {
             const downloadBtn = document.getElementById('directDownload');
             downloadBtn.href = downloadUrl;
             downloadBtn.textContent = translations[currentLang].downloadBtn;
@@ -534,11 +605,29 @@
             });
             
             // 更新应用信息中的版本和大小
-            const releaseData = JSON.parse(document.getElementById('versionSelect').selectedOptions[0].dataset.releaseData);
-            document.getElementById('appVersion').textContent = releaseData.tag_name;
-            document.getElementById('appSize').textContent = currentLang === 'zh' ? 
-                `约 ${(releaseData.size / (1024 * 1024)).toFixed(1)} MB` : 
-                `Approx. ${(releaseData.size / (1024 * 1024)).toFixed(1)} MB`;
+            if (releaseData) {
+                document.getElementById('appVersion').textContent = releaseData.tag_name;
+                document.getElementById('appSize').textContent = currentLang === 'zh' ? 
+                    `约 ${(releaseData.size / (1024 * 1024)).toFixed(1)} MB` : 
+                    `Approx. ${(releaseData.size / (1024 * 1024)).toFixed(1)} MB`;
+            }
+        }
+
+        // 显示错误信息给用户
+        function showErrorToUser(message, currentLang) {
+            const releaseInfo = document.getElementById('releaseInfo');
+            releaseInfo.innerHTML = `
+                <div style="background: #ffe6e6; padding: 15px; border-radius: 8px; border-left: 4px solid #ff4444;">
+                    <h4>${currentLang === 'zh' ? '加载失败' : 'Load Failed'}</h4>
+                    <p>${message}</p>
+                    <p>${currentLang === 'zh' ? '请检查：' : 'Please check:'}</p>
+                    <ul>
+                        <li>${currentLang === 'zh' ? 'GitHub/Gitee仓库是否存在Releases' : 'Whether GitHub/Gitee repository has Releases'}</li>
+                        <li>${currentLang === 'zh' ? 'Releases中是否包含APK文件' : 'Whether Releases contain APK files'}</li>
+                        <li>${currentLang === 'zh' ? '网络连接是否正常' : 'Network connection is normal'}</li>
+                    </ul>
+                </div>
+            `;
         }
 
         // 切换语言
@@ -556,7 +645,7 @@
             document.getElementById('versionLabel').textContent = t.versionLabel;
             document.getElementById('appDetailsTitle').textContent = t.appDetailsTitle;
             document.getElementById('notesTitle').textContent = t.notesTitle;
-            document.getElementById('footerText').innerHTML = t.footerText.replace('您的公司名称', config.companyName[lang]);
+            document.getElementById('footerText').innerHTML = t.footerText;
             
             // 更新标签文本
             document.getElementById('labelAppName').textContent = t.labelAppName;
@@ -602,14 +691,19 @@
 
         // 加载Releases
         async function loadReleases(currentLang) {
-            const releases = await fetchReleases();
-            updateVersionSelector(releases, currentLang);
-            
-            // 设置版本切换事件
-            const versionSelect = document.getElementById('versionSelect');
-            versionSelect.addEventListener('change', function() {
-                updateReleaseInfo(this.selectedIndex, releases, currentLang);
-            });
+            try {
+                const { releases, platform } = await smartFetchReleases(currentLang);
+                updateVersionSelector(releases, currentLang, platform);
+                
+                // 设置版本切换事件
+                const versionSelect = document.getElementById('versionSelect');
+                versionSelect.addEventListener('change', function() {
+                    updateReleaseInfo(this.selectedIndex, releases, currentLang);
+                });
+            } catch (error) {
+                console.error('加载Releases失败:', error);
+                showErrorToUser(error.message, currentLang);
+            }
         }
 
         document.addEventListener('DOMContentLoaded', async function() {
