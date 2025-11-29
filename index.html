@@ -1,0 +1,633 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">下载应用 - eEGG文件转换与传送助手</title>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        
+        header {
+            background: #2575fc;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .language-switcher {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+        }
+        
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-left: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .lang-btn.active {
+            background: rgba(255, 255, 255, 0.4);
+            font-weight: bold;
+        }
+        
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .qr-section {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+            padding: 20px;
+            border-right: 1px dashed #e0e0e0;
+        }
+        
+        .info-section {
+            flex: 1;
+            min-width: 300px;
+            padding: 10px;
+        }
+        
+        #qrcode {
+            display: inline-block;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        .instructions {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+        
+        .instructions h3 {
+            color: #2575fc;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .instructions ol, .instructions ul {
+            padding-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 12px;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            background: #2575fc;
+            color: white;
+            padding: 14px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(37, 117, 252, 0.4);
+        }
+        
+        .download-btn:hover {
+            background: #1c68e0;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(37, 117, 252, 0.5);
+        }
+        
+        .version-selector {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .version-selector select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: white;
+        }
+        
+        .release-notes {
+            background: #e8f4ff;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            border-left: 4px solid #2575fc;
+        }
+        
+        .release-notes h4 {
+            color: #2575fc;
+            margin-bottom: 10px;
+        }
+        
+        .app-info {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #eaeaea;
+        }
+        
+        .app-info h3 {
+            color: #2575fc;
+            margin-bottom: 10px;
+        }
+        
+        .app-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .detail-item {
+            padding: 8px 0;
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            color: #555;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .qr-section {
+                border-right: none;
+                border-bottom: 1px dashed #e0e0e0;
+                padding-bottom: 30px;
+            }
+            
+            .content {
+                padding: 30px 20px;
+            }
+            
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .language-switcher {
+                position: static;
+                text-align: center;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="language-switcher">
+                <button class="lang-btn" data-lang="zh">中文</button>
+                <button class="lang-btn" data-lang="en">English</button>
+            </div>
+            <h1 id="headerTitle">下载应用</h1>
+            <p id="headerSubtitle">扫描下方二维码，立即安装应用</p>
+        </header>
+        
+        <div class="content">
+            <div class="qr-section">
+                <div id="qrcode"></div>
+                <p id="qrDescription">使用手机扫描二维码下载应用</p>
+                
+                <div class="instructions">
+                    <h3 id="instructionsTitle">安装说明</h3>
+                    <ol id="instructionsList">
+                        <li>使用手机摄像头或扫码工具扫描上方二维码</li>
+                        <li>点击下载链接，等待应用下载完成</li>
+                        <li>打开下载的APK文件进行安装</li>
+                        <li>如有安全提示，请选择"继续安装"或"允许安装"</li>
+                        <li>安装完成后即可打开应用</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div class="info-section">
+                <div class="version-selector">
+                    <label for="versionSelect" id="versionLabel">选择版本:</label>
+                    <select id="versionSelect">
+                        <option value="" id="loadingVersions">加载版本中...</option>
+                    </select>
+                </div>
+                
+                <div id="releaseInfo">
+                    <!-- 版本信息会动态加载 -->
+                </div>
+                
+                <a href="#" class="download-btn" id="directDownload">直接下载APK</a>
+                
+                <div class="app-info">
+                    <h3 id="appDetailsTitle">应用详情</h3>
+                    <div class="app-details">
+                        <div class="detail-item">
+                            <span class="detail-label" id="labelAppName">应用名称:</span> <span id="appName">eEGG文件转换与传送助手</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label" id="labelVersion">版本:</span> <span id="appVersion">0.1.0</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label" id="labelSize">文件大小:</span> <span id="appSize">约 135 MB</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label" id="labelRequirements">系统要求:</span> <span id="appRequirements">Android 5.0+</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="instructions" style="margin-top: 30px;">
+                    <h3 id="notesTitle">注意事项</h3>
+                    <ul id="notesList">
+                        <li>请确保手机有足够的存储空间</li>
+                        <li>建议在Wi-Fi环境下下载以节省流量</li>
+                        <li>安装前请确保已开启"允许安装来自未知来源的应用"</li>
+                        <li>如有问题，请联系我们的技术支持</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p id="footerText">&copy; 2023 您的公司名称. 保留所有权利.</p>
+        </footer>
+    </div>
+
+    <script>
+        // 多语言配置
+        const translations = {
+            zh: {
+                pageTitle: "下载应用 - eEGG文件转换与传送助手",
+                headerTitle: "下载应用",
+                headerSubtitle: "扫描下方二维码，立即安装应用",
+                qrDescription: "使用手机扫描二维码下载应用",
+                instructionsTitle: "安装说明",
+                instructionsList: [
+                    "使用手机摄像头或扫码工具扫描上方二维码",
+                    "点击下载链接，等待应用下载完成",
+                    "打开下载的APK文件进行安装",
+                    "如有安全提示，请选择\"继续安装\"或\"允许安装\"",
+                    "安装完成后即可打开应用"
+                ],
+                versionLabel: "选择版本:",
+                loadingVersions: "加载版本中...",
+                noReleases: "暂无可用版本",
+                downloadCount: "下载次数:",
+                releaseNotes: "版本说明",
+                appDetailsTitle: "应用详情",
+                labelAppName: "应用名称:",
+                labelVersion: "版本:",
+                labelSize: "文件大小:",
+                labelRequirements: "系统要求:",
+                downloadBtn: "直接下载APK",
+                notesTitle: "注意事项",
+                notesList: [
+                    "请确保手机有足够的存储空间",
+                    "建议在Wi-Fi环境下下载以节省流量",
+                    "安装前请确保已开启\"允许安装来自未知来源的应用\"",
+                    "如有问题，请联系我们的技术支持"
+                ],
+                footerText: "&copy; 2023 深圳市众视达创新科技有限公司. 保留所有权利."
+            },
+            en: {
+                pageTitle: "Download App - eEGG File Transfer",
+                headerTitle: "Download App",
+                headerSubtitle: "Scan the QR code below to install the app immediately",
+                qrDescription: "Use your phone to scan the QR code and download the app",
+                instructionsTitle: "Installation Instructions",
+                instructionsList: [
+                    "Scan the QR code above using your phone camera or scanning tool",
+                    "Click the download link and wait for the app to download",
+                    "Open the downloaded APK file to install",
+                    "If security prompts appear, select \"Continue installation\" or \"Allow installation\"",
+                    "Open the app after installation is complete"
+                ],
+                versionLabel: "Select Version:",
+                loadingVersions: "Loading versions...",
+                noReleases: "No releases available",
+                downloadCount: "Download Count:",
+                releaseNotes: "Release Notes",
+                appDetailsTitle: "App Details",
+                labelAppName: "App Name:",
+                labelVersion: "Version:",
+                labelSize: "File Size:",
+                labelRequirements: "System Requirements:",
+                downloadBtn: "Download APK Directly",
+                notesTitle: "Important Notes",
+                notesList: [
+                    "Ensure your phone has sufficient storage space",
+                    "Recommended to download over Wi-Fi to save data",
+                    "Make sure \"Allow installation from unknown sources\" is enabled before installing",
+                    "Contact our technical support if you have any issues"
+                ],
+                footerText: "&copy; 2023 Shenzhen ZONESTAR Innovation Technology Co., Ltd. All rights reserved."
+            }
+        };
+
+        // GitHub配置 - 修改这里！
+        const githubConfig = {
+            // 你的GitHub用户名
+            username: 'ZONESTAR3D',
+            // 你的仓库名
+            repository: 'EggAPK',
+            // APK文件名的模式（支持通配符，如 *-release.apk）
+            apkPattern: '*.apk'
+        };
+
+        // 应用配置信息
+        const config = {
+            appName: {
+                zh: 'eEGG文件转换与传送助手',
+                en: 'eEGG File Transfer'
+            },
+            appRequirements: {
+                zh: 'Android 5.0+',
+                en: 'Android 5.0+'
+            },
+            companyName: {
+                zh: '深圳市众视达创新科技有限公司',
+                en: 'Shenzhen Zhongshida Innovation Technology Co., Ltd'
+            }
+        };
+
+        // 检测浏览器语言
+        function detectBrowserLanguage() {
+            const browserLang = navigator.language || navigator.userLanguage;
+            if (browserLang.startsWith('zh')) {
+                return 'zh';
+            } else {
+                return 'en';
+            }
+        }
+
+        // 获取GitHub Releases
+        async function fetchReleases() {
+            try {
+                const response = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repository}/releases`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch releases');
+                }
+                const releases = await response.json();
+                return releases;
+            } catch (error) {
+                console.error('Error fetching releases:', error);
+                return [];
+            }
+        }
+
+        // 从Release中查找APK文件
+        function findApkAsset(release) {
+            return release.assets.find(asset => {
+                return asset.name.toLowerCase().endsWith('.apk');
+            });
+        }
+
+        // 更新版本选择器
+        function updateVersionSelector(releases, currentLang) {
+            const select = document.getElementById('versionSelect');
+            select.innerHTML = '';
+            
+            if (releases.length === 0) {
+                const option = document.createElement('option');
+                option.value = '';
+                option.textContent = translations[currentLang].noReleases;
+                select.appendChild(option);
+                return;
+            }
+            
+            releases.forEach((release, index) => {
+                const apkAsset = findApkAsset(release);
+                if (apkAsset) {
+                    const option = document.createElement('option');
+                    option.value = index;
+                    option.textContent = `${release.tag_name} - ${apkAsset.name}`;
+                    option.dataset.downloadUrl = apkAsset.browser_download_url;
+                    option.dataset.releaseData = JSON.stringify({
+                        tag_name: release.tag_name,
+                        name: release.name,
+                        body: release.body,
+                        download_count: apkAsset.download_count,
+                        size: apkAsset.size,
+                        created_at: release.created_at
+                    });
+                    select.appendChild(option);
+                }
+            });
+            
+            // 默认选择最新版本
+            if (releases.length > 0) {
+                select.selectedIndex = 0;
+                updateReleaseInfo(0, releases, currentLang);
+            }
+        }
+
+        // 更新版本信息显示
+        function updateReleaseInfo(selectedIndex, releases, currentLang) {
+            const releaseInfo = document.getElementById('releaseInfo');
+            const select = document.getElementById('versionSelect');
+            const selectedOption = select.options[selectedIndex];
+            
+            if (!selectedOption || !selectedOption.dataset.releaseData) {
+                releaseInfo.innerHTML = '';
+                return;
+            }
+            
+            const releaseData = JSON.parse(selectedOption.dataset.releaseData);
+            const fileSize = (releaseData.size / (1024 * 1024)).toFixed(1);
+            
+            releaseInfo.innerHTML = `
+                <div class="release-notes">
+                    <h4>${translations[currentLang].releaseNotes}</h4>
+                    <p>${releaseData.body || '暂无版本说明'}</p>
+                    <p><strong>${translations[currentLang].downloadCount}</strong> ${releaseData.download_count}</p>
+                    <p><strong>文件大小:</strong> ${fileSize} MB</p>
+                    <p><strong>发布时间:</strong> ${new Date(releaseData.created_at).toLocaleDateString()}</p>
+                </div>
+            `;
+            
+            // 更新下载链接和二维码
+            const downloadUrl = selectedOption.dataset.downloadUrl;
+            updateDownloadLinks(downloadUrl, currentLang);
+        }
+
+        // 更新下载链接和二维码
+        function updateDownloadLinks(downloadUrl, currentLang) {
+            const downloadBtn = document.getElementById('directDownload');
+            downloadBtn.href = downloadUrl;
+            downloadBtn.textContent = translations[currentLang].downloadBtn;
+            
+            // 更新二维码
+            const qrcodeContainer = document.getElementById('qrcode');
+            qrcodeContainer.innerHTML = '';
+            
+            QRCode.toCanvas(qrcodeContainer, downloadUrl, {
+                width: 200,
+                margin: 1,
+                color: {
+                    dark: '#000000',
+                    light: '#FFFFFF'
+                }
+            }, function(error) {
+                if (error) {
+                    console.error('QR code generation failed:', error);
+                    qrcodeContainer.innerHTML = `<p>${currentLang === 'zh' ? '二维码生成失败' : 'QR Code Generation Failed'}</p>`;
+                }
+            });
+            
+            // 更新应用信息中的版本和大小
+            const releaseData = JSON.parse(document.getElementById('versionSelect').selectedOptions[0].dataset.releaseData);
+            document.getElementById('appVersion').textContent = releaseData.tag_name;
+            document.getElementById('appSize').textContent = currentLang === 'zh' ? 
+                `约 ${(releaseData.size / (1024 * 1024)).toFixed(1)} MB` : 
+                `Approx. ${(releaseData.size / (1024 * 1024)).toFixed(1)} MB`;
+        }
+
+        // 切换语言
+        function switchLanguage(lang) {
+            const t = translations[lang];
+            
+            // 更新页面标题
+            document.title = t.pageTitle;
+            
+            // 更新页面内容
+            document.getElementById('headerTitle').textContent = t.headerTitle;
+            document.getElementById('headerSubtitle').textContent = t.headerSubtitle;
+            document.getElementById('qrDescription').textContent = t.qrDescription;
+            document.getElementById('instructionsTitle').textContent = t.instructionsTitle;
+            document.getElementById('versionLabel').textContent = t.versionLabel;
+            document.getElementById('appDetailsTitle').textContent = t.appDetailsTitle;
+            document.getElementById('notesTitle').textContent = t.notesTitle;
+            document.getElementById('footerText').innerHTML = t.footerText.replace('您的公司名称', config.companyName[lang]);
+            
+            // 更新标签文本
+            document.getElementById('labelAppName').textContent = t.labelAppName;
+            document.getElementById('labelVersion').textContent = t.labelVersion;
+            document.getElementById('labelSize').textContent = t.labelSize;
+            document.getElementById('labelRequirements').textContent = t.labelRequirements;
+            
+            // 更新应用信息
+            document.getElementById('appName').textContent = config.appName[lang];
+            document.getElementById('appRequirements').textContent = config.appRequirements[lang];
+            
+            // 更新列表
+            const instructionsList = document.getElementById('instructionsList');
+            instructionsList.innerHTML = '';
+            t.instructionsList.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                instructionsList.appendChild(li);
+            });
+            
+            const notesList = document.getElementById('notesList');
+            notesList.innerHTML = '';
+            t.notesList.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                notesList.appendChild(li);
+            });
+            
+            // 更新语言切换按钮状态
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.lang === lang) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // 保存语言偏好
+            localStorage.setItem('preferredLanguage', lang);
+            
+            // 重新加载版本信息（更新语言）
+            loadReleases(lang);
+        }
+
+        // 加载Releases
+        async function loadReleases(currentLang) {
+            const releases = await fetchReleases();
+            updateVersionSelector(releases, currentLang);
+            
+            // 设置版本切换事件
+            const versionSelect = document.getElementById('versionSelect');
+            versionSelect.addEventListener('change', function() {
+                updateReleaseInfo(this.selectedIndex, releases, currentLang);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            // 设置应用基本信息
+            const preferredLang = localStorage.getItem('preferredLanguage') || detectBrowserLanguage();
+            
+            // 初始化语言
+            switchLanguage(preferredLang);
+            
+            // 语言切换按钮事件
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    switchLanguage(this.dataset.lang);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
