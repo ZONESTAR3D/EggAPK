@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">EggFileTransfer</string>
+    <string name="title">文件转换与传送助手</string>
+    <string name="CameraNoFind">未检测到摄像头，请手动输入IP</string>
+    <string name="IP_ADDRESS">设备IP地址</string>
+    <string name="btn_video">视频上传</string>
+    <string name="btn_image">图片上传</string>
+    <string name="btn_audio">音乐上传</string>
+    <string name="btn_settings">设置</string>
+    <string name="status_label">状态:</string>
+    <string name="status_idle">设备就绪</string>
+    <string name="status_connecting">正在连接...</string>
+    <string name="status_connect_ok">设备连接成功</string>
+    <string name="status_connect_fail">设备连接失败</string>
+    <string name="status_converting">文件转换中...</string>
+    <string name="status_convert_ok">文件转换成功</string>
+    <string name="status_convert_fail">文件转换失败</string>
+    <string name="status_transferring">文件传输中...</string>
+    <string name="status_transfer_ok">文件传输成功</string>
+    <string name="status_transfer_fail">文件传输失败</string>
+    <string name="status_unkwon_file">文件不支持</string>
+    <string name="status_video_toolong">视频时长太长</string>
+    <string name="status_exception_error">源文件异常</string>
+    <string name="status_unkwon_state">未知状态</string>
+</resources>
