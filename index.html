@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="pageTitle">下载应用 - eEGG文件转换与传送助手</title>
-    <script src="js/qrcode.min.js"></script>
+    <script src="js/qrcode.min.js" onload="console.log('QRCode 库加载成功')" onerror="console.error('QRCode 库加载失败')"></script>
+    <script>console.log('QRCode 对象:', typeof QRCode);</script>
     
     <style>
         * {
