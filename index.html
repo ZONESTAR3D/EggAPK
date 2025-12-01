@@ -86,6 +86,7 @@
             display: flex;
             flex-wrap: wrap;
             gap: 30px;
+            flex-direction: row-reverse;
         }
         
         .qr-section {
@@ -93,13 +94,16 @@
             min-width: 300px;
             text-align: center;
             padding: 20px;
-            border-right: 1px dashed #e0e0e0;
+            //border-right: 1px dashed #e0e0e0;
+            border-left: 1px dashed #e0e0e0;
+            border-right: none;
         }
         
         .info-section {
             flex: 1;
             min-width: 300px;
             padding: 10px;
+            border-right: none;
         }
         
         #qrcode {
@@ -218,7 +222,8 @@
         
         @media (max-width: 768px) {
             .qr-section {
-                border-right: none;
+                //border-right: none;
+                border-left: none;
                 border-bottom: 1px dashed #e0e0e0;
                 padding-bottom: 30px;
             }
@@ -610,7 +615,27 @@
         
         // 页面加载完成
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM加载完成，开始初始化二维码');
+            const testUrl = 'https://www.baidu.com/';                        
+            const qrContainer = document.getElementById('qrcode');
+            try {
+                QRCode.toCanvas(qrContainer, testUrl, {
+                    width: 200,
+                    margin: 1
+                }, function(error) {
+                    if (error) {
+                        console.error('二维码生成错误:', error);
+                        qrContainer.innerHTML = '<p>二维码生成失败</p>';
+                    } else {
+                        console.log('二维码生成成功');
+                    }
+                });
+            } catch (error) {
+                console.error('二维码异常:', error);
+            }
+    
             const preferredLang = localStorage.getItem('preferredLanguage') || detectBrowserLanguage();
+
             
             // 初始化语言
             switchLanguage(preferredLang);
