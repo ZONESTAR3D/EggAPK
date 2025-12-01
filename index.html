@@ -448,21 +448,29 @@
         function generateQRCode(url, container) {
             container.innerHTML = ''; // 清空容器
             
-            // 使用QRCode库生成二维码
-            Qrcode.toCanvas(container, url, {
-                width: 200,
-                margin: 1,
-                color: {
-                    dark: '#000000',
-                    light: '#FFFFFF'
-                }
-            }, function(error) {
-                if (error) {
-                    console.error('生成二维码失败:', error);
-                    container.innerHTML = '<p style="color: red;">二维码生成失败</p>';
-                } else {
-                    console.log('二维码生成成功');
-                }
+            // 创建canvas元素
+            const canvas = document.createElement('canvas');
+            container.appendChild(canvas);
+            
+            return new Promise((resolve, reject) => {
+                QRCode.toCanvas(canvas, url, {
+                    width: 200,
+                    height: 200,
+                    margin: 1,
+                    color: {
+                        dark: '#000000',
+                        light: '#FFFFFF'
+                    }
+                }, function(error) {
+                    if (error) {
+                        console.error('生成二维码失败:', error);
+                        container.innerHTML = '<p style="color: red;">二维码生成失败</p>';
+                        reject(error);
+                    } else {
+                        console.log('二维码生成成功');
+                        resolve();
+                    }
+                });
             });
         }
         
@@ -535,14 +543,24 @@
         }
         
         // 更新下载链接和二维码
-        function updateDownloadLinks(downloadUrl, currentLang, releaseData) {
+        async function updateDownloadLinks(downloadUrl, currentLang, releaseData) {
             const downloadBtn = document.getElementById('directDownload');
             downloadBtn.href = downloadUrl;
             downloadBtn.textContent = translations[currentLang].downloadBtn;
             
             // 更新二维码
             const qrcodeContainer = document.getElementById('qrcode');
-            generateQRCode(downloadUrl, qrcodeContainer);
+            try {
+                await generateQRCode(downloadUrl, qrcodeContainer);
+            } catch (error) {
+                console.warn('二维码生成失败，使用备用方案:', error);
+                qrcodeContainer.innerHTML = `
+                    <div style="text-align: center; padding: 20px;">
+                        <p>二维码生成失败</p>
+                        <p><a href="${downloadUrl}" target="_blank">点击直接下载</a></p>
+                    </div>
+                `;
+            }
             
             // 更新应用信息
             if (releaseData) {
@@ -615,38 +633,47 @@
         
         // 页面加载完成
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('DOM加载完成，开始初始化二维码');
-            const testUrl = 'https://www.baidu.com/';                        
-            const qrContainer = document.getElementById('qrcode');
-            try {
-                QRCode.toCanvas(qrContainer, testUrl, {
-                    width: 200,
-                    margin: 1
-                }, function(error) {
-                    if (error) {
-                        console.error('二维码生成错误:', error);
-                        qrContainer.innerHTML = '<p>二维码生成失败</p>';
-                    } else {
-                        console.log('二维码生成成功');
-                    }
-                });
-            } catch (error) {
-                console.error('二维码异常:', error);
+          console.log('DOM加载完成，检查DOM元素...');
+          console.log('qrcode容器是否存在:', document.getElementById('qrcode'));
+          console.log('QRCode库是否存在:', typeof QRCode);
+          
+          const preferredLang = localStorage.getItem('preferredLanguage') || detectBrowserLanguage();
+          
+          // 初始化语言
+          switchLanguage(preferredLang);
+          
+          // 语言切换按钮事件
+          document.querySelectorAll('.lang-btn').forEach(btn => {
+              btn.addEventListener('click', function() {
+                  switchLanguage(this.dataset.lang);
+              });
+          });
+      });
+      
+      
+      
+      function testQRCodeGeneration() {
+        console.log('开始测试二维码生成...');
+        console.log('QRCode版本:', QRCode.version);
+        
+        const testContainer = document.getElementById('qrcode');
+        const testCanvas = document.createElement('canvas');
+        testContainer.appendChild(testCanvas);
+        
+        // 测试生成一个简单的二维码
+        QRCode.toCanvas(testCanvas, 'https://github.com/test', {
+            width: 100,
+            margin: 0
+        }, function(error) {
+            if (error) {
+                console.error('QRCode测试失败:', error);
+            } else {
+                console.log('QRCode测试成功!');
             }
-    
-            const preferredLang = localStorage.getItem('preferredLanguage') || detectBrowserLanguage();
-
-            
-            // 初始化语言
-            switchLanguage(preferredLang);
-            
-            // 语言切换按钮事件
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    switchLanguage(this.dataset.lang);
-                });
-            });
         });
+      }
+      
+      document.addEventListener('DOMContentLoaded', testQRCodeGeneration);
     </script>
 </body>
 </html>
