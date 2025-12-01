@@ -13,7 +13,7 @@
 ---
 
 ## 🔧eEGG视频与图片工具 (Windows)
-点击[**这个链接**](./manual/eEGGUserGuide.md)下载视频与图片转换工具。
+点击[**这个链接**](readme_tools.md)下载视频与图片转换工具。
 
 <!-- ## eEgg File Transfer APK -->
 
