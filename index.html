@@ -94,7 +94,7 @@
             min-width: 300px;
             text-align: center;
             padding: 20px;
-            //border-right: 1px dashed #e0e0e0;
+            /*border-right: 1px dashed #e0e0e0;*/
             border-left: 1px dashed #e0e0e0;
             border-right: none;
         }
@@ -222,7 +222,7 @@
         
         @media (max-width: 768px) {
             .qr-section {
-                //border-right: none;
+                /*border-right: none;*/
                 border-left: none;
                 border-bottom: 1px dashed #e0e0e0;
                 padding-bottom: 30px;
@@ -346,6 +346,7 @@
                 labelAppName: "应用名称:",
                 labelVersion: "版本:",
                 labelSize: "文件大小:",
+                releaseTime: "发布时间:",
                 labelRequirements: "系统要求:",
                 downloadBtn: "直接下载APK",
                 notesTitle: "注意事项",
@@ -379,6 +380,7 @@
                 labelAppName: "App Name:",
                 labelVersion: "Version:",
                 labelSize: "File Size:",
+                releaseTime: "Release Time:",
                 labelRequirements: "System Requirements:",
                 downloadBtn: "Download APK Directly",
                 notesTitle: "Important Notes",
@@ -532,8 +534,8 @@
                     <h4>${translations[currentLang].releaseNotes}</h4>
                     <p>${releaseData.body || '暂无版本说明'}</p>
                     <p><strong>${translations[currentLang].downloadCount}</strong> ${releaseData.download_count}</p>
-                    <p><strong>文件大小:</strong> ${fileSize} MB</p>
-                    <p><strong>发布时间:</strong> ${new Date(releaseData.created_at).toLocaleDateString()}</p>
+                    <p><strong>${translations[currentLang].labelSize}</strong> ${fileSize} MB</p>
+                    <p><strong>${translations[currentLang].releaseTime}</strong> ${new Date(releaseData.created_at).toLocaleDateString()}</p>
                 </div>
             `;
             
@@ -633,10 +635,34 @@
         
         // 页面加载完成
         document.addEventListener('DOMContentLoaded', function() {
+          /*
           console.log('DOM加载完成，检查DOM元素...');
           console.log('qrcode容器是否存在:', document.getElementById('qrcode'));
           console.log('QRCode库是否存在:', typeof QRCode);
           
+           function testQRCodeGeneration() {
+              console.log('开始测试二维码生成...');
+              console.log('QRCode版本:', QRCode.version);
+              
+              const testContainer = document.getElementById('qrcode');
+              const testCanvas = document.createElement('canvas');
+              testContainer.appendChild(testCanvas);
+              
+              // 测试生成一个简单的二维码
+              QRCode.toCanvas(testCanvas, 'https://github.com/test', {
+                  width: 100,
+                  margin: 0
+              }, function(error) {
+                  if (error) {
+                      console.error('QRCode测试失败:', error);
+                  } else {
+                      console.log('QRCode测试成功!');
+                  }
+              });
+          }
+          
+          testQRCodeGeneration();
+          */
           const preferredLang = localStorage.getItem('preferredLanguage') || detectBrowserLanguage();
           
           // 初始化语言
@@ -649,31 +675,7 @@
               });
           });
       });
-      
-      
-      
-      function testQRCodeGeneration() {
-        console.log('开始测试二维码生成...');
-        console.log('QRCode版本:', QRCode.version);
-        
-        const testContainer = document.getElementById('qrcode');
-        const testCanvas = document.createElement('canvas');
-        testContainer.appendChild(testCanvas);
-        
-        // 测试生成一个简单的二维码
-        QRCode.toCanvas(testCanvas, 'https://github.com/test', {
-            width: 100,
-            margin: 0
-        }, function(error) {
-            if (error) {
-                console.error('QRCode测试失败:', error);
-            } else {
-                console.log('QRCode测试成功!');
-            }
-        });
-      }
-      
-      document.addEventListener('DOMContentLoaded', testQRCodeGeneration);
+
     </script>
 </body>
 </html>
