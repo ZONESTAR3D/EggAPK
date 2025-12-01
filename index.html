@@ -43,6 +43,15 @@
             position: relative;
         }
         
+        .logo{
+          position: absolute;
+          top: 15px;
+          left: 15px;
+          width: 100px;
+          height: auto;
+          filter: drop-shadow(0 2px 3px rgba(0,0,0,.25));
+        }
+        
         .language-switcher {
             position: absolute;
             top: 15px;
@@ -247,6 +256,8 @@
 <body>
     <div class="container">
         <header>
+            <!-- logo -->
+            <img class="logo" src="eEGGlogo.svg" alt="eEGG Logo">
             <div class="language-switcher">
                 <button class="lang-btn" data-lang="zh">中文</button>
                 <button class="lang-btn" data-lang="en">English</button>
