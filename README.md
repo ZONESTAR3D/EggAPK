@@ -1,19 +1,19 @@
-# eEGG�û��ֲ��빤��
+# eEGG用户手册与工具
 
 ---
 
-## ?eEGG�û��ֲ�
-���[?**�������**](./manual/eEGGUserGuide.md)�鿴�û��ֲᡣ
+## 📄eEGG用户手册
+点击[**这个链接**](manual.md)查看用户手册。
 
 ---
 
-## eEGG�ļ�ת���봫������APP (Android)
-���[?**�������**](https://ZONESTAR3D.github.io/EggAPK/)����apk����װ�������ֻ�
+## :app: eEGG文件转换与传输助手APP (Android)
+点击[**这个链接**](https://ZONESTAR3D.github.io/EggAPK/)下载apk并安装到您的手机
 
 ---
 
-## ?eEGG��Ƶ��ͼƬ���� (Windows)
-���[?**�������**](./manual/eEGGUserGuide.md)������Ƶ��ͼƬת�����ߡ�
+## 🔧eEGG视频与图片工具 (Windows)
+点击[**这个链接**](./manual/eEGGUserGuide.md)下载视频与图片转换工具。
 
 ## eEgg File Transfer APK
 
