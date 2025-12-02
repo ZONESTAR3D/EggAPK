@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="pageTitle">eEGG电子球 - 完整资源中心</title>
-    <script src="https://unpkg.com/qrcode@1.5.3/build/qrcode.min.js"></script>
+    <!-- <script src="https://unpkg.com/qrcode@1.5.3/build/qrcode.min.js"></script> -->
+    <script src="qrcode.min.js"></script>
     
     <style>
         * {
@@ -1318,7 +1319,8 @@
         function generateQRCode(url, container) {
             container.innerHTML = ''; // 清空容器
             
-            return new Promise((resolve, reject) => {
+            try {
+                // 直接使用QRCode生成二维码
                 QRCode.toCanvas(container, url, {
                     width: 200,
                     height: 200,
@@ -1329,15 +1331,30 @@
                     }
                 }, function(error) {
                     if (error) {
-                        console.error('QR code generation failed:', error);
-                        container.innerHTML = '<p style="color: red;">QR code generation failed</p>';
-                        reject(error);
-                    } else {
-                        console.log('QR code generated successfully');
-                        resolve();
+                        console.error('生成二维码失败:', error);
+                        // 显示备用链接
+                        container.innerHTML = `
+                            <div style="text-align: center; padding: 20px;">
+                                <p>二维码生成失败</p>
+                                <p><a href="${url}" target="_blank" style="color: #2575fc; font-weight: bold;">
+                                    点击直接下载
+                                </a></p>
+                            </div>
+                        `;
                     }
                 });
-            });
+            } catch (error) {
+                console.error('生成二维码异常:', error);
+                // 显示备用链接
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 20px;">
+                        <p>二维码生成异常</p>
+                        <p><a href="${url}" target="_blank" style="color: #2575fc; font-weight: bold;">
+                            点击直接下载
+                        </a></p>
+                    </div>
+                `;
+            }
         }
         
         // 更新版本选择器
