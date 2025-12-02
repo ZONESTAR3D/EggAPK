@@ -1316,12 +1316,56 @@
         }
         
         // 生成二维码
+        // function generateQRCode(url, container) {
+        //     container.innerHTML = ''; // 清空容器
+            
+        //     try {
+        //         // 直接使用QRCode生成二维码
+        //         QRCode.toCanvas(container, url, {
+        //             width: 200,
+        //             height: 200,
+        //             margin: 1,
+        //             color: {
+        //                 dark: '#000000',
+        //                 light: '#FFFFFF'
+        //             }
+        //         }, function(error) {
+        //             if (error) {
+        //                 console.error('生成二维码失败:', error);
+        //                 // 显示备用链接
+        //                 container.innerHTML = `
+        //                     <div style="text-align: center; padding: 20px;">
+        //                         <p>二维码生成失败</p>
+        //                         <p><a href="${url}" target="_blank" style="color: #2575fc; font-weight: bold;">
+        //                             点击直接下载
+        //                         </a></p>
+        //                     </div>
+        //                 `;
+        //             }
+        //         });
+        //     } catch (error) {
+        //         console.error('生成二维码异常:', error);
+        //         // 显示备用链接
+        //         container.innerHTML = `
+        //             <div style="text-align: center; padding: 20px;">
+        //                 <p>二维码生成异常</p>
+        //                 <p><a href="${url}" target="_blank" style="color: #2575fc; font-weight: bold;">
+        //                     点击直接下载
+        //                 </a></p>
+        //             </div>
+        //         `;
+        //     }
+        // }
+
         function generateQRCode(url, container) {
             container.innerHTML = ''; // 清空容器
             
-            try {
-                // 直接使用QRCode生成二维码
-                QRCode.toCanvas(container, url, {
+            // 创建canvas元素
+            const canvas = document.createElement('canvas');
+            container.appendChild(canvas);
+            
+            return new Promise((resolve, reject) => {
+                QRCode.toCanvas(canvas, url, {
                     width: 200,
                     height: 200,
                     margin: 1,
@@ -1332,29 +1376,14 @@
                 }, function(error) {
                     if (error) {
                         console.error('生成二维码失败:', error);
-                        // 显示备用链接
-                        container.innerHTML = `
-                            <div style="text-align: center; padding: 20px;">
-                                <p>二维码生成失败</p>
-                                <p><a href="${url}" target="_blank" style="color: #2575fc; font-weight: bold;">
-                                    点击直接下载
-                                </a></p>
-                            </div>
-                        `;
+                        container.innerHTML = '<p style="color: red;">二维码生成失败</p>';
+                        reject(error);
+                    } else {
+                        console.log('二维码生成成功');
+                        resolve();
                     }
                 });
-            } catch (error) {
-                console.error('生成二维码异常:', error);
-                // 显示备用链接
-                container.innerHTML = `
-                    <div style="text-align: center; padding: 20px;">
-                        <p>二维码生成异常</p>
-                        <p><a href="${url}" target="_blank" style="color: #2575fc; font-weight: bold;">
-                            点击直接下载
-                        </a></p>
-                    </div>
-                `;
-            }
+            });
         }
         
         // 更新版本选择器
