@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="pageTitle">下载应用 - eEGG文件转换与传送助手</title>
-    <!--<script src="https://unpkg.com/qrcode@1.5.3/build/qrcode.min.js"></script>-->
-    <script src="qrcode.min.js"></script>
+    <title id="pageTitle">eEGG电子球 - 完整资源中心</title>
+    <script src="https://unpkg.com/qrcode@1.5.3/build/qrcode.min.js"></script>
     
     <style>
         * {
@@ -20,15 +19,13 @@
             color: #333;
             line-height: 1.6;
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             padding: 20px;
         }
         
         .container {
-            max-width: 900px;
+            max-width: 1200px;
             width: 100%;
+            margin: 0 auto;
             background: white;
             border-radius: 20px;
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
@@ -38,15 +35,15 @@
         header {
             background: #2575fc;
             color: white;
-            padding: 30px 20px;
+            padding: 40px 20px;
             text-align: center;
             position: relative;
         }
         
         .logo{
           position: absolute;
-          top: 15px;
-          left: 15px;
+          top: 20px;
+          left: 20px;
           width: 100px;
           height: auto;
           filter: drop-shadow(0 2px 3px rgba(0,0,0,.25));
@@ -54,19 +51,20 @@
         
         .language-switcher {
             position: absolute;
-            top: 15px;
+            top: 20px;
             right: 20px;
+            display: flex;
+            gap: 10px;
         }
         
         .lang-btn {
             background: rgba(255, 255, 255, 0.2);
             border: none;
             color: white;
-            padding: 5px 12px;
+            padding: 8px 16px;
             border-radius: 15px;
             cursor: pointer;
             font-size: 0.9rem;
-            margin-left: 5px;
             transition: all 0.3s ease;
         }
         
@@ -80,348 +78,1062 @@
         }
         
         header h1 {
-            font-size: 2.2rem;
-            margin-bottom: 10px;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
             font-weight: 700;
         }
         
         header p {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
         }
         
-        .content {
-            padding: 40px 30px;
+        .nav-tabs {
             display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            flex-direction: row-reverse;
+            background: #f0f4f8;
+            border-bottom: 2px solid #e0e0e0;
+            overflow-x: auto;
+            white-space: nowrap;
         }
         
-        .qr-section {
+        .tab-btn {
             flex: 1;
-            min-width: 300px;
-            text-align: center;
-            padding: 20px;
-            /*border-right: 1px dashed #e0e0e0;*/
-            border-left: 1px dashed #e0e0e0;
+            min-width: 180px;
+            padding: 18px 20px;
+            background: none;
+            border: none;
+            border-right: 1px solid #e0e0e0;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #555;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .tab-btn:last-child {
             border-right: none;
         }
         
-        .info-section {
-            flex: 1;
-            min-width: 300px;
-            padding: 10px;
-            border-right: none;
+        .tab-btn:hover {
+            background: #e3f2fd;
+            color: #2575fc;
         }
         
-        #qrcode {
-            display: inline-block;
+        .tab-btn.active {
             background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
+            color: #2575fc;
+            border-bottom: 3px solid #2575fc;
+            position: relative;
+            top: 1px;
         }
         
-        .instructions {
+        .tab-btn i {
+            font-size: 1.2rem;
+        }
+        
+        .tab-content {
+            padding: 40px;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .tab-content h2 {
+            color: #2575fc;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e0e0e0;
+            font-size: 1.8rem;
+        }
+        
+        .tab-content h3 {
+            color: #2c3e50;
+            margin: 25px 0 15px;
+            font-size: 1.4rem;
+        }
+        
+        .tab-content h4 {
+            color: #34495e;
+            margin: 20px 0 10px;
+            font-size: 1.2rem;
+        }
+        
+        .tab-content p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .tab-content ul, .tab-content ol {
+            margin-bottom: 20px;
+            padding-left: 25px;
+        }
+        
+        .tab-content li {
+            margin-bottom: 10px;
+        }
+        
+        .tab-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .tab-content th {
+            background: #2575fc;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .tab-content td {
+            padding: 12px 15px;
+            border: 1px solid #e0e0e0;
+            text-align: center;
+        }
+        
+        .tab-content tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .download-section {
             background: #f8f9fa;
             padding: 25px;
             border-radius: 12px;
+            margin: 30px 0;
+        }
+        
+        .download-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
             margin-top: 20px;
         }
         
-        .instructions h3 {
+        .download-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .download-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        .download-card h4 {
             color: #2575fc;
             margin-bottom: 15px;
             font-size: 1.3rem;
         }
         
-        .instructions ol, .instructions ul {
-            padding-left: 20px;
-        }
-        
-        .instructions li {
-            margin-bottom: 12px;
+        .download-card p {
+            margin-bottom: 20px;
+            color: #666;
+            min-height: 60px;
         }
         
         .download-btn {
             display: inline-block;
             background: #2575fc;
             color: white;
-            padding: 14px 30px;
+            padding: 12px 25px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 1.1rem;
-            margin-top: 20px;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(37, 117, 252, 0.4);
+            text-align: center;
+            width: 100%;
         }
         
         .download-btn:hover {
             background: #1c68e0;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(37, 117, 252, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(37, 117, 252, 0.3);
         }
         
-        .version-selector {
+        .qr-container {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        #qrcode {
+            display: inline-block;
             margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
             padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .warning strong {
+            color: #856404;
+        }
+        
+        .note {
+            background: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .note strong {
+            color: #0c5460;
+        }
+        
+        .manual-section {
+            margin-bottom: 40px;
+            padding: 20px;
             background: #f8f9fa;
             border-radius: 10px;
         }
         
-        .version-selector select {
-            width: 100%;
-            padding: 10px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 1rem;
-            background: white;
+        .feature-table {
+            overflow-x: auto;
+            margin: 20px 0;
         }
         
-        .release-notes {
-            background: #e8f4ff;
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 15px;
-            border-left: 4px solid #2575fc;
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #2575fc;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(37, 117, 252, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: none;
         }
         
-        .release-notes h4 {
-            color: #2575fc;
-            margin-bottom: 10px;
-        }
-        
-        .app-info {
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 1px solid #eaeaea;
-        }
-        
-        .app-info h3 {
-            color: #2575fc;
-            margin-bottom: 10px;
-        }
-        
-        .app-details {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        
-        .detail-item {
-            padding: 8px 0;
-        }
-        
-        .detail-label {
-            font-weight: 600;
-            color: #555;
+        .back-to-top:hover {
+            background: #1c68e0;
+            transform: translateY(-3px);
         }
         
         footer {
             text-align: center;
-            padding: 20px;
+            padding: 25px;
             background: #f8f9fa;
             color: #666;
+            font-size: 0.95rem;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .manual-link {
+            display: inline-block;
+            margin: 10px 5px;
+            padding: 8px 16px;
+            background: #e3f2fd;
+            color: #2575fc;
+            text-decoration: none;
+            border-radius: 20px;
             font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .manual-link:hover {
+            background: #2575fc;
+            color: white;
         }
         
         @media (max-width: 768px) {
             .logo {
-              width: 60px;
-              top: 20px;
-              left: 20px;
+                width: 60px;
+                top: 15px;
+                left: 15px;
             }
             
-            .qr-section {
-                /*border-right: none;*/
-                border-left: none;
-                border-bottom: 1px dashed #e0e0e0;
-                padding-bottom: 30px;
-            }
-            
-            .content {
-                padding: 30px 20px;
+            header {
+                padding: 30px 15px;
             }
             
             header h1 {
                 font-size: 1.8rem;
             }
             
+            header p {
+                font-size: 1rem;
+            }
+            
+            .nav-tabs {
+                flex-direction: column;
+            }
+            
+            .tab-btn {
+                min-width: 100%;
+                border-right: none;
+                border-bottom: 1px solid #e0e0e0;
+                justify-content: flex-start;
+                padding: 15px;
+            }
+            
+            .tab-btn.active {
+                border-bottom: 3px solid #2575fc;
+            }
+            
+            .tab-content {
+                padding: 25px 15px;
+            }
+            
+            .tab-content h2 {
+                font-size: 1.5rem;
+            }
+            
+            .download-grid {
+                grid-template-columns: 1fr;
+            }
+            
             .language-switcher {
                 position: static;
-                text-align: center;
-                margin-bottom: 15px;
+                justify-content: center;
+                margin-top: 15px;
+            }
+            
+            .feature-table table {
+                font-size: 0.9rem;
+            }
+            
+            .feature-table th, 
+            .feature-table td {
+                padding: 8px;
             }
         }
+        
+        @media (max-width: 480px) {
+            .container {
+                border-radius: 15px;
+            }
+            
+            .tab-content h2 {
+                font-size: 1.3rem;
+            }
+            
+            .tab-content h3 {
+                font-size: 1.2rem;
+            }
+            
+            .download-card {
+                padding: 15px;
+            }
+        }
+        
+        .icon {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        
+        .content-wrapper {
+            max-height: 600px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+        
+        .content-wrapper::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .content-wrapper::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+        
+        .content-wrapper::-webkit-scrollbar-thumb {
+            background: #2575fc;
+            border-radius: 4px;
+        }
+        
+        .content-wrapper::-webkit-scrollbar-thumb:hover {
+            background: #1c68e0;
+        }
     </style>
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <!-- logo -->
             <img class="logo" src="eEGGlogo.svg" alt="eEGG Logo">
             <div class="language-switcher">
                 <button class="lang-btn" data-lang="zh">中文</button>
                 <button class="lang-btn" data-lang="en">English</button>
             </div>
-            <h1 id="headerTitle">下载应用</h1>
-            <p id="headerSubtitle">扫描下方二维码，立即安装应用</p>
+            <h1 id="headerTitle">eEGG电子球资源中心</h1>
+            <p id="headerSubtitle">用户手册、应用下载、工具软件一站式获取</p>
         </header>
         
-        <div class="content">
-            <div class="qr-section">
-                <div id="qrcode"></div>
-                <p id="qrDescription">使用手机扫描二维码下载应用</p>
+        <nav class="nav-tabs">
+            <button class="tab-btn active" data-tab="manual">
+                <i class="fas fa-book"></i>
+                <span id="tabManual">用户手册</span>
+            </button>
+            <button class="tab-btn" data-tab="apk">
+                <i class="fas fa-mobile-alt"></i>
+                <span id="tabAPK">应用下载</span>
+            </button>
+            <button class="tab-btn" data-tab="tools">
+                <i class="fas fa-tools"></i>
+                <span id="tabTools">转换工具</span>
+            </button>
+        </nav>
+        
+        <!-- 用户手册 Tab -->
+        <div class="tab-content active" id="manual-tab">
+            <h2 id="manualTitle">eEGG用户手册</h2>
+            
+            <div class="content-wrapper">
+                <!-- 语言切换链接 -->
+                <div style="margin-bottom: 20px; text-align: center;">
+                    <a href="usermanual-cn.md" class="manual-link" target="_blank">
+                        <i class="fas fa-file-alt"></i> 查看完整中文手册
+                    </a>
+                    <a href="usermanual.md" class="manual-link" target="_blank">
+                        <i class="fas fa-file-alt"></i> View Full English Manual
+                    </a>
+                </div>
                 
-                <div class="instructions">
-                    <h3 id="instructionsTitle">安装说明</h3>
-                    <ol id="instructionsList">
-                        <li>使用手机摄像头或扫码工具扫描上方二维码</li>
-                        <li>点击下载链接，等待应用下载完成</li>
-                        <li>打开下载的APK文件进行安装</li>
-                        <li>如有安全提示，请选择"继续安装"或"允许安装"</li>
-                        <li>安装完成后即可打开应用</li>
+                <!-- 产品功能 -->
+                <div class="manual-section">
+                    <h3 id="productFeaturesTitle">产品功能</h3>
+                    <p id="productFeaturesDesc">电子球的设备型号不同，它们的功能也有所区别，以下是各个型号设备支持的功能列表：</p>
+                    
+                    <div class="feature-table">
+                        <table id="featuresTable">
+                            <thead>
+                                <tr>
+                                    <th>设备型号</th>
+                                    <th>产品名称</th>
+                                    <th>视频播放</th>
+                                    <th>图片播放</th>
+                                    <th>音乐播放</th>
+                                    <th>网络电台</th>
+                                    <th>小游戏</th>
+                                    <th>语音控制</th>
+                                    <th>AI对话</th>
+                                    <th>手机文件传输</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>eEGG5</td>
+                                    <td>5厘米电子球</td>
+                                    <td>✔️</td>
+                                    <td>✔️</td>
+                                    <td>❌</td>
+                                    <td>❌</td>
+                                    <td>✔️</td>
+                                    <td>❌</td>
+                                    <td>❌</td>
+                                    <td>❌</td>
+                                </tr>
+                                <tr>
+                                    <td>eEGG6</td>
+                                    <td>6厘米电子球</td>
+                                    <td>✔️</td>
+                                    <td>✔️</td>
+                                    <td>✔️</td>
+                                    <td>✔️</td>
+                                    <td>✔️</td>
+                                    <td>❌</td>
+                                    <td>✔️</td>
+                                    <td>✔️</td>
+                                </tr>
+                                <tr>
+                                    <td>eEGG7</td>
+                                    <td>7厘米电子球</td>
+                                    <td>✔️</td>
+                                    <td>✔️</td>
+                                    <td>✔️</td>
+                                    <td>✔️</td>
+                                    <td>✔️</td>
+                                    <td>❌</td>
+                                    <td>✔️</td>
+                                    <td>✔️</td>
+                                </tr>
+                                <tr>
+                                    <td>eEGG7-AI</td>
+                                    <td>7厘米AI电子球</td>
+                                    <td>✔️</td>
+                                    <td>✔️</td>
+                                    <td>✔️</td>
+                                    <td>✔️</td>
+                                    <td>❌</td>
+                                    <td>✔️</td>
+                                    <td>✔️</td>
+                                    <td>✔️</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="note"><strong>注：</strong> <span id="productNote">下文中将直接使用产品型号作为不同产品的代称。</span></p>
+                </div>
+                
+                <!-- 设备操作 -->
+                <div class="manual-section">
+                    <h3 id="operationTitle">设备操作</h3>
+                    
+                    <h4 id="powerOnTitle">开机</h4>
+                    <p id="powerOnDesc">电子球上部有1个硅胶电源按钮，用力按一下这个按钮，设备即可开机。</p>
+                    <div class="warning">
+                        <strong>⚠️注意：</strong> <span id="chargingWarning">收到电子球后，请先给设备充满电后再使用。</span>
+                    </div>
+                    
+                    <h4 id="shakeTitle">操作</h4>
+                    <p id="shakeDesc">电子球内置加速度传感器, 可使用<strong>甩一甩</strong>来实现不同的功能。具体方法为：手握电子球连续轻轻甩动几次，然后停止等待约1秒钟，设备会识别甩动的次数并执行相应的功能：</p>
+                    
+                    <div class="feature-table">
+                        <table id="shakeTable">
+                            <thead>
+                                <tr>
+                                    <th>操作</th>
+                                    <th>功能</th>
+                                    <th>说明</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>甩1次</td>
+                                    <td>下一个/增加</td>
+                                    <td id="shake1Desc">在菜单界面，切换下一个项目；在媒体播放时，播放下一个文件；调整音量时，音量增加</td>
+                                </tr>
+                                <tr>
+                                    <td>甩2次</td>
+                                    <td>执行/上一个/减小</td>
+                                    <td id="shake2Desc">在菜单界面，执行当前选择的菜单或功能；在媒体播放时，播放上一个文件；调整音量时，音量减少</td>
+                                </tr>
+                                <tr>
+                                    <td>甩3次</td>
+                                    <td>打开菜单</td>
+                                    <td id="shake3Desc">显示菜单界面</td>
+                                </tr>
+                                <tr>
+                                    <td>甩4次</td>
+                                    <td>播放模式/音量调节</td>
+                                    <td id="shake4Desc">在媒体播放时，甩4次可打开调整音量/播放模式的弹出式菜单；然后接着甩动可调整音量或播放模式</td>
+                                </tr>
+                                <tr>
+                                    <td>甩5次</td>
+                                    <td>关机</td>
+                                    <td id="shake5Desc">关机后按电子球上的按钮开机</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- 充电 -->
+                <div class="manual-section">
+                    <h3 id="chargingTitle">给设备充电</h3>
+                    <ol>
+                        <li id="charging1">本设备可使用各类带Type-C接口充电器充电，通常情况下90分钟之内可充满内部电池。</li>
+                        <li id="charging2">如果设备长时间放置导致内部电池过放电，请先插上充电器10分钟之后，在试着打开设备的电源。</li>
+                        <li id="charging3">如果设备长时间不使用，建议至少每2个月给设备充满电一次。</li>
                     </ol>
                 </div>
+                
+                <!-- 文件传输方法 -->
+                <div class="manual-section">
+                    <h3 id="fileTransferTitle">文件传输方法</h3>
+                    
+                    <h4 id="browserTransferTitle">通过浏览器传输文件到设备</h4>
+                    <p id="browserTransferDesc">操作设备菜单进入浏览器文件传输模式，打开电脑浏览器并输入设备的IP地址(通常是192.168.x.x)，根据提示管理设备上的文件(上传文件到设备或者从设备上删除文件)。</p>
+                    <div class="note">
+                        <strong>⚠️注1：</strong> <span id="browserNote">上传文件到设备前，您需要通过文件转换工具将视频/图片文件转换为设备可识别的格式。</span>
+                    </div>
+                    
+                    <h4 id="phoneTransferTitle">通过手机传输文件到设备(对eEGG6、eEGG7和eEGG7-AI)</h4>
+                    <p id="phoneTransferDesc">下载并安装"eEGG文件转换与传输助手"APP到您的手机，操作设备进入手机文件传输模式，连接同一WiFi网络，扫描二维码连接设备，即可传输文件。</p>
+                    <div class="note">
+                        <strong>⚠️注：</strong> <span id="phoneNote">eEGG文件转换与传输助手会在传输文件前自动转换图片和视频格式。</span>
+                    </div>
+                    
+                    <h4 id="usbTransferTitle">连接USB传输文件</h4>
+                    <p id="usbTransferDesc">将设备通过USB直接连接到电脑，可以非常方便地将要播放的媒体文件直接复制到设备的内存。</p>
+                    <div class="warning">
+                        <strong>⚠️注意：</strong> <span id="usbWarning">视频和图片文件复制前，需要使用视频和图片转换工具软件转换为设备可用的格式。不要删除设备上的目录,否则可能导致设备的某些功能无法正常工作。</span>
+                    </div>
+                </div>
+                
+                <!-- 快速链接 -->
+                <div class="manual-section">
+                    <h3 id="quickLinksTitle">快速链接</h3>
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                        <a href="#apk-tab" class="manual-link tab-link" data-tab="apk">
+                            <i class="fas fa-download"></i> 下载手机应用
+                        </a>
+                        <a href="#tools-tab" class="manual-link tab-link" data-tab="tools">
+                            <i class="fas fa-tools"></i> 下载转换工具
+                        </a>
+                        <a href="readme_tools.md" class="manual-link" target="_blank">
+                            <i class="fas fa-file-pdf"></i> 转换工具详细教程
+                        </a>
+                    </div>
+                </div>
             </div>
+        </div>
+        
+        <!-- APK下载 Tab -->
+        <div class="tab-content" id="apk-tab">
+            <h2 id="apkTitle">下载应用</h2>
             
-            <div class="info-section">
-                <div class="version-selector">
-                    <label for="versionSelect" id="versionLabel">选择版本:</label>
-                    <select id="versionSelect">
-                        <option value="" id="loadingVersions">加载版本中...</option>
-                    </select>
+            <div class="content-wrapper">
+                <p id="apkSubtitle">扫描下方二维码，立即安装eEGG文件转换与传送助手应用</p>
+                
+                <div class="qr-container">
+                    <p id="qrDescription">使用手机扫描二维码下载应用</p>
+                    <div id="qrcode"></div>
+                    
+                    <div class="version-selector" style="margin: 20px 0;">
+                        <label for="versionSelect" id="versionLabel">选择版本:</label>
+                        <select id="versionSelect" style="width: 100%; padding: 10px; margin-top: 10px; border-radius: 5px; border: 1px solid #ddd;">
+                            <option value="" id="loadingVersions">加载版本中...</option>
+                        </select>
+                    </div>
+                    
+                    <a href="#" class="download-btn" id="directDownload" style="display: inline-block; width: auto; min-width: 200px;">
+                        <i class="fas fa-download"></i> <span id="downloadBtnText">直接下载APK</span>
+                    </a>
                 </div>
                 
-                <div id="releaseInfo">
-                    <!-- 版本信息会动态加载 -->
+                <div class="manual-section">
+                    <h3 id="instructionsTitle">安装说明</h3>
+                    <ol id="instructionsList">
+                        <li id="instruction1">使用手机摄像头或扫码工具扫描上方二维码</li>
+                        <li id="instruction2">点击下载链接，等待应用下载完成</li>
+                        <li id="instruction3">打开下载的APK文件进行安装</li>
+                        <li id="instruction4">如有安全提示，请选择"继续安装"或"允许安装"</li>
+                        <li id="instruction5">安装完成后即可打开应用</li>
+                    </ol>
                 </div>
                 
-                <a href="#" class="download-btn" id="directDownload">直接下载APK</a>
-                
-                <div class="app-info">
-                    <h3 id="appDetailsTitle">应用详情</h3>
-                    <div class="app-details">
-                        <div class="detail-item">
-                            <span class="detail-label" id="labelAppName">应用名称:</span> <span id="appName">eEGG文件转换与传送助手</span>
+                <div class="manual-section">
+                    <h3 id="appInfoTitle">应用信息</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 15px;">
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px;">
+                            <strong id="labelAppName">应用名称:</strong><br>
+                            <span id="appName">eEGG文件转换与传送助手</span>
                         </div>
-                        <div class="detail-item">
-                            <span class="detail-label" id="labelVersion">版本:</span> <span id="appVersion">0.1.0</span>
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px;">
+                            <strong id="labelVersion">版本:</strong><br>
+                            <span id="appVersion">0.1.0</span>
                         </div>
-                        <div class="detail-item">
-                            <span class="detail-label" id="labelSize">文件大小:</span> <span id="appSize">约 135 MB</span>
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px;">
+                            <strong id="labelSize">文件大小:</strong><br>
+                            <span id="appSize">约 135 MB</span>
                         </div>
-                        <div class="detail-item">
-                            <span class="detail-label" id="labelRequirements">系统要求:</span> <span id="appRequirements">Android 5.0+</span>
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px;">
+                            <strong id="labelRequirements">系统要求:</strong><br>
+                            <span id="appRequirements">Android 5.0+</span>
                         </div>
                     </div>
                 </div>
                 
-                <div class="instructions" style="margin-top: 30px;">
+                <div id="releaseInfo" style="margin-top: 25px;">
+                    <!-- 版本信息会动态加载 -->
+                </div>
+                
+                <div class="manual-section">
                     <h3 id="notesTitle">注意事项</h3>
                     <ul id="notesList">
-                        <li>请确保手机有足够的存储空间</li>
-                        <li>建议在Wi-Fi环境下下载以节省流量</li>
-                        <li>安装前请确保已开启"允许安装来自未知来源的应用"</li>
-                        <li>如有问题，请联系我们的技术支持</li>
+                        <li id="note1">请确保手机有足够的存储空间</li>
+                        <li id="note2">建议在Wi-Fi环境下下载以节省流量</li>
+                        <li id="note3">安装前请确保已开启"允许安装来自未知来源的应用"</li>
+                        <li id="note4">如有问题，请联系我们的技术支持</li>
                     </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 转换工具 Tab -->
+        <div class="tab-content" id="tools-tab">
+            <h2 id="toolsTitle">转换工具下载</h2>
+            
+            <div class="content-wrapper">
+                <p id="toolsSubtitle">下载视频和图片转换工具，将您的媒体文件转换为eEGG设备可识别的格式</p>
+                
+                <div class="download-grid">
+                    <!-- 视频转换工具 -->
+                    <div class="download-card">
+                        <h4><i class="fas fa-video icon"></i> <span id="videoToolTitle">视频转换工具</span></h4>
+                        <p id="videoToolDesc">将您的视频文件转换为eEGG设备可播放的格式。支持多种视频格式转换，可调整分辨率和帧率以适应不同型号设备。</p>
+                        <div style="margin: 15px 0;">
+                            <strong id="supportedFormats">支持格式:</strong>
+                            <ul style="margin-top: 5px; font-size: 0.9rem;">
+                                <li>MP4, AVI, MOV, MKV</li>
+                                <li>转换为MJPEG格式</li>
+                                <li>最大分辨率: 1920x1080</li>
+                                <li>最大时长: 60秒</li>
+                            </ul>
+                        </div>
+                        <a href="https://github.com/ZONESTAR3D/eEGG-Tools/archive/refs/tags/VideoConverter-V0.7.zip" class="download-btn">
+                            <i class="fas fa-download"></i> <span id="downloadVideoTool">下载视频转换工具</span>
+                        </a>
+                    </div>
+                    
+                    <!-- 图片转换工具 -->
+                    <div class="download-card">
+                        <h4><i class="fas fa-image icon"></i> <span id="imageToolTitle">图片转换工具</span></h4>
+                        <p id="imageToolDesc">将您的图片文件转换为eEGG设备可显示的格式。支持批量转换，可调整尺寸和裁剪为圆形以适应设备屏幕。</p>
+                        <div style="margin: 15px 0;">
+                            <strong id="imageFeatures">功能特点:</strong>
+                            <ul style="margin-top: 5px; font-size: 0.9rem;">
+                                <li>支持JPG, PNG, BMP格式</li>
+                                <li>批量转换功能</li>
+                                <li>圆形裁剪选项</li>
+                                <li>尺寸调整: 240x240 或 360x360</li>
+                            </ul>
+                        </div>
+                        <a href="https://github.com/ZONESTAR3D/eEGG-Tools/archive/refs/tags/ImageConverter-V0.3.zip" class="download-btn">
+                            <i class="fas fa-download"></i> <span id="downloadImageTool">下载图片转换工具</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="manual-section">
+                    <h3 id="usageGuideTitle">使用指南</h3>
+                    
+                    <h4 id="videoConversionTitle">视频转换步骤</h4>
+                    <ol id="videoConversionSteps">
+                        <li id="videoStep1">下载并解压视频转换工具</li>
+                        <li id="videoStep2">运行视频转换工具应用软件</li>
+                        <li id="videoStep3">根据设备型号选择预设配置(eEGG5/eEGG6/eEGG7)</li>
+                        <li id="videoStep4">添加需要转换的视频文件</li>
+                        <li id="videoStep5">点击"转换"按钮，等待转换完成</li>
+                        <li id="videoStep6">转换后的文件保存在源文件目录下的output文件夹中</li>
+                    </ol>
+                    
+                    <h4 id="imageConversionTitle">图片转换步骤</h4>
+                    <ol id="imageConversionSteps">
+                        <li id="imageStep1">下载并解压图片转换工具</li>
+                        <li id="imageStep2">运行图片转换工具应用软件</li>
+                        <li id="imageStep3">根据设备型号选择输出尺寸(240×240或360×360)</li>
+                        <li id="imageStep4">点击"导入"按钮选择源图片文件</li>
+                        <li id="imageStep5">如需圆形裁剪，勾选相应选项</li>
+                        <li id="imageStep6">点击"导出"按钮并输入文件名保存</li>
+                    </ol>
+                </div>
+                
+                <div class="manual-section">
+                    <h3 id="importantNotesTitle">重要提示</h3>
+                    <div class="warning">
+                        <strong>⚠️注意：</strong>
+                        <ul style="margin-top: 10px;">
+                            <li id="toolNote1">转换工具仅支持Windows系统</li>
+                            <li id="toolNote2">解压路径中不要使用中文目录</li>
+                            <li id="toolNote3">视频文件长度不应超过60秒</li>
+                            <li id="toolNote4">建议视频分辨率为1920x1080，帧率30fps</li>
+                            <li id="toolNote5">转换前请备份原始文件</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="note" style="margin-top: 20px;">
+                        <strong>💡 提示：</strong>
+                        <p id="toolTip">有关转换工具的详细使用方法和参数设置，请参考<a href="readme_tools.md" style="color: #17a2b8; font-weight: bold;">转换工具详细教程</a>。</p>
+                    </div>
                 </div>
             </div>
         </div>
         
         <footer>
             <p id="footerText">&copy; 2023 深圳市众视达创新科技有限公司. 保留所有权利.</p>
+            <p style="margin-top: 10px; font-size: 0.85rem; color: #888;">
+                <span id="contactInfo">如有问题请联系技术支持: support@zone-star.com</span>
+            </p>
         </footer>
     </div>
+    
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
 
     <script>
         // 多语言配置
         const translations = {
             zh: {
-                pageTitle: "下载应用 - eEGG文件转换与传送助手",
-                headerTitle: "下载应用",
-                headerSubtitle: "扫描下方二维码，立即安装应用",
+                pageTitle: "eEGG电子球 - 完整资源中心",
+                headerTitle: "eEGG电子球资源中心",
+                headerSubtitle: "用户手册、应用下载、工具软件一站式获取",
+                tabManual: "用户手册",
+                tabAPK: "应用下载",
+                tabTools: "转换工具",
+                
+                // 用户手册部分
+                manualTitle: "eEGG用户手册",
+                productFeaturesTitle: "产品功能",
+                productFeaturesDesc: "电子球的设备型号不同，它们的功能也有所区别，以下是各个型号设备支持的功能列表：",
+                productNote: "下文中将直接使用产品型号作为不同产品的代称。",
+                
+                operationTitle: "设备操作",
+                powerOnTitle: "开机",
+                powerOnDesc: "电子球上部有1个硅胶电源按钮，用力按一下这个按钮，设备即可开机。",
+                chargingWarning: "收到电子球后，请先给设备充满电后再使用。",
+                
+                shakeTitle: "操作",
+                shakeDesc: "电子球内置加速度传感器, 可使用甩一甩来实现不同的功能。具体方法为：手握电子球连续轻轻甩动几次，然后停止等待约1秒钟，设备会识别甩动的次数并执行相应的功能：",
+                shake1Desc: "在菜单界面，切换下一个项目；在媒体播放时，播放下一个文件；调整音量时，音量增加",
+                shake2Desc: "在菜单界面，执行当前选择的菜单或功能；在媒体播放时，播放上一个文件；调整音量时，音量减少",
+                shake3Desc: "显示菜单界面",
+                shake4Desc: "在媒体播放时，甩4次可打开调整音量/播放模式的弹出式菜单；然后接着甩动可调整音量或播放模式",
+                shake5Desc: "关机后按电子球上的按钮开机",
+                
+                chargingTitle: "给设备充电",
+                charging1: "本设备可使用各类带Type-C接口充电器充电，通常情况下90分钟之内可充满内部电池。",
+                charging2: "如果设备长时间放置导致内部电池过放电，请先插上充电器10分钟之后，在试着打开设备的电源。",
+                charging3: "如果设备长时间不使用，建议至少每2个月给设备充满电一次。",
+                
+                fileTransferTitle: "文件传输方法",
+                browserTransferTitle: "通过浏览器传输文件到设备",
+                browserTransferDesc: "操作设备菜单进入浏览器文件传输模式，打开电脑浏览器并输入设备的IP地址(通常是192.168.x.x)，根据提示管理设备上的文件(上传文件到设备或者从设备上删除文件)。",
+                browserNote: "上传文件到设备前，您需要通过文件转换工具将视频/图片文件转换为设备可识别的格式。",
+                
+                phoneTransferTitle: "通过手机传输文件到设备(对eEGG6、eEGG7和eEGG7-AI)",
+                phoneTransferDesc: "下载并安装\"eEGG文件转换与传输助手\"APP到您的手机，操作设备进入手机文件传输模式，连接同一WiFi网络，扫描二维码连接设备，即可传输文件。",
+                phoneNote: "eEGG文件转换与传输助手会在传输文件前自动转换图片和视频格式。",
+                
+                usbTransferTitle: "连接USB传输文件",
+                usbTransferDesc: "将设备通过USB直接连接到电脑，可以非常方便地将要播放的媒体文件直接复制到设备的内存。",
+                usbWarning: "视频和图片文件复制前，需要使用视频和图片转换工具软件转换为设备可用的格式。不要删除设备上的目录,否则可能导致设备的某些功能无法正常工作。",
+                
+                quickLinksTitle: "快速链接",
+                
+                // APK下载部分
+                apkTitle: "下载应用",
+                apkSubtitle: "扫描下方二维码，立即安装eEGG文件转换与传送助手应用",
                 qrDescription: "使用手机扫描二维码下载应用",
-                instructionsTitle: "安装说明",
-                instructionsList: [
-                    "使用手机摄像头或扫码工具扫描上方二维码",
-                    "点击下载链接，等待应用下载完成",
-                    "打开下载的APK文件进行安装",
-                    "如有安全提示，请选择\"继续安装\"或\"允许安装\"",
-                    "安装完成后即可打开应用"
-                ],
                 versionLabel: "选择版本:",
                 loadingVersions: "加载版本中...",
                 noReleases: "暂无可用版本",
                 downloadCount: "下载次数:",
                 releaseNotes: "版本说明",
-                appDetailsTitle: "应用详情",
+                downloadBtnText: "直接下载APK",
+                
+                instructionsTitle: "安装说明",
+                instruction1: "使用手机摄像头或扫码工具扫描上方二维码",
+                instruction2: "点击下载链接，等待应用下载完成",
+                instruction3: "打开下载的APK文件进行安装",
+                instruction4: "如有安全提示，请选择\"继续安装\"或\"允许安装\"",
+                instruction5: "安装完成后即可打开应用",
+                
+                appInfoTitle: "应用信息",
                 labelAppName: "应用名称:",
                 labelVersion: "版本:",
                 labelSize: "文件大小:",
-                releaseTime: "发布时间:",
                 labelRequirements: "系统要求:",
-                downloadBtn: "直接下载APK",
+                
                 notesTitle: "注意事项",
-                notesList: [
-                    "请确保手机有足够的存储空间",
-                    "建议在Wi-Fi环境下下载以节省流量",
-                    "安装前请确保已开启\"允许安装来自未知来源的应用\"",
-                    "如有问题，请联系我们的技术支持"
-                ],
-                footerText: "&copy; 2023 深圳市众视达创新科技有限公司. 保留所有权利."
+                note1: "请确保手机有足够的存储空间",
+                note2: "建议在Wi-Fi环境下下载以节省流量",
+                note3: "安装前请确保已开启\"允许安装来自未知来源的应用\"",
+                note4: "如有问题，请联系我们的技术支持",
+                
+                // 转换工具部分
+                toolsTitle: "转换工具下载",
+                toolsSubtitle: "下载视频和图片转换工具，将您的媒体文件转换为eEGG设备可识别的格式",
+                videoToolTitle: "视频转换工具",
+                videoToolDesc: "将您的视频文件转换为eEGG设备可播放的格式。支持多种视频格式转换，可调整分辨率和帧率以适应不同型号设备。",
+                supportedFormats: "支持格式:",
+                downloadVideoTool: "下载视频转换工具",
+                
+                imageToolTitle: "图片转换工具",
+                imageToolDesc: "将您的图片文件转换为eEGG设备可显示的格式。支持批量转换，可调整尺寸和裁剪为圆形以适应设备屏幕。",
+                imageFeatures: "功能特点:",
+                downloadImageTool: "下载图片转换工具",
+                
+                usageGuideTitle: "使用指南",
+                videoConversionTitle: "视频转换步骤",
+                videoStep1: "下载并解压视频转换工具",
+                videoStep2: "运行视频转换工具应用软件",
+                videoStep3: "根据设备型号选择预设配置(eEGG5/eEGG6/eEGG7)",
+                videoStep4: "添加需要转换的视频文件",
+                videoStep5: "点击\"转换\"按钮，等待转换完成",
+                videoStep6: "转换后的文件保存在源文件目录下的output文件夹中",
+                
+                imageConversionTitle: "图片转换步骤",
+                imageStep1: "下载并解压图片转换工具",
+                imageStep2: "运行图片转换工具应用软件",
+                imageStep3: "根据设备型号选择输出尺寸(240×240或360×360)",
+                imageStep4: "点击\"导入\"按钮选择源图片文件",
+                imageStep5: "如需圆形裁剪，勾选相应选项",
+                imageStep6: "点击\"导出\"按钮并输入文件名保存",
+                
+                importantNotesTitle: "重要提示",
+                toolNote1: "转换工具仅支持Windows系统",
+                toolNote2: "解压路径中不要使用中文目录",
+                toolNote3: "视频文件长度不应超过60秒",
+                toolNote4: "建议视频分辨率为1920x1080，帧率30fps",
+                toolNote5: "转换前请备份原始文件",
+                toolTip: "有关转换工具的详细使用方法和参数设置，请参考转换工具详细教程。",
+                
+                // 页脚
+                footerText: "&copy; 2023 深圳市众视达创新科技有限公司. 保留所有权利.",
+                contactInfo: "如有问题请联系技术支持: support@zone-star.com"
             },
             en: {
-                pageTitle: "Download App - eEGG File Transfer",
-                headerTitle: "Download App",
-                headerSubtitle: "Scan the QR code below to install the app immediately",
+                pageTitle: "eEGG Electronic Ball - Complete Resource Center",
+                headerTitle: "eEGG Resource Center",
+                headerSubtitle: "User Manual, App Downloads, Tools - All in One Place",
+                tabManual: "User Manual",
+                tabAPK: "App Download",
+                tabTools: "Conversion Tools",
+                
+                // 用户手册部分
+                manualTitle: "eEGG User Manual",
+                productFeaturesTitle: "Product Features",
+                productFeaturesDesc: "The functions of the eEGG vary depending on the model. Below is a list of supported functions for each model:",
+                productNote: "The product model will be used directly as a designation for different products below.",
+                
+                operationTitle: "Operation Guide",
+                powerOnTitle: "Power On",
+                powerOnDesc: "There is a silicone power button on the top of the eEGG. Press this button firmly to power on the device.",
+                chargingWarning: "After receiving the eEGG, please fully charge the device before use.",
+                
+                shakeTitle: "Shake-and-Do Operation",
+                shakeDesc: "The eEGG has a built-in G-sensor and can be used to achieve different functions by swinging it. Gently shake the eEGG several times, then stop and wait for about 1 second. The device will recognize the number of shakes and execute the corresponding function:",
+                shake1Desc: "Switch to the next menu item; Play the next media file; Increase the volume.",
+                shake2Desc: "Execute the selected menu or function; Play the previous file; Decrease the volume.",
+                shake3Desc: "Display the menu.",
+                shake4Desc: "Shaking 4 times opens a pop-up menu for adjusting volume/playback mode;",
+                shake5Desc: "After powering off, press the button on the eEGG to power it on.",
+                
+                chargingTitle: "Charging",
+                charging1: "This device can be charged using various chargers with a Type-C interface. Under normal circumstances, the internal battery can be fully charged within 90 minutes.",
+                charging2: "If the device has been left unused for an extended period, causing over-discharge of the internal battery, please plug in the charger for 10 minutes before trying to turn the device on.",
+                charging3: "If the device is not used for a long time, it is recommended to fully charge it at least once every two months.",
+                
+                fileTransferTitle: "File Transfer Methods",
+                browserTransferTitle: "Transferring Files to the Device via Browser",
+                browserTransferDesc: "Accessing the Browser's File Transfer Mode via the Device Menu, open your computer's browser and enter the device's IP address (usually 192.168.x.x), follow the prompts to manage files on the device.",
+                browserNote: "Before uploading files to the device, you need to convert video/image files to a format that the device can recognize using a file conversion tool.",
+                
+                phoneTransferTitle: "Transferring Files to the Device via Mobile Phone (for eEGG6, eEGG7, and eEGG7-AI)",
+                phoneTransferDesc: "Download and install the \"eEGG File Conversion and Transfer Assistant\" APP to your mobile phone, shake the eEGG to enter mobile file transfer mode, connect to the same WiFi network, scan the QR code to connect the device, then transfer files.",
+                phoneNote: "eEGG File Converter and Transfer Assistant will automatically convert image and video formats before transferring files.",
+                
+                usbTransferTitle: "Transfer Files via PC (USB)",
+                usbTransferDesc: "Connecting the device directly to the computer via USB allows for easy copying of media files to the device's memory.",
+                usbWarning: "Before copying video and image files, you need to use Video & Image Converter Tools to convert them. Do not delete directories on the device, otherwise some functions may malfunction.",
+                
+                quickLinksTitle: "Quick Links",
+                
+                // APK下载部分
+                apkTitle: "Download App",
+                apkSubtitle: "Scan the QR code below to install the eEGG File Transfer Assistant app immediately",
                 qrDescription: "Use your phone to scan the QR code and download the app",
-                instructionsTitle: "Installation Instructions",
-                instructionsList: [
-                    "Scan the QR code above using your phone camera or scanning tool",
-                    "Click the download link and wait for the app to download",
-                    "Open the downloaded APK file to install",
-                    "If security prompts appear, select \"Continue installation\" or \"Allow installation\"",
-                    "Open the app after installation is complete"
-                ],
                 versionLabel: "Select Version:",
                 loadingVersions: "Loading versions...",
                 noReleases: "No releases available",
                 downloadCount: "Download Count:",
                 releaseNotes: "Release Notes",
-                appDetailsTitle: "App Details",
+                downloadBtnText: "Download APK Directly",
+                
+                instructionsTitle: "Installation Instructions",
+                instruction1: "Scan the QR code above using your phone camera or scanning tool",
+                instruction2: "Click the download link and wait for the app to download",
+                instruction3: "Open the downloaded APK file to install",
+                instruction4: "If security prompts appear, select \"Continue installation\" or \"Allow installation\"",
+                instruction5: "Open the app after installation is complete",
+                
+                appInfoTitle: "App Information",
                 labelAppName: "App Name:",
                 labelVersion: "Version:",
                 labelSize: "File Size:",
-                releaseTime: "Release Time:",
                 labelRequirements: "System Requirements:",
-                downloadBtn: "Download APK Directly",
+                
                 notesTitle: "Important Notes",
-                notesList: [
-                    "Ensure your phone has sufficient storage space",
-                    "Recommended to download over Wi-Fi to save data",
-                    "Make sure \"Allow installation from unknown sources\" is enabled before installing",
-                    "Contact our technical support if you have any issues"
-                ],
-                footerText: "&copy; 2023 Shenzhen ZONESTAR Innovation Technology Co., Ltd. All rights reserved."
+                note1: "Ensure your phone has sufficient storage space",
+                note2: "Recommended to download over Wi-Fi to save data",
+                note3: "Make sure \"Allow installation from unknown sources\" is enabled before installing",
+                note4: "Contact our technical support if you have any issues",
+                
+                // 转换工具部分
+                toolsTitle: "Conversion Tools Download",
+                toolsSubtitle: "Download video and image conversion tools to convert your media files to eEGG device compatible format",
+                videoToolTitle: "Video Converter",
+                videoToolDesc: "Convert your video files to eEGG device playable format. Supports multiple video format conversion, adjustable resolution and frame rate for different device models.",
+                supportedFormats: "Supported Formats:",
+                downloadVideoTool: "Download Video Converter",
+                
+                imageToolTitle: "Image Converter",
+                imageToolDesc: "Convert your image files to eEGG device displayable format. Supports batch conversion, adjustable size and circular cropping to fit device screen.",
+                imageFeatures: "Features:",
+                downloadImageTool: "Download Image Converter",
+                
+                usageGuideTitle: "Usage Guide",
+                videoConversionTitle: "Video Conversion Steps",
+                videoStep1: "Download and extract the video conversion tool",
+                videoStep2: "Launch the video converter application",
+                videoStep3: "Select preset configuration based on device model (eEGG5/eEGG6/eEGG7)",
+                videoStep4: "Add video files that need to be converted",
+                videoStep5: "Click \"Convert\" button and wait for conversion to complete",
+                videoStep6: "Converted files are saved in the output folder under the source file directory",
+                
+                imageConversionTitle: "Image Conversion Steps",
+                imageStep1: "Download and extract the image conversion tool",
+                imageStep2: "Launch the image converter application",
+                imageStep3: "Select output size based on device model (240×240 or 360×360)",
+                imageStep4: "Click \"Import\" button to select source image files",
+                imageStep5: "Check the circular cropping option if needed",
+                imageStep6: "Click \"Export\" button and enter filename to save",
+                
+                importantNotesTitle: "Important Notes",
+                toolNote1: "Conversion tools only support Windows system",
+                toolNote2: "Do not use Chinese characters in the extraction path",
+                toolNote3: "Video files should not exceed 60 seconds in length",
+                toolNote4: "Recommended video resolution is 1920x1080, frame rate 30fps",
+                toolNote5: "Back up original files before conversion",
+                toolTip: "For detailed usage methods and parameter settings of conversion tools, please refer to the Conversion Tool Detailed Tutorial.",
+                
+                // 页脚
+                footerText: "&copy; 2023 Shenzhen ZONESTAR Innovation Technology Co., Ltd. All rights reserved.",
+                contactInfo: "For questions contact technical support: support@zone-star.com"
             }
-        };
-        
-        // 简化配置 - 先确保基本功能工作
-        const githubConfig = {
-            username: 'ZONESTAR3D',
-            repository: 'EggAPK'
         };
         
         // 应用配置信息
         const config = {
             appName: {
                 zh: 'eEGG文件转换与传送助手',
-                en: 'eEGG File Transfer'
+                en: 'eEGG File Transfer Assistant'
             },
             appRequirements: {
                 zh: 'Android 5.0+',
@@ -439,20 +1151,26 @@
             return browserLang.startsWith('zh') ? 'zh' : 'en';
         }
         
+        // GitHub配置
+        const githubConfig = {
+            username: 'ZONESTAR3D',
+            repository: 'EggAPK'
+        };
+        
         // 获取GitHub Releases
         async function fetchReleases() {
             try {
-                console.log('正在获取Releases...');
+                console.log('Fetching releases...');
                 const apiUrl = `https://api.github.com/repos/${githubConfig.username}/${githubConfig.repository}/releases`;
                 
                 const response = await fetch(apiUrl);
-                if (!response.ok) throw new Error(`HTTP错误! 状态: ${response.status}`);
+                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
                 
                 const releases = await response.json();
-                console.log('获取到的Releases:', releases);
+                console.log('Releases fetched:', releases);
                 return releases;
             } catch (error) {
-                console.error('获取Releases失败:', error);
+                console.error('Failed to fetch releases:', error);
                 return [];
             }
         }
@@ -467,12 +1185,8 @@
         function generateQRCode(url, container) {
             container.innerHTML = ''; // 清空容器
             
-            // 创建canvas元素
-            const canvas = document.createElement('canvas');
-            container.appendChild(canvas);
-            
             return new Promise((resolve, reject) => {
-                QRCode.toCanvas(canvas, url, {
+                QRCode.toCanvas(container, url, {
                     width: 200,
                     height: 200,
                     margin: 1,
@@ -482,11 +1196,11 @@
                     }
                 }, function(error) {
                     if (error) {
-                        console.error('生成二维码失败:', error);
-                        container.innerHTML = '<p style="color: red;">二维码生成失败</p>';
+                        console.error('QR code generation failed:', error);
+                        container.innerHTML = '<p style="color: red;">QR code generation failed</p>';
                         reject(error);
                     } else {
-                        console.log('二维码生成成功');
+                        console.log('QR code generated successfully');
                         resolve();
                     }
                 });
@@ -547,12 +1261,17 @@
             const fileSize = (releaseData.size / (1024 * 1024)).toFixed(1);
             
             releaseInfo.innerHTML = `
-                <div class="release-notes">
-                    <h4>${translations[currentLang].releaseNotes}</h4>
-                    <p>${releaseData.body || '暂无版本说明'}</p>
-                    <p><strong>${translations[currentLang].downloadCount}</strong> ${releaseData.download_count}</p>
-                    <p><strong>${translations[currentLang].labelSize}</strong> ${fileSize} MB</p>
-                    <p><strong>${translations[currentLang].releaseTime}</strong> ${new Date(releaseData.created_at).toLocaleDateString()}</p>
+                <div class="manual-section">
+                    <h3>${translations[currentLang].releaseNotes}</h3>
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-top: 10px;">
+                        <p><strong>${releaseData.name || releaseData.tag_name}</strong></p>
+                        <p>${releaseData.body || 'No release notes available.'}</p>
+                        <div style="margin-top: 15px; display: flex; flex-wrap: wrap; gap: 15px;">
+                            <div><strong>${translations[currentLang].downloadCount}</strong> ${releaseData.download_count}</div>
+                            <div><strong>${translations[currentLang].labelSize}</strong> ${fileSize} MB</div>
+                            <div><strong>发布时间:</strong> ${new Date(releaseData.created_at).toLocaleDateString()}</div>
+                        </div>
+                    </div>
                 </div>
             `;
             
@@ -565,18 +1284,18 @@
         async function updateDownloadLinks(downloadUrl, currentLang, releaseData) {
             const downloadBtn = document.getElementById('directDownload');
             downloadBtn.href = downloadUrl;
-            downloadBtn.textContent = translations[currentLang].downloadBtn;
+            downloadBtn.querySelector('span').textContent = translations[currentLang].downloadBtnText;
             
             // 更新二维码
             const qrcodeContainer = document.getElementById('qrcode');
             try {
                 await generateQRCode(downloadUrl, qrcodeContainer);
             } catch (error) {
-                console.warn('二维码生成失败，使用备用方案:', error);
+                console.warn('QR code generation failed, using fallback:', error);
                 qrcodeContainer.innerHTML = `
                     <div style="text-align: center; padding: 20px;">
-                        <p>二维码生成失败</p>
-                        <p><a href="${downloadUrl}" target="_blank">点击直接下载</a></p>
+                        <p>QR code generation failed</p>
+                        <p><a href="${downloadUrl}" target="_blank">${translations[currentLang].downloadBtnText}</a></p>
                     </div>
                 `;
             }
@@ -584,9 +1303,10 @@
             // 更新应用信息
             if (releaseData) {
                 document.getElementById('appVersion').textContent = releaseData.tag_name.replace('V', '');
-                document.getElementById('appSize').textContent = currentLang === 'zh' ? 
+                const sizeText = currentLang === 'zh' ? 
                     `约 ${(releaseData.size / (1024 * 1024)).toFixed(1)} MB` : 
                     `Approx. ${(releaseData.size / (1024 * 1024)).toFixed(1)} MB`;
+                document.getElementById('appSize').textContent = sizeText;
             }
         }
         
@@ -594,32 +1314,119 @@
         function switchLanguage(lang) {
             const t = translations[lang];
             
-            // 更新页面内容
+            // 更新页面标题和header
             document.title = t.pageTitle;
             document.getElementById('headerTitle').textContent = t.headerTitle;
             document.getElementById('headerSubtitle').textContent = t.headerSubtitle;
-            document.getElementById('qrDescription').textContent = t.qrDescription;
-            document.getElementById('instructionsTitle').textContent = t.instructionsTitle;
-            document.getElementById('versionLabel').textContent = t.versionLabel;
-            document.getElementById('appDetailsTitle').textContent = t.appDetailsTitle;
-            document.getElementById('notesTitle').textContent = t.notesTitle;
-            document.getElementById('footerText').innerHTML = t.footerText;
             
-            // 更新标签文本
+            // 更新tab标题
+            document.getElementById('tabManual').textContent = t.tabManual;
+            document.getElementById('tabAPK').textContent = t.tabAPK;
+            document.getElementById('tabTools').textContent = t.tabTools;
+            
+            // 更新tab内容标题
+            document.getElementById('manualTitle').textContent = t.manualTitle;
+            document.getElementById('apkTitle').textContent = t.apkTitle;
+            document.getElementById('toolsTitle').textContent = t.toolsTitle;
+            
+            // 更新用户手册部分
+            document.getElementById('productFeaturesTitle').textContent = t.productFeaturesTitle;
+            document.getElementById('productFeaturesDesc').textContent = t.productFeaturesDesc;
+            document.getElementById('productNote').textContent = t.productNote;
+            
+            document.getElementById('operationTitle').textContent = t.operationTitle;
+            document.getElementById('powerOnTitle').textContent = t.powerOnTitle;
+            document.getElementById('powerOnDesc').textContent = t.powerOnDesc;
+            document.getElementById('chargingWarning').textContent = t.chargingWarning;
+            
+            document.getElementById('shakeTitle').textContent = t.shakeTitle;
+            document.getElementById('shakeDesc').innerHTML = t.shakeDesc.replace('甩一甩', '<strong>甩一甩</strong>');
+            document.getElementById('shake1Desc').textContent = t.shake1Desc;
+            document.getElementById('shake2Desc').textContent = t.shake2Desc;
+            document.getElementById('shake3Desc').textContent = t.shake3Desc;
+            document.getElementById('shake4Desc').textContent = t.shake4Desc;
+            document.getElementById('shake5Desc').textContent = t.shake5Desc;
+            
+            document.getElementById('chargingTitle').textContent = t.chargingTitle;
+            document.getElementById('charging1').textContent = t.charging1;
+            document.getElementById('charging2').textContent = t.charging2;
+            document.getElementById('charging3').textContent = t.charging3;
+            
+            document.getElementById('fileTransferTitle').textContent = t.fileTransferTitle;
+            document.getElementById('browserTransferTitle').textContent = t.browserTransferTitle;
+            document.getElementById('browserTransferDesc').textContent = t.browserTransferDesc;
+            document.getElementById('browserNote').textContent = t.browserNote;
+            document.getElementById('phoneTransferTitle').textContent = t.phoneTransferTitle;
+            document.getElementById('phoneTransferDesc').textContent = t.phoneTransferDesc;
+            document.getElementById('phoneNote').textContent = t.phoneNote;
+            document.getElementById('usbTransferTitle').textContent = t.usbTransferTitle;
+            document.getElementById('usbTransferDesc').textContent = t.usbTransferDesc;
+            document.getElementById('usbWarning').textContent = t.usbWarning;
+            
+            document.getElementById('quickLinksTitle').textContent = t.quickLinksTitle;
+            
+            // 更新APK下载部分
+            document.getElementById('apkSubtitle').textContent = t.apkSubtitle;
+            document.getElementById('qrDescription').textContent = t.qrDescription;
+            document.getElementById('versionLabel').textContent = t.versionLabel;
+            document.getElementById('loadingVersions').textContent = t.loadingVersions;
+            document.getElementById('instructionsTitle').textContent = t.instructionsTitle;
+            document.getElementById('instruction1').textContent = t.instruction1;
+            document.getElementById('instruction2').textContent = t.instruction2;
+            document.getElementById('instruction3').textContent = t.instruction3;
+            document.getElementById('instruction4').textContent = t.instruction4;
+            document.getElementById('instruction5').textContent = t.instruction5;
+            document.getElementById('appInfoTitle').textContent = t.appInfoTitle;
             document.getElementById('labelAppName').textContent = t.labelAppName;
             document.getElementById('labelVersion').textContent = t.labelVersion;
             document.getElementById('labelSize').textContent = t.labelSize;
             document.getElementById('labelRequirements').textContent = t.labelRequirements;
+            document.getElementById('notesTitle').textContent = t.notesTitle;
+            document.getElementById('note1').textContent = t.note1;
+            document.getElementById('note2').textContent = t.note2;
+            document.getElementById('note3').textContent = t.note3;
+            document.getElementById('note4').textContent = t.note4;
+            
+            // 更新转换工具部分
+            document.getElementById('toolsSubtitle').textContent = t.toolsSubtitle;
+            document.getElementById('videoToolTitle').textContent = t.videoToolTitle;
+            document.getElementById('videoToolDesc').textContent = t.videoToolDesc;
+            document.getElementById('supportedFormats').textContent = t.supportedFormats;
+            document.getElementById('downloadVideoTool').textContent = t.downloadVideoTool;
+            document.getElementById('imageToolTitle').textContent = t.imageToolTitle;
+            document.getElementById('imageToolDesc').textContent = t.imageToolDesc;
+            document.getElementById('imageFeatures').textContent = t.imageFeatures;
+            document.getElementById('downloadImageTool').textContent = t.downloadImageTool;
+            document.getElementById('usageGuideTitle').textContent = t.usageGuideTitle;
+            document.getElementById('videoConversionTitle').textContent = t.videoConversionTitle;
+            document.getElementById('videoStep1').textContent = t.videoStep1;
+            document.getElementById('videoStep2').textContent = t.videoStep2;
+            document.getElementById('videoStep3').textContent = t.videoStep3;
+            document.getElementById('videoStep4').textContent = t.videoStep4;
+            document.getElementById('videoStep5').textContent = t.videoStep5;
+            document.getElementById('videoStep6').textContent = t.videoStep6;
+            document.getElementById('imageConversionTitle').textContent = t.imageConversionTitle;
+            document.getElementById('imageStep1').textContent = t.imageStep1;
+            document.getElementById('imageStep2').textContent = t.imageStep2;
+            document.getElementById('imageStep3').textContent = t.imageStep3;
+            document.getElementById('imageStep4').textContent = t.imageStep4;
+            document.getElementById('imageStep5').textContent = t.imageStep5;
+            document.getElementById('imageStep6').textContent = t.imageStep6;
+            document.getElementById('importantNotesTitle').textContent = t.importantNotesTitle;
+            document.getElementById('toolNote1').textContent = t.toolNote1;
+            document.getElementById('toolNote2').textContent = t.toolNote2;
+            document.getElementById('toolNote3').textContent = t.toolNote3;
+            document.getElementById('toolNote4').textContent = t.toolNote4;
+            document.getElementById('toolNote5').textContent = t.toolNote5;
+            document.getElementById('toolTip').innerHTML = t.toolTip;
+            
+            // 更新页脚
+            document.getElementById('footerText').innerHTML = t.footerText;
+            document.getElementById('contactInfo').textContent = t.contactInfo;
             
             // 更新应用信息
             document.getElementById('appName').textContent = config.appName[lang];
             document.getElementById('appRequirements').textContent = config.appRequirements[lang];
-            
-            // 更新列表
-            document.getElementById('instructionsList').innerHTML = t.instructionsList
-                .map(item => `<li>${item}</li>`).join('');
-            document.getElementById('notesList').innerHTML = t.notesList
-                .map(item => `<li>${item}</li>`).join('');
             
             // 更新语言按钮状态
             document.querySelectorAll('.lang-btn').forEach(btn => {
@@ -644,55 +1451,88 @@
                     updateReleaseInfo(this.selectedIndex, releases, currentLang);
                 });
             } catch (error) {
-                console.error('加载Releases失败:', error);
+                console.error('Failed to load releases:', error);
                 document.getElementById('releaseInfo').innerHTML = 
-                    '<div style="color: red; padding: 10px;">加载版本信息失败，请刷新页面重试</div>';
+                    '<div style="color: red; padding: 10px;">Failed to load version information, please refresh the page and try again.</div>';
             }
         }
         
         // 页面加载完成
         document.addEventListener('DOMContentLoaded', function() {
-          /*
-          console.log('DOM加载完成，检查DOM元素...');
-          console.log('qrcode容器是否存在:', document.getElementById('qrcode'));
-          console.log('QRCode库是否存在:', typeof QRCode);
-          
-           function testQRCodeGeneration() {
-              console.log('开始测试二维码生成...');
-              console.log('QRCode版本:', QRCode.version);
-              
-              const testContainer = document.getElementById('qrcode');
-              const testCanvas = document.createElement('canvas');
-              testContainer.appendChild(testCanvas);
-              
-              // 测试生成一个简单的二维码
-              QRCode.toCanvas(testCanvas, 'https://github.com/test', {
-                  width: 100,
-                  margin: 0
-              }, function(error) {
-                  if (error) {
-                      console.error('QRCode测试失败:', error);
-                  } else {
-                      console.log('QRCode测试成功!');
-                  }
-              });
-          }
-          
-          testQRCodeGeneration();
-          */
-          const preferredLang = localStorage.getItem('preferredLanguage') || detectBrowserLanguage();
-          
-          // 初始化语言
-          switchLanguage(preferredLang);
-          
-          // 语言切换按钮事件
-          document.querySelectorAll('.lang-btn').forEach(btn => {
-              btn.addEventListener('click', function() {
-                  switchLanguage(this.dataset.lang);
-              });
-          });
-      });
-
+            const preferredLang = localStorage.getItem('preferredLanguage') || detectBrowserLanguage();
+            
+            // 初始化语言
+            switchLanguage(preferredLang);
+            
+            // 语言切换按钮事件
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    switchLanguage(this.dataset.lang);
+                });
+            });
+            
+            // Tab切换功能
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const tabId = this.dataset.tab;
+                    
+                    // 移除所有active类
+                    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                    
+                    // 添加active类到当前tab
+                    this.classList.add('active');
+                    document.getElementById(`${tabId}-tab`).classList.add('active');
+                    
+                    // 滚动到顶部
+                    document.querySelector('.tab-content.active').scrollTop = 0;
+                    
+                    // 更新返回顶部按钮
+                    updateBackToTopButton();
+                });
+            });
+            
+            // 快速链接跳转
+            document.querySelectorAll('.tab-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const tabId = this.dataset.tab;
+                    
+                    // 切换到对应tab
+                    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                    
+                    document.querySelector(`.tab-btn[data-tab="${tabId}"]`).classList.add('active');
+                    document.getElementById(`${tabId}-tab`).classList.add('active');
+                });
+            });
+            
+            // 返回顶部按钮
+            const backToTopBtn = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', function() {
+                updateBackToTopButton();
+            });
+            
+            backToTopBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            function updateBackToTopButton() {
+                if (window.scrollY > 300) {
+                    backToTopBtn.style.display = 'flex';
+                } else {
+                    backToTopBtn.style.display = 'none';
+                }
+            }
+            
+            // 初始化返回顶部按钮
+            updateBackToTopButton();
+        });
     </script>
 </body>
 </html>
