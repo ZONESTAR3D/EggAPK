@@ -524,11 +524,11 @@
             <div class="content-wrapper">
                 <!-- 语言切换链接 -->
                 <div style="margin-bottom: 20px; text-align: center;">
-                    <a href="usermanual-cn.md" class="manual-link" target="_blank">
-                        <i class="fas fa-file-alt"></i> 查看完整中文手册
+                    <a href="usermanual-cn.html" class="manual-link" target="_blank">
+                        <i class="fas fa-file-alt"></i> <span id="viewChineseManual">查看完整中文手册</span>
                     </a>
-                    <a href="usermanual.md" class="manual-link" target="_blank">
-                        <i class="fas fa-file-alt"></i> View Full English Manual
+                    <a href="usermanual.html" class="manual-link" target="_blank">
+                        <i class="fas fa-file-alt"></i> <span id="viewEnglishManual">View Full English Manual</span>
                     </a>
                 </div>
                 
@@ -541,71 +541,24 @@
                         <table id="featuresTable">
                             <thead>
                                 <tr>
-                                    <th>设备型号</th>
-                                    <th>产品名称</th>
-                                    <th>视频播放</th>
-                                    <th>图片播放</th>
-                                    <th>音乐播放</th>
-                                    <th>网络电台</th>
-                                    <th>小游戏</th>
-                                    <th>语音控制</th>
-                                    <th>AI对话</th>
-                                    <th>手机文件传输</th>
+                                    <th id="thModel">设备型号</th>
+                                    <th id="thProductName">产品名称</th>
+                                    <th id="thVideo">视频播放</th>
+                                    <th id="thImage">图片播放</th>
+                                    <th id="thMusic">音乐播放</th>
+                                    <th id="thRadio">网络电台</th>
+                                    <th id="thGames">小游戏</th>
+                                    <th id="thVoice">语音控制</th>
+                                    <th id="thAI">AI对话</th>
+                                    <th id="thTransfer">手机文件传输</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>eEGG5</td>
-                                    <td>5厘米电子球</td>
-                                    <td>✔️</td>
-                                    <td>✔️</td>
-                                    <td>❌</td>
-                                    <td>❌</td>
-                                    <td>✔️</td>
-                                    <td>❌</td>
-                                    <td>❌</td>
-                                    <td>❌</td>
-                                </tr>
-                                <tr>
-                                    <td>eEGG6</td>
-                                    <td>6厘米电子球</td>
-                                    <td>✔️</td>
-                                    <td>✔️</td>
-                                    <td>✔️</td>
-                                    <td>✔️</td>
-                                    <td>✔️</td>
-                                    <td>❌</td>
-                                    <td>✔️</td>
-                                    <td>✔️</td>
-                                </tr>
-                                <tr>
-                                    <td>eEGG7</td>
-                                    <td>7厘米电子球</td>
-                                    <td>✔️</td>
-                                    <td>✔️</td>
-                                    <td>✔️</td>
-                                    <td>✔️</td>
-                                    <td>✔️</td>
-                                    <td>❌</td>
-                                    <td>✔️</td>
-                                    <td>✔️</td>
-                                </tr>
-                                <tr>
-                                    <td>eEGG7-AI</td>
-                                    <td>7厘米AI电子球</td>
-                                    <td>✔️</td>
-                                    <td>✔️</td>
-                                    <td>✔️</td>
-                                    <td>✔️</td>
-                                    <td>❌</td>
-                                    <td>✔️</td>
-                                    <td>✔️</td>
-                                    <td>✔️</td>
-                                </tr>
+                            <tbody id="featuresTableBody">
+                                <!-- 表格内容会动态加载 -->
                             </tbody>
                         </table>
                     </div>
-                    <p class="note"><strong>注：</strong> <span id="productNote">下文中将直接使用产品型号作为不同产品的代称。</span></p>
+                    <p class="note"><strong id="noteStrong">注：</strong> <span id="productNote">下文中将直接使用产品型号作为不同产品的代称。</span></p>
                 </div>
                 
                 <!-- 设备操作 -->
@@ -615,7 +568,7 @@
                     <h4 id="powerOnTitle">开机</h4>
                     <p id="powerOnDesc">电子球上部有1个硅胶电源按钮，用力按一下这个按钮，设备即可开机。</p>
                     <div class="warning">
-                        <strong>⚠️注意：</strong> <span id="chargingWarning">收到电子球后，请先给设备充满电后再使用。</span>
+                        <strong>⚠️<span id="warningText">注意</span>：</strong> <span id="chargingWarning">收到电子球后，请先给设备充满电后再使用。</span>
                     </div>
                     
                     <h4 id="shakeTitle">操作</h4>
@@ -625,37 +578,13 @@
                         <table id="shakeTable">
                             <thead>
                                 <tr>
-                                    <th>操作</th>
-                                    <th>功能</th>
-                                    <th>说明</th>
+                                    <th id="thOperation">操作</th>
+                                    <th id="thFunction">功能</th>
+                                    <th id="thDescription">说明</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>甩1次</td>
-                                    <td>下一个/增加</td>
-                                    <td id="shake1Desc">在菜单界面，切换下一个项目；在媒体播放时，播放下一个文件；调整音量时，音量增加</td>
-                                </tr>
-                                <tr>
-                                    <td>甩2次</td>
-                                    <td>执行/上一个/减小</td>
-                                    <td id="shake2Desc">在菜单界面，执行当前选择的菜单或功能；在媒体播放时，播放上一个文件；调整音量时，音量减少</td>
-                                </tr>
-                                <tr>
-                                    <td>甩3次</td>
-                                    <td>打开菜单</td>
-                                    <td id="shake3Desc">显示菜单界面</td>
-                                </tr>
-                                <tr>
-                                    <td>甩4次</td>
-                                    <td>播放模式/音量调节</td>
-                                    <td id="shake4Desc">在媒体播放时，甩4次可打开调整音量/播放模式的弹出式菜单；然后接着甩动可调整音量或播放模式</td>
-                                </tr>
-                                <tr>
-                                    <td>甩5次</td>
-                                    <td>关机</td>
-                                    <td id="shake5Desc">关机后按电子球上的按钮开机</td>
-                                </tr>
+                            <tbody id="shakeTableBody">
+                                <!-- 表格内容会动态加载 -->
                             </tbody>
                         </table>
                     </div>
@@ -664,10 +593,8 @@
                 <!-- 充电 -->
                 <div class="manual-section">
                     <h3 id="chargingTitle">给设备充电</h3>
-                    <ol>
-                        <li id="charging1">本设备可使用各类带Type-C接口充电器充电，通常情况下90分钟之内可充满内部电池。</li>
-                        <li id="charging2">如果设备长时间放置导致内部电池过放电，请先插上充电器10分钟之后，在试着打开设备的电源。</li>
-                        <li id="charging3">如果设备长时间不使用，建议至少每2个月给设备充满电一次。</li>
+                    <ol id="chargingList">
+                        <!-- 充电列表会动态加载 -->
                     </ol>
                 </div>
                 
@@ -678,19 +605,19 @@
                     <h4 id="browserTransferTitle">通过浏览器传输文件到设备</h4>
                     <p id="browserTransferDesc">操作设备菜单进入浏览器文件传输模式，打开电脑浏览器并输入设备的IP地址(通常是192.168.x.x)，根据提示管理设备上的文件(上传文件到设备或者从设备上删除文件)。</p>
                     <div class="note">
-                        <strong>⚠️注1：</strong> <span id="browserNote">上传文件到设备前，您需要通过文件转换工具将视频/图片文件转换为设备可识别的格式。</span>
+                        <strong>⚠️<span id="note1Text">注1</span>：</strong> <span id="browserNote">上传文件到设备前，您需要通过文件转换工具将视频/图片文件转换为设备可识别的格式。</span>
                     </div>
                     
                     <h4 id="phoneTransferTitle">通过手机传输文件到设备(对eEGG6、eEGG7和eEGG7-AI)</h4>
                     <p id="phoneTransferDesc">下载并安装"eEGG文件转换与传输助手"APP到您的手机，操作设备进入手机文件传输模式，连接同一WiFi网络，扫描二维码连接设备，即可传输文件。</p>
                     <div class="note">
-                        <strong>⚠️注：</strong> <span id="phoneNote">eEGG文件转换与传输助手会在传输文件前自动转换图片和视频格式。</span>
+                        <strong>⚠️<span id="noteText">注</span>：</strong> <span id="phoneNote">eEGG文件转换与传输助手会在传输文件前自动转换图片和视频格式。</span>
                     </div>
                     
                     <h4 id="usbTransferTitle">连接USB传输文件</h4>
                     <p id="usbTransferDesc">将设备通过USB直接连接到电脑，可以非常方便地将要播放的媒体文件直接复制到设备的内存。</p>
                     <div class="warning">
-                        <strong>⚠️注意：</strong> <span id="usbWarning">视频和图片文件复制前，需要使用视频和图片转换工具软件转换为设备可用的格式。不要删除设备上的目录,否则可能导致设备的某些功能无法正常工作。</span>
+                        <strong>⚠️<span id="warning2Text">注意</span>：</strong> <span id="usbWarning">视频和图片文件复制前，需要使用视频和图片转换工具软件转换为设备可用的格式。不要删除设备上的目录,否则可能导致设备的某些功能无法正常工作。</span>
                     </div>
                 </div>
                 
@@ -699,13 +626,13 @@
                     <h3 id="quickLinksTitle">快速链接</h3>
                     <div style="display: flex; flex-wrap: wrap; gap: 10px;">
                         <a href="#apk-tab" class="manual-link tab-link" data-tab="apk">
-                            <i class="fas fa-download"></i> 下载手机应用
+                            <i class="fas fa-download"></i> <span id="downloadAppText">下载手机应用</span>
                         </a>
                         <a href="#tools-tab" class="manual-link tab-link" data-tab="tools">
-                            <i class="fas fa-tools"></i> 下载转换工具
+                            <i class="fas fa-tools"></i> <span id="downloadToolsText">下载转换工具</span>
                         </a>
-                        <a href="readme_tools.md" class="manual-link" target="_blank">
-                            <i class="fas fa-file-pdf"></i> 转换工具详细教程
+                        <a href="readme_tools.html" class="manual-link" target="_blank">
+                            <i class="fas fa-file-pdf"></i> <span id="detailedTutorialText">转换工具详细教程</span>
                         </a>
                     </div>
                 </div>
@@ -738,11 +665,7 @@
                 <div class="manual-section">
                     <h3 id="instructionsTitle">安装说明</h3>
                     <ol id="instructionsList">
-                        <li id="instruction1">使用手机摄像头或扫码工具扫描上方二维码</li>
-                        <li id="instruction2">点击下载链接，等待应用下载完成</li>
-                        <li id="instruction3">打开下载的APK文件进行安装</li>
-                        <li id="instruction4">如有安全提示，请选择"继续安装"或"允许安装"</li>
-                        <li id="instruction5">安装完成后即可打开应用</li>
+                        <!-- 安装说明会动态加载 -->
                     </ol>
                 </div>
                 
@@ -775,10 +698,7 @@
                 <div class="manual-section">
                     <h3 id="notesTitle">注意事项</h3>
                     <ul id="notesList">
-                        <li id="note1">请确保手机有足够的存储空间</li>
-                        <li id="note2">建议在Wi-Fi环境下下载以节省流量</li>
-                        <li id="note3">安装前请确保已开启"允许安装来自未知来源的应用"</li>
-                        <li id="note4">如有问题，请联系我们的技术支持</li>
+                        <!-- 注意事项会动态加载 -->
                     </ul>
                 </div>
             </div>
@@ -798,11 +718,8 @@
                         <p id="videoToolDesc">将您的视频文件转换为eEGG设备可播放的格式。支持多种视频格式转换，可调整分辨率和帧率以适应不同型号设备。</p>
                         <div style="margin: 15px 0;">
                             <strong id="supportedFormats">支持格式:</strong>
-                            <ul style="margin-top: 5px; font-size: 0.9rem;">
-                                <li>MP4, AVI, MOV, MKV</li>
-                                <li>转换为MJPEG格式</li>
-                                <li>最大分辨率: 1920x1080</li>
-                                <li>最大时长: 60秒</li>
+                            <ul id="videoFormatsList" style="margin-top: 5px; font-size: 0.9rem;">
+                                <!-- 视频格式列表会动态加载 -->
                             </ul>
                         </div>
                         <a href="https://github.com/ZONESTAR3D/eEGG-Tools/archive/refs/tags/VideoConverter-V0.7.zip" class="download-btn">
@@ -816,11 +733,8 @@
                         <p id="imageToolDesc">将您的图片文件转换为eEGG设备可显示的格式。支持批量转换，可调整尺寸和裁剪为圆形以适应设备屏幕。</p>
                         <div style="margin: 15px 0;">
                             <strong id="imageFeatures">功能特点:</strong>
-                            <ul style="margin-top: 5px; font-size: 0.9rem;">
-                                <li>支持JPG, PNG, BMP格式</li>
-                                <li>批量转换功能</li>
-                                <li>圆形裁剪选项</li>
-                                <li>尺寸调整: 240x240 或 360x360</li>
+                            <ul id="imageFeaturesList" style="margin-top: 5px; font-size: 0.9rem;">
+                                <!-- 图片功能列表会动态加载 -->
                             </ul>
                         </div>
                         <a href="https://github.com/ZONESTAR3D/eEGG-Tools/archive/refs/tags/ImageConverter-V0.3.zip" class="download-btn">
@@ -834,41 +748,27 @@
                     
                     <h4 id="videoConversionTitle">视频转换步骤</h4>
                     <ol id="videoConversionSteps">
-                        <li id="videoStep1">下载并解压视频转换工具</li>
-                        <li id="videoStep2">运行视频转换工具应用软件</li>
-                        <li id="videoStep3">根据设备型号选择预设配置(eEGG5/eEGG6/eEGG7)</li>
-                        <li id="videoStep4">添加需要转换的视频文件</li>
-                        <li id="videoStep5">点击"转换"按钮，等待转换完成</li>
-                        <li id="videoStep6">转换后的文件保存在源文件目录下的output文件夹中</li>
+                        <!-- 视频转换步骤会动态加载 -->
                     </ol>
                     
                     <h4 id="imageConversionTitle">图片转换步骤</h4>
                     <ol id="imageConversionSteps">
-                        <li id="imageStep1">下载并解压图片转换工具</li>
-                        <li id="imageStep2">运行图片转换工具应用软件</li>
-                        <li id="imageStep3">根据设备型号选择输出尺寸(240×240或360×360)</li>
-                        <li id="imageStep4">点击"导入"按钮选择源图片文件</li>
-                        <li id="imageStep5">如需圆形裁剪，勾选相应选项</li>
-                        <li id="imageStep6">点击"导出"按钮并输入文件名保存</li>
+                        <!-- 图片转换步骤会动态加载 -->
                     </ol>
                 </div>
                 
                 <div class="manual-section">
                     <h3 id="importantNotesTitle">重要提示</h3>
                     <div class="warning">
-                        <strong>⚠️注意：</strong>
-                        <ul style="margin-top: 10px;">
-                            <li id="toolNote1">转换工具仅支持Windows系统</li>
-                            <li id="toolNote2">解压路径中不要使用中文目录</li>
-                            <li id="toolNote3">视频文件长度不应超过60秒</li>
-                            <li id="toolNote4">建议视频分辨率为1920x1080，帧率30fps</li>
-                            <li id="toolNote5">转换前请备份原始文件</li>
+                        <strong>⚠️<span id="importantNoteText">注意</span>：</strong>
+                        <ul id="toolNotesList" style="margin-top: 10px;">
+                            <!-- 工具注意事项会动态加载 -->
                         </ul>
                     </div>
                     
                     <div class="note" style="margin-top: 20px;">
-                        <strong>💡 提示：</strong>
-                        <p id="toolTip">有关转换工具的详细使用方法和参数设置，请参考<a href="readme_tools.md" style="color: #17a2b8; font-weight: bold;">转换工具详细教程</a>。</p>
+                        <strong>💡 <span id="tipText">提示</span>：</strong>
+                        <p id="toolTip">有关转换工具的详细使用方法和参数设置，请参考<a href="readme_tools.html" style="color: #17a2b8; font-weight: bold;"><span id="tutorialLinkText">转换工具详细教程</span></a>。</p>
                     </div>
                 </div>
             </div>
@@ -899,42 +799,82 @@
                 
                 // 用户手册部分
                 manualTitle: "eEGG用户手册",
+                viewChineseManual: "查看完整中文手册",
+                viewEnglishManual: "查看完整英文手册",
+                
                 productFeaturesTitle: "产品功能",
                 productFeaturesDesc: "电子球的设备型号不同，它们的功能也有所区别，以下是各个型号设备支持的功能列表：",
                 productNote: "下文中将直接使用产品型号作为不同产品的代称。",
+                noteStrong: "注",
+                
+                // 表格标题
+                thModel: "设备型号",
+                thProductName: "产品名称",
+                thVideo: "视频播放",
+                thImage: "图片播放",
+                thMusic: "音乐播放",
+                thRadio: "网络电台",
+                thGames: "小游戏",
+                thVoice: "语音控制",
+                thAI: "AI对话",
+                thTransfer: "手机文件传输",
+                
+                // 表格数据
+                featuresTableData: [
+                    ["eEGG5", "5厘米电子球", "✔️", "✔️", "❌", "❌", "✔️", "❌", "❌", "❌"],
+                    ["eEGG6", "6厘米电子球", "✔️", "✔️", "✔️", "✔️", "✔️", "❌", "✔️", "✔️"],
+                    ["eEGG7", "7厘米电子球", "✔️", "✔️", "✔️", "✔️", "✔️", "❌", "✔️", "✔️"],
+                    ["eEGG7-AI", "7厘米AI电子球", "✔️", "✔️", "✔️", "✔️", "❌", "✔️", "✔️", "✔️"]
+                ],
                 
                 operationTitle: "设备操作",
                 powerOnTitle: "开机",
                 powerOnDesc: "电子球上部有1个硅胶电源按钮，用力按一下这个按钮，设备即可开机。",
+                warningText: "注意",
                 chargingWarning: "收到电子球后，请先给设备充满电后再使用。",
                 
                 shakeTitle: "操作",
-                shakeDesc: "电子球内置加速度传感器, 可使用甩一甩来实现不同的功能。具体方法为：手握电子球连续轻轻甩动几次，然后停止等待约1秒钟，设备会识别甩动的次数并执行相应的功能：",
-                shake1Desc: "在菜单界面，切换下一个项目；在媒体播放时，播放下一个文件；调整音量时，音量增加",
-                shake2Desc: "在菜单界面，执行当前选择的菜单或功能；在媒体播放时，播放上一个文件；调整音量时，音量减少",
-                shake3Desc: "显示菜单界面",
-                shake4Desc: "在媒体播放时，甩4次可打开调整音量/播放模式的弹出式菜单；然后接着甩动可调整音量或播放模式",
-                shake5Desc: "关机后按电子球上的按钮开机",
+                shakeDesc: "电子球内置加速度传感器, 可使用<strong>甩一甩</strong>来实现不同的功能。具体方法为：手握电子球连续轻轻甩动几次，然后停止等待约1秒钟，设备会识别甩动的次数并执行相应的功能：",
+                
+                // 摇动操作表格
+                thOperation: "操作",
+                thFunction: "功能",
+                thDescription: "说明",
+                shakeTableData: [
+                    ["甩1次", "下一个/增加", "在菜单界面，切换下一个项目；在媒体播放时，播放下一个文件；调整音量时，音量增加"],
+                    ["甩2次", "执行/上一个/减小", "在菜单界面，执行当前选择的菜单或功能；在媒体播放时，播放上一个文件；调整音量时，音量减少"],
+                    ["甩3次", "打开菜单", "显示菜单界面"],
+                    ["甩4次", "播放模式/音量调节", "在媒体播放时，甩4次可打开调整音量/播放模式的弹出式菜单；然后接着甩动可调整音量或播放模式"],
+                    ["甩5次", "关机", "关机后按电子球上的按钮开机"]
+                ],
                 
                 chargingTitle: "给设备充电",
-                charging1: "本设备可使用各类带Type-C接口充电器充电，通常情况下90分钟之内可充满内部电池。",
-                charging2: "如果设备长时间放置导致内部电池过放电，请先插上充电器10分钟之后，在试着打开设备的电源。",
-                charging3: "如果设备长时间不使用，建议至少每2个月给设备充满电一次。",
+                chargingSteps: [
+                    "本设备可使用各类带Type-C接口充电器充电，通常情况下90分钟之内可充满内部电池。",
+                    "如果设备长时间放置导致内部电池过放电，请先插上充电器10分钟之后，在试着打开设备的电源。",
+                    "如果设备长时间不使用，建议至少每2个月给设备充满电一次。"
+                ],
                 
                 fileTransferTitle: "文件传输方法",
                 browserTransferTitle: "通过浏览器传输文件到设备",
                 browserTransferDesc: "操作设备菜单进入浏览器文件传输模式，打开电脑浏览器并输入设备的IP地址(通常是192.168.x.x)，根据提示管理设备上的文件(上传文件到设备或者从设备上删除文件)。",
+                note1Text: "注1",
                 browserNote: "上传文件到设备前，您需要通过文件转换工具将视频/图片文件转换为设备可识别的格式。",
                 
                 phoneTransferTitle: "通过手机传输文件到设备(对eEGG6、eEGG7和eEGG7-AI)",
                 phoneTransferDesc: "下载并安装\"eEGG文件转换与传输助手\"APP到您的手机，操作设备进入手机文件传输模式，连接同一WiFi网络，扫描二维码连接设备，即可传输文件。",
+                noteText: "注",
                 phoneNote: "eEGG文件转换与传输助手会在传输文件前自动转换图片和视频格式。",
                 
                 usbTransferTitle: "连接USB传输文件",
                 usbTransferDesc: "将设备通过USB直接连接到电脑，可以非常方便地将要播放的媒体文件直接复制到设备的内存。",
+                warning2Text: "注意",
                 usbWarning: "视频和图片文件复制前，需要使用视频和图片转换工具软件转换为设备可用的格式。不要删除设备上的目录,否则可能导致设备的某些功能无法正常工作。",
                 
                 quickLinksTitle: "快速链接",
+                downloadAppText: "下载手机应用",
+                downloadToolsText: "下载转换工具",
+                detailedTutorialText: "转换工具详细教程",
                 
                 // APK下载部分
                 apkTitle: "下载应用",
@@ -948,11 +888,13 @@
                 downloadBtnText: "直接下载APK",
                 
                 instructionsTitle: "安装说明",
-                instruction1: "使用手机摄像头或扫码工具扫描上方二维码",
-                instruction2: "点击下载链接，等待应用下载完成",
-                instruction3: "打开下载的APK文件进行安装",
-                instruction4: "如有安全提示，请选择\"继续安装\"或\"允许安装\"",
-                instruction5: "安装完成后即可打开应用",
+                instructions: [
+                    "使用手机摄像头或扫码工具扫描上方二维码",
+                    "点击下载链接，等待应用下载完成",
+                    "打开下载的APK文件进行安装",
+                    "如有安全提示，请选择\"继续安装\"或\"允许安装\"",
+                    "安装完成后即可打开应用"
+                ],
                 
                 appInfoTitle: "应用信息",
                 labelAppName: "应用名称:",
@@ -961,10 +903,12 @@
                 labelRequirements: "系统要求:",
                 
                 notesTitle: "注意事项",
-                note1: "请确保手机有足够的存储空间",
-                note2: "建议在Wi-Fi环境下下载以节省流量",
-                note3: "安装前请确保已开启\"允许安装来自未知来源的应用\"",
-                note4: "如有问题，请联系我们的技术支持",
+                notes: [
+                    "请确保手机有足够的存储空间",
+                    "建议在Wi-Fi环境下下载以节省流量",
+                    "安装前请确保已开启\"允许安装来自未知来源的应用\"",
+                    "如有问题，请联系我们的技术支持"
+                ],
                 
                 // 转换工具部分
                 toolsTitle: "转换工具下载",
@@ -972,36 +916,57 @@
                 videoToolTitle: "视频转换工具",
                 videoToolDesc: "将您的视频文件转换为eEGG设备可播放的格式。支持多种视频格式转换，可调整分辨率和帧率以适应不同型号设备。",
                 supportedFormats: "支持格式:",
+                videoFormats: [
+                    "MP4, AVI, MOV, MKV",
+                    "转换为MJPEG格式",
+                    "最大分辨率: 1920x1080",
+                    "最大时长: 60秒"
+                ],
                 downloadVideoTool: "下载视频转换工具",
                 
                 imageToolTitle: "图片转换工具",
                 imageToolDesc: "将您的图片文件转换为eEGG设备可显示的格式。支持批量转换，可调整尺寸和裁剪为圆形以适应设备屏幕。",
                 imageFeatures: "功能特点:",
+                imageFeaturesList: [
+                    "支持JPG, PNG, BMP格式",
+                    "批量转换功能",
+                    "圆形裁剪选项",
+                    "尺寸调整: 240x240 或 360x360"
+                ],
                 downloadImageTool: "下载图片转换工具",
                 
                 usageGuideTitle: "使用指南",
                 videoConversionTitle: "视频转换步骤",
-                videoStep1: "下载并解压视频转换工具",
-                videoStep2: "运行视频转换工具应用软件",
-                videoStep3: "根据设备型号选择预设配置(eEGG5/eEGG6/eEGG7)",
-                videoStep4: "添加需要转换的视频文件",
-                videoStep5: "点击\"转换\"按钮，等待转换完成",
-                videoStep6: "转换后的文件保存在源文件目录下的output文件夹中",
+                videoConversionSteps: [
+                    "下载并解压视频转换工具",
+                    "运行视频转换工具应用软件",
+                    "根据设备型号选择预设配置(eEGG5/eEGG6/eEGG7)",
+                    "添加需要转换的视频文件",
+                    "点击\"转换\"按钮，等待转换完成",
+                    "转换后的文件保存在源文件目录下的output文件夹中"
+                ],
                 
                 imageConversionTitle: "图片转换步骤",
-                imageStep1: "下载并解压图片转换工具",
-                imageStep2: "运行图片转换工具应用软件",
-                imageStep3: "根据设备型号选择输出尺寸(240×240或360×360)",
-                imageStep4: "点击\"导入\"按钮选择源图片文件",
-                imageStep5: "如需圆形裁剪，勾选相应选项",
-                imageStep6: "点击\"导出\"按钮并输入文件名保存",
+                imageConversionSteps: [
+                    "下载并解压图片转换工具",
+                    "运行图片转换工具应用软件",
+                    "根据设备型号选择输出尺寸(240×240或360×360)",
+                    "点击\"导入\"按钮选择源图片文件",
+                    "如需圆形裁剪，勾选相应选项",
+                    "点击\"导出\"按钮并输入文件名保存"
+                ],
                 
                 importantNotesTitle: "重要提示",
-                toolNote1: "转换工具仅支持Windows系统",
-                toolNote2: "解压路径中不要使用中文目录",
-                toolNote3: "视频文件长度不应超过60秒",
-                toolNote4: "建议视频分辨率为1920x1080，帧率30fps",
-                toolNote5: "转换前请备份原始文件",
+                importantNoteText: "注意",
+                toolNotes: [
+                    "转换工具仅支持Windows系统",
+                    "解压路径中不要使用中文目录",
+                    "视频文件长度不应超过60秒",
+                    "建议视频分辨率为1920x1080，帧率30fps",
+                    "转换前请备份原始文件"
+                ],
+                tipText: "提示",
+                tutorialLinkText: "转换工具详细教程",
                 toolTip: "有关转换工具的详细使用方法和参数设置，请参考转换工具详细教程。",
                 
                 // 页脚
@@ -1018,42 +983,82 @@
                 
                 // 用户手册部分
                 manualTitle: "eEGG User Manual",
+                viewChineseManual: "View Full Chinese Manual",
+                viewEnglishManual: "View Full English Manual",
+                
                 productFeaturesTitle: "Product Features",
                 productFeaturesDesc: "The functions of the eEGG vary depending on the model. Below is a list of supported functions for each model:",
                 productNote: "The product model will be used directly as a designation for different products below.",
+                noteStrong: "Note",
+                
+                // 表格标题
+                thModel: "Model",
+                thProductName: "Product Name",
+                thVideo: "Video Player",
+                thImage: "Image Player",
+                thMusic: "Music Player",
+                thRadio: "iRadio",
+                thGames: "Games",
+                thVoice: "Voice Control",
+                thAI: "AI Dialogue",
+                thTransfer: "Mobile File Transfer",
+                
+                // 表格数据
+                featuresTableData: [
+                    ["eEGG5", "5cm eEGG", "✔️", "✔️", "❌", "❌", "✔️", "❌", "❌", "❌"],
+                    ["eEGG6", "6cm eEGG", "✔️", "✔️", "✔️", "✔️", "✔️", "❌", "✔️", "✔️"],
+                    ["eEGG7", "7cm eEGG", "✔️", "✔️", "✔️", "✔️", "✔️", "❌", "✔️", "✔️"],
+                    ["eEGG7-AI", "7cm AI eEGG", "✔️", "✔️", "✔️", "✔️", "❌", "✔️", "✔️", "✔️"]
+                ],
                 
                 operationTitle: "Operation Guide",
                 powerOnTitle: "Power On",
                 powerOnDesc: "There is a silicone power button on the top of the eEGG. Press this button firmly to power on the device.",
+                warningText: "Caution",
                 chargingWarning: "After receiving the eEGG, please fully charge the device before use.",
                 
                 shakeTitle: "Shake-and-Do Operation",
-                shakeDesc: "The eEGG has a built-in G-sensor and can be used to achieve different functions by swinging it. Gently shake the eEGG several times, then stop and wait for about 1 second. The device will recognize the number of shakes and execute the corresponding function:",
-                shake1Desc: "Switch to the next menu item; Play the next media file; Increase the volume.",
-                shake2Desc: "Execute the selected menu or function; Play the previous file; Decrease the volume.",
-                shake3Desc: "Display the menu.",
-                shake4Desc: "Shaking 4 times opens a pop-up menu for adjusting volume/playback mode;",
-                shake5Desc: "After powering off, press the button on the eEGG to power it on.",
+                shakeDesc: "The eEGG has a built-in G-sensor and can be used to achieve different functions by <strong>swinging</strong> it. Gently shake the eEGG several times, then stop and wait for about 1 second. The device will recognize the number of shakes and execute the corresponding function:",
+                
+                // 摇动操作表格
+                thOperation: "Operation",
+                thFunction: "Function",
+                thDescription: "Description",
+                shakeTableData: [
+                    ["Shake 1 time", "Next/+", "Switch to the next menu item; Play the next media file; Increase the volume."],
+                    ["Shake 2 times", "Run/Prev./-", "Execute the selected menu or function; Play the previous file; Decrease the volume."],
+                    ["Shake 3 times", "Open Menu", "Display the menu."],
+                    ["Shake 4 times", "Mode/Volume", "Shaking 4 times opens a pop-up menu for adjusting volume/playback mode;"],
+                    ["Shake 5 times", "Power Off", "After powering off, press the button on the eEGG to power it on."]
+                ],
                 
                 chargingTitle: "Charging",
-                charging1: "This device can be charged using various chargers with a Type-C interface. Under normal circumstances, the internal battery can be fully charged within 90 minutes.",
-                charging2: "If the device has been left unused for an extended period, causing over-discharge of the internal battery, please plug in the charger for 10 minutes before trying to turn the device on.",
-                charging3: "If the device is not used for a long time, it is recommended to fully charge it at least once every two months.",
+                chargingSteps: [
+                    "This device can be charged using various chargers with a Type-C interface. Under normal circumstances, the internal battery can be fully charged within 90 minutes.",
+                    "If the device has been left unused for an extended period, causing over-discharge of the internal battery, please plug in the charger for 10 minutes before trying to turn the device on.",
+                    "If the device is not used for a long time, it is recommended to fully charge it at least once every two months."
+                ],
                 
                 fileTransferTitle: "File Transfer Methods",
                 browserTransferTitle: "Transferring Files to the Device via Browser",
                 browserTransferDesc: "Accessing the Browser's File Transfer Mode via the Device Menu, open your computer's browser and enter the device's IP address (usually 192.168.x.x), follow the prompts to manage files on the device.",
+                note1Text: "Note 1",
                 browserNote: "Before uploading files to the device, you need to convert video/image files to a format that the device can recognize using a file conversion tool.",
                 
                 phoneTransferTitle: "Transferring Files to the Device via Mobile Phone (for eEGG6, eEGG7, and eEGG7-AI)",
                 phoneTransferDesc: "Download and install the \"eEGG File Conversion and Transfer Assistant\" APP to your mobile phone, shake the eEGG to enter mobile file transfer mode, connect to the same WiFi network, scan the QR code to connect the device, then transfer files.",
+                noteText: "Note",
                 phoneNote: "eEGG File Converter and Transfer Assistant will automatically convert image and video formats before transferring files.",
                 
                 usbTransferTitle: "Transfer Files via PC (USB)",
                 usbTransferDesc: "Connecting the device directly to the computer via USB allows for easy copying of media files to the device's memory.",
+                warning2Text: "Caution",
                 usbWarning: "Before copying video and image files, you need to use Video & Image Converter Tools to convert them. Do not delete directories on the device, otherwise some functions may malfunction.",
                 
                 quickLinksTitle: "Quick Links",
+                downloadAppText: "Download App",
+                downloadToolsText: "Download Tools",
+                detailedTutorialText: "Detailed Tutorial",
                 
                 // APK下载部分
                 apkTitle: "Download App",
@@ -1067,11 +1072,13 @@
                 downloadBtnText: "Download APK Directly",
                 
                 instructionsTitle: "Installation Instructions",
-                instruction1: "Scan the QR code above using your phone camera or scanning tool",
-                instruction2: "Click the download link and wait for the app to download",
-                instruction3: "Open the downloaded APK file to install",
-                instruction4: "If security prompts appear, select \"Continue installation\" or \"Allow installation\"",
-                instruction5: "Open the app after installation is complete",
+                instructions: [
+                    "Scan the QR code above using your phone camera or scanning tool",
+                    "Click the download link and wait for the app to download",
+                    "Open the downloaded APK file to install",
+                    "If security prompts appear, select \"Continue installation\" or \"Allow installation\"",
+                    "Open the app after installation is complete"
+                ],
                 
                 appInfoTitle: "App Information",
                 labelAppName: "App Name:",
@@ -1080,10 +1087,12 @@
                 labelRequirements: "System Requirements:",
                 
                 notesTitle: "Important Notes",
-                note1: "Ensure your phone has sufficient storage space",
-                note2: "Recommended to download over Wi-Fi to save data",
-                note3: "Make sure \"Allow installation from unknown sources\" is enabled before installing",
-                note4: "Contact our technical support if you have any issues",
+                notes: [
+                    "Ensure your phone has sufficient storage space",
+                    "Recommended to download over Wi-Fi to save data",
+                    "Make sure \"Allow installation from unknown sources\" is enabled before installing",
+                    "Contact our technical support if you have any issues"
+                ],
                 
                 // 转换工具部分
                 toolsTitle: "Conversion Tools Download",
@@ -1091,36 +1100,57 @@
                 videoToolTitle: "Video Converter",
                 videoToolDesc: "Convert your video files to eEGG device playable format. Supports multiple video format conversion, adjustable resolution and frame rate for different device models.",
                 supportedFormats: "Supported Formats:",
+                videoFormats: [
+                    "MP4, AVI, MOV, MKV",
+                    "Convert to MJPEG format",
+                    "Max resolution: 1920x1080",
+                    "Max duration: 60 seconds"
+                ],
                 downloadVideoTool: "Download Video Converter",
                 
                 imageToolTitle: "Image Converter",
                 imageToolDesc: "Convert your image files to eEGG device displayable format. Supports batch conversion, adjustable size and circular cropping to fit device screen.",
                 imageFeatures: "Features:",
+                imageFeaturesList: [
+                    "Supports JPG, PNG, BMP formats",
+                    "Batch conversion function",
+                    "Circular cropping option",
+                    "Size adjustment: 240x240 or 360x360"
+                ],
                 downloadImageTool: "Download Image Converter",
                 
                 usageGuideTitle: "Usage Guide",
                 videoConversionTitle: "Video Conversion Steps",
-                videoStep1: "Download and extract the video conversion tool",
-                videoStep2: "Launch the video converter application",
-                videoStep3: "Select preset configuration based on device model (eEGG5/eEGG6/eEGG7)",
-                videoStep4: "Add video files that need to be converted",
-                videoStep5: "Click \"Convert\" button and wait for conversion to complete",
-                videoStep6: "Converted files are saved in the output folder under the source file directory",
+                videoConversionSteps: [
+                    "Download and extract the video conversion tool",
+                    "Launch the video converter application",
+                    "Select preset configuration based on device model (eEGG5/eEGG6/eEGG7)",
+                    "Add video files that need to be converted",
+                    "Click \"Convert\" button and wait for conversion to complete",
+                    "Converted files are saved in the output folder under the source file directory"
+                ],
                 
                 imageConversionTitle: "Image Conversion Steps",
-                imageStep1: "Download and extract the image conversion tool",
-                imageStep2: "Launch the image converter application",
-                imageStep3: "Select output size based on device model (240×240 or 360×360)",
-                imageStep4: "Click \"Import\" button to select source image files",
-                imageStep5: "Check the circular cropping option if needed",
-                imageStep6: "Click \"Export\" button and enter filename to save",
+                imageConversionSteps: [
+                    "Download and extract the image conversion tool",
+                    "Launch the image converter application",
+                    "Select output size based on device model (240×240 or 360×360)",
+                    "Click \"Import\" button to select source image files",
+                    "Check the circular cropping option if needed",
+                    "Click \"Export\" button and enter filename to save"
+                ],
                 
                 importantNotesTitle: "Important Notes",
-                toolNote1: "Conversion tools only support Windows system",
-                toolNote2: "Do not use Chinese characters in the extraction path",
-                toolNote3: "Video files should not exceed 60 seconds in length",
-                toolNote4: "Recommended video resolution is 1920x1080, frame rate 30fps",
-                toolNote5: "Back up original files before conversion",
+                importantNoteText: "Note",
+                toolNotes: [
+                    "Conversion tools only support Windows system",
+                    "Do not use Chinese characters in the extraction path",
+                    "Video files should not exceed 60 seconds in length",
+                    "Recommended video resolution is 1920x1080, frame rate 30fps",
+                    "Back up original files before conversion"
+                ],
+                tipText: "Tip",
+                tutorialLinkText: "Conversion Tool Detailed Tutorial",
                 toolTip: "For detailed usage methods and parameter settings of conversion tools, please refer to the Conversion Tool Detailed Tutorial.",
                 
                 // 页脚
@@ -1156,6 +1186,109 @@
             username: 'ZONESTAR3D',
             repository: 'EggAPK'
         };
+        
+        // 动态更新表格内容
+        function updateTables(currentLang) {
+            const t = translations[currentLang];
+            
+            // 更新产品功能表格
+            const featuresTableBody = document.getElementById('featuresTableBody');
+            featuresTableBody.innerHTML = '';
+            t.featuresTableData.forEach(row => {
+                const tr = document.createElement('tr');
+                row.forEach(cell => {
+                    const td = document.createElement('td');
+                    td.innerHTML = cell;
+                    tr.appendChild(td);
+                });
+                featuresTableBody.appendChild(tr);
+            });
+            
+            // 更新摇动操作表格
+            const shakeTableBody = document.getElementById('shakeTableBody');
+            shakeTableBody.innerHTML = '';
+            t.shakeTableData.forEach(row => {
+                const tr = document.createElement('tr');
+                row.forEach(cell => {
+                    const td = document.createElement('td');
+                    td.innerHTML = cell;
+                    tr.appendChild(td);
+                });
+                shakeTableBody.appendChild(tr);
+            });
+            
+            // 更新充电列表
+            const chargingList = document.getElementById('chargingList');
+            chargingList.innerHTML = '';
+            t.chargingSteps.forEach(step => {
+                const li = document.createElement('li');
+                li.textContent = step;
+                chargingList.appendChild(li);
+            });
+            
+            // 更新安装说明
+            const instructionsList = document.getElementById('instructionsList');
+            instructionsList.innerHTML = '';
+            t.instructions.forEach(instruction => {
+                const li = document.createElement('li');
+                li.textContent = instruction;
+                instructionsList.appendChild(li);
+            });
+            
+            // 更新注意事项
+            const notesList = document.getElementById('notesList');
+            notesList.innerHTML = '';
+            t.notes.forEach(note => {
+                const li = document.createElement('li');
+                li.textContent = note;
+                notesList.appendChild(li);
+            });
+            
+            // 更新视频格式列表
+            const videoFormatsList = document.getElementById('videoFormatsList');
+            videoFormatsList.innerHTML = '';
+            t.videoFormats.forEach(format => {
+                const li = document.createElement('li');
+                li.textContent = format;
+                videoFormatsList.appendChild(li);
+            });
+            
+            // 更新图片功能列表
+            const imageFeaturesList = document.getElementById('imageFeaturesList');
+            imageFeaturesList.innerHTML = '';
+            t.imageFeaturesList.forEach(feature => {
+                const li = document.createElement('li');
+                li.textContent = feature;
+                imageFeaturesList.appendChild(li);
+            });
+            
+            // 更新视频转换步骤
+            const videoConversionSteps = document.getElementById('videoConversionSteps');
+            videoConversionSteps.innerHTML = '';
+            t.videoConversionSteps.forEach(step => {
+                const li = document.createElement('li');
+                li.textContent = step;
+                videoConversionSteps.appendChild(li);
+            });
+            
+            // 更新图片转换步骤
+            const imageConversionSteps = document.getElementById('imageConversionSteps');
+            imageConversionSteps.innerHTML = '';
+            t.imageConversionSteps.forEach(step => {
+                const li = document.createElement('li');
+                li.textContent = step;
+                imageConversionSteps.appendChild(li);
+            });
+            
+            // 更新工具注意事项
+            const toolNotesList = document.getElementById('toolNotesList');
+            toolNotesList.innerHTML = '';
+            t.toolNotes.forEach(note => {
+                const li = document.createElement('li');
+                li.textContent = note;
+                toolNotesList.appendChild(li);
+            });
+        }
         
         // 获取GitHub Releases
         async function fetchReleases() {
@@ -1269,7 +1402,7 @@
                         <div style="margin-top: 15px; display: flex; flex-wrap: wrap; gap: 15px;">
                             <div><strong>${translations[currentLang].downloadCount}</strong> ${releaseData.download_count}</div>
                             <div><strong>${translations[currentLang].labelSize}</strong> ${fileSize} MB</div>
-                            <div><strong>发布时间:</strong> ${new Date(releaseData.created_at).toLocaleDateString()}</div>
+                            <div><strong>${currentLang === 'zh' ? '发布时间' : 'Release Time'}:</strong> ${new Date(releaseData.created_at).toLocaleDateString()}</div>
                         </div>
                     </div>
                 </div>
@@ -1330,40 +1463,58 @@
             document.getElementById('toolsTitle').textContent = t.toolsTitle;
             
             // 更新用户手册部分
+            document.getElementById('viewChineseManual').textContent = t.viewChineseManual;
+            document.getElementById('viewEnglishManual').textContent = t.viewEnglishManual;
+            
             document.getElementById('productFeaturesTitle').textContent = t.productFeaturesTitle;
             document.getElementById('productFeaturesDesc').textContent = t.productFeaturesDesc;
             document.getElementById('productNote').textContent = t.productNote;
+            document.getElementById('noteStrong').textContent = t.noteStrong;
+            
+            // 更新表格标题
+            document.getElementById('thModel').textContent = t.thModel;
+            document.getElementById('thProductName').textContent = t.thProductName;
+            document.getElementById('thVideo').textContent = t.thVideo;
+            document.getElementById('thImage').textContent = t.thImage;
+            document.getElementById('thMusic').textContent = t.thMusic;
+            document.getElementById('thRadio').textContent = t.thRadio;
+            document.getElementById('thGames').textContent = t.thGames;
+            document.getElementById('thVoice').textContent = t.thVoice;
+            document.getElementById('thAI').textContent = t.thAI;
+            document.getElementById('thTransfer').textContent = t.thTransfer;
             
             document.getElementById('operationTitle').textContent = t.operationTitle;
             document.getElementById('powerOnTitle').textContent = t.powerOnTitle;
             document.getElementById('powerOnDesc').textContent = t.powerOnDesc;
+            document.getElementById('warningText').textContent = t.warningText;
             document.getElementById('chargingWarning').textContent = t.chargingWarning;
             
             document.getElementById('shakeTitle').textContent = t.shakeTitle;
-            document.getElementById('shakeDesc').innerHTML = t.shakeDesc.replace('甩一甩', '<strong>甩一甩</strong>');
-            document.getElementById('shake1Desc').textContent = t.shake1Desc;
-            document.getElementById('shake2Desc').textContent = t.shake2Desc;
-            document.getElementById('shake3Desc').textContent = t.shake3Desc;
-            document.getElementById('shake4Desc').textContent = t.shake4Desc;
-            document.getElementById('shake5Desc').textContent = t.shake5Desc;
+            document.getElementById('shakeDesc').innerHTML = t.shakeDesc;
+            document.getElementById('thOperation').textContent = t.thOperation;
+            document.getElementById('thFunction').textContent = t.thFunction;
+            document.getElementById('thDescription').textContent = t.thDescription;
             
             document.getElementById('chargingTitle').textContent = t.chargingTitle;
-            document.getElementById('charging1').textContent = t.charging1;
-            document.getElementById('charging2').textContent = t.charging2;
-            document.getElementById('charging3').textContent = t.charging3;
             
             document.getElementById('fileTransferTitle').textContent = t.fileTransferTitle;
             document.getElementById('browserTransferTitle').textContent = t.browserTransferTitle;
             document.getElementById('browserTransferDesc').textContent = t.browserTransferDesc;
+            document.getElementById('note1Text').textContent = t.note1Text;
             document.getElementById('browserNote').textContent = t.browserNote;
             document.getElementById('phoneTransferTitle').textContent = t.phoneTransferTitle;
             document.getElementById('phoneTransferDesc').textContent = t.phoneTransferDesc;
+            document.getElementById('noteText').textContent = t.noteText;
             document.getElementById('phoneNote').textContent = t.phoneNote;
             document.getElementById('usbTransferTitle').textContent = t.usbTransferTitle;
             document.getElementById('usbTransferDesc').textContent = t.usbTransferDesc;
+            document.getElementById('warning2Text').textContent = t.warning2Text;
             document.getElementById('usbWarning').textContent = t.usbWarning;
             
             document.getElementById('quickLinksTitle').textContent = t.quickLinksTitle;
+            document.getElementById('downloadAppText').textContent = t.downloadAppText;
+            document.getElementById('downloadToolsText').textContent = t.downloadToolsText;
+            document.getElementById('detailedTutorialText').textContent = t.detailedTutorialText;
             
             // 更新APK下载部分
             document.getElementById('apkSubtitle').textContent = t.apkSubtitle;
@@ -1371,21 +1522,12 @@
             document.getElementById('versionLabel').textContent = t.versionLabel;
             document.getElementById('loadingVersions').textContent = t.loadingVersions;
             document.getElementById('instructionsTitle').textContent = t.instructionsTitle;
-            document.getElementById('instruction1').textContent = t.instruction1;
-            document.getElementById('instruction2').textContent = t.instruction2;
-            document.getElementById('instruction3').textContent = t.instruction3;
-            document.getElementById('instruction4').textContent = t.instruction4;
-            document.getElementById('instruction5').textContent = t.instruction5;
             document.getElementById('appInfoTitle').textContent = t.appInfoTitle;
             document.getElementById('labelAppName').textContent = t.labelAppName;
             document.getElementById('labelVersion').textContent = t.labelVersion;
             document.getElementById('labelSize').textContent = t.labelSize;
             document.getElementById('labelRequirements').textContent = t.labelRequirements;
             document.getElementById('notesTitle').textContent = t.notesTitle;
-            document.getElementById('note1').textContent = t.note1;
-            document.getElementById('note2').textContent = t.note2;
-            document.getElementById('note3').textContent = t.note3;
-            document.getElementById('note4').textContent = t.note4;
             
             // 更新转换工具部分
             document.getElementById('toolsSubtitle').textContent = t.toolsSubtitle;
@@ -1399,26 +1541,12 @@
             document.getElementById('downloadImageTool').textContent = t.downloadImageTool;
             document.getElementById('usageGuideTitle').textContent = t.usageGuideTitle;
             document.getElementById('videoConversionTitle').textContent = t.videoConversionTitle;
-            document.getElementById('videoStep1').textContent = t.videoStep1;
-            document.getElementById('videoStep2').textContent = t.videoStep2;
-            document.getElementById('videoStep3').textContent = t.videoStep3;
-            document.getElementById('videoStep4').textContent = t.videoStep4;
-            document.getElementById('videoStep5').textContent = t.videoStep5;
-            document.getElementById('videoStep6').textContent = t.videoStep6;
             document.getElementById('imageConversionTitle').textContent = t.imageConversionTitle;
-            document.getElementById('imageStep1').textContent = t.imageStep1;
-            document.getElementById('imageStep2').textContent = t.imageStep2;
-            document.getElementById('imageStep3').textContent = t.imageStep3;
-            document.getElementById('imageStep4').textContent = t.imageStep4;
-            document.getElementById('imageStep5').textContent = t.imageStep5;
-            document.getElementById('imageStep6').textContent = t.imageStep6;
             document.getElementById('importantNotesTitle').textContent = t.importantNotesTitle;
-            document.getElementById('toolNote1').textContent = t.toolNote1;
-            document.getElementById('toolNote2').textContent = t.toolNote2;
-            document.getElementById('toolNote3').textContent = t.toolNote3;
-            document.getElementById('toolNote4').textContent = t.toolNote4;
-            document.getElementById('toolNote5').textContent = t.toolNote5;
-            document.getElementById('toolTip').innerHTML = t.toolTip;
+            document.getElementById('importantNoteText').textContent = t.importantNoteText;
+            document.getElementById('tipText').textContent = t.tipText;
+            document.getElementById('tutorialLinkText').textContent = t.tutorialLinkText;
+            document.getElementById('toolTip').innerHTML = t.toolTip.replace('转换工具详细教程', `<span id="tutorialLinkText">${t.tutorialLinkText}</span>`);
             
             // 更新页脚
             document.getElementById('footerText').innerHTML = t.footerText;
@@ -1427,6 +1555,9 @@
             // 更新应用信息
             document.getElementById('appName').textContent = config.appName[lang];
             document.getElementById('appRequirements').textContent = config.appRequirements[lang];
+            
+            // 更新表格内容
+            updateTables(lang);
             
             // 更新语言按钮状态
             document.querySelectorAll('.lang-btn').forEach(btn => {
@@ -1447,13 +1578,19 @@
                 updateVersionSelector(releases, currentLang);
                 
                 // 设置版本切换事件
-                document.getElementById('versionSelect').addEventListener('change', function() {
-                    updateReleaseInfo(this.selectedIndex, releases, currentLang);
-                });
+                const versionSelect = document.getElementById('versionSelect');
+                if (versionSelect) {
+                    versionSelect.addEventListener('change', function() {
+                        updateReleaseInfo(this.selectedIndex, releases, currentLang);
+                    });
+                }
             } catch (error) {
                 console.error('Failed to load releases:', error);
-                document.getElementById('releaseInfo').innerHTML = 
-                    '<div style="color: red; padding: 10px;">Failed to load version information, please refresh the page and try again.</div>';
+                const releaseInfo = document.getElementById('releaseInfo');
+                if (releaseInfo) {
+                    releaseInfo.innerHTML = 
+                        '<div style="color: red; padding: 10px;">Failed to load version information, please refresh the page and try again.</div>';
+                }
             }
         }
         
@@ -1502,8 +1639,11 @@
                     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
                     document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
                     
-                    document.querySelector(`.tab-btn[data-tab="${tabId}"]`).classList.add('active');
-                    document.getElementById(`${tabId}-tab`).classList.add('active');
+                    const targetTab = document.querySelector(`.tab-btn[data-tab="${tabId}"]`);
+                    if (targetTab) {
+                        targetTab.classList.add('active');
+                        document.getElementById(`${tabId}-tab`).classList.add('active');
+                    }
                 });
             });
             
@@ -1514,19 +1654,23 @@
                 updateBackToTopButton();
             });
             
-            backToTopBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
+            if (backToTopBtn) {
+                backToTopBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
                 });
-            });
+            }
             
             function updateBackToTopButton() {
-                if (window.scrollY > 300) {
-                    backToTopBtn.style.display = 'flex';
-                } else {
-                    backToTopBtn.style.display = 'none';
+                if (backToTopBtn) {
+                    if (window.scrollY > 300) {
+                        backToTopBtn.style.display = 'flex';
+                    } else {
+                        backToTopBtn.style.display = 'none';
+                    }
                 }
             }
             
