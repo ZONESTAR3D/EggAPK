@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>usermanual-cn.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<p><a href="usermanual.md"><img src="https://img.shields.io/badge/lang-English-blue" alt="lang"></a></p>
+<h1 id="eegg%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C">eEGG用户手册</h1>
+<hr>
+<h2 id="%E4%BA%A7%E5%93%81%E5%8A%9F%E8%83%BD">产品功能</h2>
+<p>电子球的设备型号不同，它们的功能也有所区别，以下是各个型号设备支持的功能列表：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">设备型号</th>
+<th style="text-align:center">产品名称</th>
+<th style="text-align:center">视频播放</th>
+<th style="text-align:center">图片播放</th>
+<th style="text-align:center">音乐播放</th>
+<th style="text-align:center">网络电台</th>
+<th style="text-align:center">小游戏</th>
+<th style="text-align:center">语音控制</th>
+<th style="text-align:center">AI对话</th>
+<th style="text-align:center">手机文件传输</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">eEGG5</td>
+<td style="text-align:center">5厘米电子球</td>
+<td style="text-align:center">✔️</td>
+<td style="text-align:center">✔️</td>
+<td style="text-align:center">❌</td>
+<td style="text-align:center">❌</td>
+<td style="text-align:center">✔️</td>
+<td style="text-align:center">❌</td>
+<td style="text-align:center">❌</td>
+<td style="text-align:center">❌</td>
+</tr>
+<tr>
+<td style="text-align:center">eEGG6</td>
+<td style="text-align:center">6厘米电子球</td>
+<td style="text-align:center">✔️</td>
+<td style="text-align:center">✔️</td>
+<td style="text-align:center">✔️</td>
+<td style="text-align:center">✔️</td>
+<td style="text-align:center">✔️</td>
+<td style="text-align:center">❌</td>
+<td style="text-align:center">✔️</td>
+<td style="text-align:center">✔️</td>
+</tr>
+<tr>
+<td style="text-align:center">eEGG7</td>
+<td style="text-align:center">7厘米电子球</td>
+<td style="text-align:center">✔️</td>
+<td style="text-align:center">✔️</td>
+<td style="text-align:center">✔️</td>
+<td style="text-align:center">✔️</td>
+<td style="text-align:center">✔️</td>
+<td style="text-align:center">❌</td>
+<td style="text-align:center">✔️</td>
+<td style="text-align:center">✔️</td>
+</tr>
+<tr>
+<td style="text-align:center">eEGG7-AI</td>
+<td style="text-align:center">7厘米AI电子球</td>
+<td style="text-align:center">✔️</td>
+<td style="text-align:center">✔️</td>
+<td style="text-align:center">✔️</td>
+<td style="text-align:center">✔️</td>
+<td style="text-align:center">❌</td>
+<td style="text-align:center">✔️</td>
+<td style="text-align:center">✔️</td>
+<td style="text-align:center">✔️</td>
+</tr>
+</tbody>
+</table>
+<p><strong>注</strong>： 下文中将直接使用产品型号作为不同产品的代称。</p>
+<hr>
+<h2 id="%E8%AE%BE%E5%A4%87%E6%93%8D%E4%BD%9C">设备操作</h2>
+<h3 id="%E5%BC%80%E6%9C%BA">开机</h3>
+<p>电子球上部有1个硅胶电源按钮，用力按一下这个按钮，设备即可开机。</p>
+<p>⚠️<em><strong>注意</strong></em>：收到电子球后，请先给设备充满电后再使用。</p>
+<h3 id="%E6%93%8D%E4%BD%9C">操作</h3>
+<p>电子球内置加速度传感器, 可使用<strong>甩一甩</strong>来实现不同的功能。具体方法为：手握电子球连续轻轻甩动几次，然后停止等待约1秒钟，设备会识别甩动的次数并执行相应的功能：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">操作</th>
+<th style="text-align:center">功能</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">甩1次</td>
+<td style="text-align:center">下一个/增加</td>
+<td style="text-align:left">在菜单界面，切换下一个项目；在媒体播放时，播放一下文件；调整音量时，音量增加</td>
+</tr>
+<tr>
+<td style="text-align:center">甩2次</td>
+<td style="text-align:center">执行/上一个/减小</td>
+<td style="text-align:left">在菜单界面，执行当前选择的菜单或功能；在媒体播放时，播放上一下文件；调整音量时，音量减少</td>
+</tr>
+<tr>
+<td style="text-align:center">甩3次</td>
+<td style="text-align:center">打开菜单</td>
+<td style="text-align:left">显示菜单界面</td>
+</tr>
+<tr>
+<td style="text-align:center">甩4次</td>
+<td style="text-align:center">播放模式/音量调节</td>
+<td style="text-align:left">在媒体播放时，甩4次可打开调整音量/播放模式的弹出式菜单；然后接着甩动可调整音量或播放模式</td>
+</tr>
+<tr>
+<td style="text-align:center">甩5次</td>
+<td style="text-align:center">关机</td>
+<td style="text-align:left">关机后按电子球上的按钮开机</td>
+</tr>
+</tbody>
+</table>
+<!--
+### 语音控制 (仅eEGG7-AI支持) 
+AI版电子球支持语音控制，可使用语音来控制设备，语音指令如下：    
+唤醒词: **小菊小菊** / **你好小菊**
+
+|语音指令                     |执行功能                     |说明                                          |
+|:--------------------------:|:--------------------------:|:---------------------------------------------|
+|播放视频                     |开始播放设备内的视频          |正在播放视频或AI对话时无效                      |
+|播放图片                     |开始播放设备上的图片          |正在播放图片或AI对话时无效                      |
+|播放音乐                     |开始播放设备上的本地音乐      |正在播放音乐或AI对话时无效                      |
+|播放电台                     |开始播放设备上网络电台        |正在播放电台或AI对话时无效                      |
+|启动AI对话                   |启动AI对话功能               |正在AI对话时无效                               |
+|上一个                       |播放上一个视频/图片/音乐/电台等|只有在媒体播放过程中才有效                      |
+|下一个                       |播放下一个视频/图片/音乐/电台等|只有在媒体播放过程中才有效                      |
+|音量大一点/声音大一点/大点声   |调整音量                     |只有在媒体播放过程中才有效                      |
+|音量小一点/声音小一点/小点声   |调整音量                     |只有在媒体播放过程中才有效                      |
+|退下                         |退出AI对话功能                |仅AI对话时有效                                |
+|关机                         |设备关机                     |                                             |
+|小菊小菊我问你                |启动AI对话功能               |**超越指令**                                  |
+|小菊小菊你闭嘴                |中断AI对话回应               |**超越指令**，正在AI对话时才有效                |
+|小菊小菊请关机                |设备关机                     |**超越指令**                                  |
+
+**使用举例**：
+1️⃣ 如果现在在播放音乐，你可以先呼叫 “**小菊小菊**“，稍等电子球会弹出倾听的小图标，你再说“**播放视频**”， 就可以播放视频。如果在10秒内你不提供说明，电子球会退回音乐播放状态。
+2️⃣ 如果现在在播放音乐，你可以先呼叫 “**小菊小菊**“，稍等电子球会弹出倾听的小图标，你再说“**大点声**”， 就可以提高播放音量。
+3️⃣ 如果现在在播放图片，你可以先呼叫 “**小菊小菊**“，稍等电子球会弹出倾听的小图标，你再说“**启动AI对话**”， 就可以启动AI对话功能。
+4️⃣ 任何(已开机)状态下，你可以直接呼叫 “**小菊小菊我问你**“，电子球会直接进入AI应答状态。你可以继续提出你的问题。
+5️⃣ AI正在回复您的问题时，您可以直接说出”**小菊小菊你闭嘴**“，终止AI语音应答。
+6️⃣ 任何(已开机)状态下，你可以直接呼叫 “**小菊小菊请关机**“，关闭设备电源。
+
+-->
+<hr>
+<h2 id="%E7%BB%99%E8%AE%BE%E5%A4%87%E5%85%85%E7%94%B5">给设备充电</h2>
+<h4 id="1%EF%B8%8F%E2%83%A3-%E6%9C%AC%E8%AE%BE%E5%A4%87%E5%8F%AF%E4%BD%BF%E7%94%A8%E5%90%84%E7%B1%BB%E5%B8%A6type-c%E6%8E%A5%E5%8F%A3%E5%85%85%E7%94%B5%E5%99%A8%E5%85%85%E7%94%B5%E9%80%9A%E5%B8%B8%E6%83%85%E5%86%B5%E4%B8%8B90%E5%88%86%E9%92%9F%E4%B9%8B%E5%86%85%E5%8F%AF%E5%85%85%E6%BB%A1%E5%86%85%E9%83%A8%E7%94%B5%E6%B1%A0">1️⃣ 本设备可使用各类带Type-C接口充电器充电，通常情况下90分钟之内可充满内部电池。</h4>
+<h4 id="2%EF%B8%8F%E2%83%A3-%E5%A6%82%E6%9E%9C%E8%AE%BE%E5%A4%87%E9%95%BF%E6%97%B6%E9%97%B4%E6%94%BE%E7%BD%AE%E5%AF%BC%E8%87%B4%E5%86%85%E9%83%A8%E7%94%B5%E6%B1%A0%E8%BF%87%E6%94%BE%E7%94%B5%E8%AF%B7%E5%85%88%E6%8F%92%E4%B8%8A%E5%85%85%E7%94%B5%E5%99%A810%E5%88%86%E9%92%9F%E4%B9%8B%E5%90%8E%E5%9C%A8%E8%AF%95%E7%9D%80%E6%89%93%E5%BC%80%E8%AE%BE%E5%A4%87%E7%9A%84%E7%94%B5%E6%BA%90">2️⃣ 如果设备长时间放置导致内部电池过放电，请先插上充电器10分钟之后，在试着打开设备的电源。</h4>
+<h4 id="3%EF%B8%8F%E2%83%A3-%E5%A6%82%E6%9E%9C%E8%AE%BE%E5%A4%87%E9%95%BF%E6%97%B6%E9%97%B4%E4%B8%8D%E4%BD%BF%E7%94%A8%E5%BB%BA%E8%AE%AE%E8%87%B3%E5%B0%91%E6%AF%8F2%E4%B8%AA%E6%9C%88%E7%BB%99%E8%AE%BE%E5%A4%87%E5%85%85%E6%BB%A1%E7%94%B5%E4%B8%80%E6%AC%A1">3️⃣ 如果设备长时间不使用，建议至少每2个月给设备充满电一次。</h4>
+<hr>
+<h2 id="%E8%8F%9C%E5%8D%95">菜单</h2>
+<h3 id="%E5%8A%9F%E8%83%BD%E8%8F%9C%E5%8D%95">功能菜单</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">菜单界面</th>
+<th style="text-align:center">功能</th>
+<th style="text-align:center">菜单界面</th>
+<th style="text-align:center">功能</th>
+<th style="text-align:center">菜单界面</th>
+<th style="text-align:center">功能</th>
+<th style="text-align:center">菜单界面</th>
+<th style="text-align:center">功能</th>
+<th style="text-align:center">菜单界面</th>
+<th style="text-align:center">功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><img src="menu0.png" alt=""></td>
+<td style="text-align:center">视频播放</td>
+<td style="text-align:center"><img src="menu1.png" alt=""></td>
+<td style="text-align:center">图片播放</td>
+<td style="text-align:center"><img src="menu2.png" alt=""></td>
+<td style="text-align:center">音乐播放</td>
+<td style="text-align:center"><img src="menu3.png" alt=""></td>
+<td style="text-align:center">小游戏<sup>*</sup></td>
+<td style="text-align:center"><img src="menu4.png" alt=""></td>
+<td style="text-align:center">WIFI菜单</td>
+</tr>
+<tr>
+<td style="text-align:center"><img src="wifimenu0.png" alt=""></td>
+<td style="text-align:center">WIFI配网</td>
+<td style="text-align:center"><img src="wifimenu1.png" alt=""></td>
+<td style="text-align:center">浏览器文件管理</td>
+<td style="text-align:center"><img src="wifimenu2.png" alt=""></td>
+<td style="text-align:center">手机文件传输</td>
+<td style="text-align:center"><img src="localaudio.png" alt=""></td>
+<td style="text-align:center">本地音乐</td>
+<td style="text-align:center"><img src="wifiaudio.png" alt=""></td>
+<td style="text-align:center">网络电台</td>
+</tr>
+<tr>
+<td style="text-align:center"><img src="gamemenu0.png" alt=""></td>
+<td style="text-align:center">骰子<sup>*</sup></td>
+<td style="text-align:center"><img src="gamemenu1.png" alt=""></td>
+<td style="text-align:center">贪吃蛇<sup>*</sup></td>
+<td style="text-align:center"><img src="gamemenu2.png" alt=""></td>
+<td style="text-align:center">迷宫<sup>*</sup></td>
+<td style="text-align:center"><img src="gamemenu3.png" alt=""></td>
+<td style="text-align:center">剪刀石头布<sup>*</sup></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>注</strong><sup>*</sup>：7厘米AI电子球无小游戏功能，图标将显示为AI功能的图标。</p>
+</blockquote>
+<h3 id="%E5%BC%B9%E5%87%BA%E5%BC%8F%E8%8F%9C%E5%8D%95%E6%8C%87%E7%A4%BA%E5%9B%BE%E6%A0%87">弹出式菜单/指示图标</h3>
+<h4 id="1%EF%B8%8F%E2%83%A3-%E6%92%AD%E6%94%BE%E6%A8%A1%E5%BC%8F-%E5%88%97%E8%A1%A8%E5%BE%AA%E7%8E%AF-%E5%8D%95%E6%9B%B2%E5%BE%AA%E7%8E%AF-%E9%9A%8F%E6%9C%BA-%E6%92%AD%E6%94%BE%E9%94%81">1️⃣ <strong>播放模式：</strong> 列表循环：<img src="listloop.png" alt=""> 单曲循环：<img src="singleloop.png" alt=""> 随机：<img src="shuffle.png" alt=""> 播放锁：<img src="lock.png" alt=""></h4>
+<h4 id="2%EF%B8%8F%E2%83%A3-%E9%9F%B3%E9%87%8F%E6%8E%A7%E5%88%B6-%E9%9D%99%E9%9F%B3-%E9%9F%B3%E9%87%8F17">2️⃣ <strong>音量控制：</strong> 静音:<img src="mute.png" alt=""> 音量1~7: <img src="volume1.png" alt=""><img src="volume2.png" alt=""><img src="volume3.png" alt=""><img src="volume4.png" alt=""><img src="volume5.png" alt=""><img src="volume6.png" alt=""><img src="volume7.png" alt=""></h4>
+<h4 id="3%EF%B8%8F%E2%83%A3-%E7%94%B5%E6%B1%A0%E7%94%B5%E9%87%8F-%E5%85%85%E7%94%B5%E4%B8%AD-%E7%94%B5%E6%B1%A0%E4%BD%8E%E7%94%B5">3️⃣ <strong>电池电量：</strong> 充电中： <img src="charge.png" alt=""> 电池低电：<img src="lowbat.png" alt=""></h4>
+<hr>
+<h2 id="a-id--wificonfigwifi%E9%85%8D%E7%BD%91a"><a id = 'wificonfig'>WiFi配网</a></h2>
+<h4 id="1%EF%B8%8F%E2%83%A3-%E5%9C%A8%E5%BE%AE%E4%BF%A1%E4%B8%8B%E6%90%9C%E7%B4%A2%E4%B8%80%E9%94%AE%E9%85%8D%E7%BD%91%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%84%B6%E5%90%8E%E8%BF%90%E8%A1%8C">1️⃣ 在微信下搜索<em><strong>一键配网</strong></em>小程序，然后运行。</h4>
+<h4 id="2%EF%B8%8F%E2%83%A3-%E6%93%8D%E4%BD%9C%E8%AE%BE%E5%A4%87%E8%8F%9C%E5%8D%95%E8%BF%9B%E5%85%A5wifi%E9%85%8D%E7%BD%91%E6%A8%A1%E5%BC%8F">2️⃣ 操作设备菜单进入WiFi配网模式：</h4>
+<ul>
+<li><strong>对eEGG5</strong>，甩3次显示菜单，然后甩1次切换到下1个菜单项，直到切换到WiFi菜单下，然后甩动2次。设备将显示WiFi配网图标。</li>
+<li><strong>对eEGG6、eEGG7和eEGG7-AI</strong>， 甩3次显示菜单，然后甩1次切换到下1个菜单项，直到切换到WiFi菜单下，然后甩动2次。设备将显示WiFi配网图标。</li>
+</ul>
+<h4 id="3%EF%B8%8F%E2%83%A3-%E5%9C%A8%E5%BE%AE%E4%BF%A1%E4%B8%80%E9%94%AE%E9%85%8D%E7%BD%91%E4%B8%8B%E9%80%89%E6%8B%A9%E4%BD%A0%E7%9A%84wifi%E8%B7%AF%E7%94%B1%E5%99%A8%E7%BD%91%E7%BB%9C%E5%90%8Dssid">3️⃣ 在微信一键配网下选择你的WiFi路由器网络名(SSID)。</h4>
+<h4 id="4%EF%B8%8F%E2%83%A3-%E8%BE%93%E5%85%A5wifi%E5%AF%86%E7%A0%81">4️⃣ 输入WiFi密码。</h4>
+<h4 id="5%EF%B8%8F%E2%83%A3-%E7%82%B9%E5%87%BB%E5%BC%80%E5%A7%8B%E9%85%8D%E7%BD%91%E7%AD%89%E5%BE%85%E5%BE%AE%E4%BF%A1%E6%8F%90%E7%A4%BA%E9%85%8D%E7%BD%91%E6%88%90%E5%8A%9F">5️⃣ 点击开始配网，等待微信提示配网成功。</h4>
+<ul>
+<li><strong>⚠️注1</strong>：设备只能工作在2.4G WiFi模式下，请确保您的路由器支持2.4G的WiFi,并且在微信一键配网选择的SSID是2.4G的。</li>
+<li><strong>⚠️注2</strong>：如果配网一次不成功，可以多测试几次。</li>
+</ul>
+<hr>
+<h2 id="a-id--webserver%E9%80%9A%E8%BF%87%E6%B5%8F%E8%A7%88%E5%99%A8%E4%BC%A0%E8%BE%93%E6%96%87%E4%BB%B6%E5%88%B0%E8%AE%BE%E5%A4%87a"><a id = 'webserver'>通过浏览器传输文件到设备</a></h2>
+<h4 id="1%EF%B8%8F%E2%83%A3-%E6%93%8D%E4%BD%9C%E8%AE%BE%E5%A4%87%E8%8F%9C%E5%8D%95%E8%BF%9B%E5%85%A5%E6%B5%8F%E8%A7%88%E5%99%A8%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E6%A8%A1%E5%BC%8F">1️⃣ 操作设备菜单进入浏览器文件传输模式：</h4>
+<ul>
+<li><strong>对eEGG5</strong>， 甩3次显示菜单，然后甩1次切换到下1个菜单项，直到切换到WiFi菜单下，然后甩动2次。设备将显示WiFi配网图标，再甩一次进入：</li>
+<li><strong>对eEGG6、eEGG7和eEGG7-AI</strong>， 甩3次显示菜单，然后甩1次切换到下1个菜单项，直到切换到WiFi菜单下，然后甩动2次。设备将显示WiFi菜单。再甩动选择有个小电脑<img src="web.png" alt="">那个图标项，再甩2次进入：
+进入浏览器传输文件的菜单后，设备将显示一个带二维码的图标，下面显示设备的SSID和IP地址。</li>
+</ul>
+<h4 id="2%EF%B8%8F%E2%83%A3-%E6%89%93%E5%BC%80%E7%94%B5%E8%84%91%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B3%A8%E6%84%8F%E9%80%89%E6%8B%A9%E7%94%B5%E8%84%91%E7%9A%84wifi%E7%BD%91%E7%BB%9C%E5%88%B0%E4%B8%8E%E8%AE%BE%E5%A4%87%E5%9C%A8%E5%90%8C%E4%B8%80%E4%B8%AA%E7%BD%91%E7%BB%9C%E4%B8%8B%E5%B9%B6%E8%BE%93%E5%85%A5%E8%AE%BE%E5%A4%87%E7%9A%84ip%E5%9C%B0%E5%9D%80%E9%80%9A%E5%B8%B8%E6%98%AF192168xx%E7%A8%8D%E7%AD%89%E4%B8%80%E4%B8%8B%E7%94%B5%E8%84%91%E4%B8%8A%E5%B0%86%E6%98%BE%E7%A4%BA%E4%B8%8B%E9%9D%A2%E7%9A%84%E9%A1%B5%E9%9D%A2webserver">2️⃣ 打开电脑浏览器(注意选择电脑的WiFi网络到与设备在同一个网络下)，并输入设备的IP地址(通常是192.168.x.x),稍等一下，电脑上将显示下面的页面(Webserver)：</h4>
+<p><img src="WebServer_page.png" alt=""></p>
+<h4 id="3%EF%B8%8F%E2%83%A3-%E6%A0%B9%E6%8D%AE%E6%8F%90%E7%A4%BA%E7%AE%A1%E7%90%86%E8%AE%BE%E5%A4%87%E4%B8%8A%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E5%88%B0%E8%AE%BE%E5%A4%87%E6%88%96%E8%80%85%E4%BB%8E%E8%AE%BE%E5%A4%87%E4%B8%8A%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6">3️⃣ 根据提示管理设备上的文件(上传文件到设备或者从设备上删除文件)。</h4>
+<ul>
+<li><strong>⚠️注1</strong>：上传文件到设备前，您需要通过文件转换工具将视频/图片文件转换为设备可识别的格式，有关操作方法，请参考<a href="./readme_tools.md"><strong>文件转换工具及使用方法</strong></a>;</li>
+</ul>
+<hr>
+<h2 id="a-id--tcpserver%E9%80%9A%E8%BF%87%E6%89%8B%E6%9C%BA%E4%BC%A0%E8%BE%93%E6%96%87%E4%BB%B6%E5%88%B0%E8%AE%BE%E5%A4%87%E5%AF%B9eegg6eegg7%E5%92%8Ceegg7-aia"><a id = 'tcpserver'>通过手机传输文件到设备(对eEGG6、eEGG7和eEGG7-AI)</a></h2>
+<h4 id="1%EF%B8%8F%E2%83%A3-%E4%B8%8B%E8%BD%BD%E5%B9%B6%E5%AE%89%E8%A3%85%E5%AE%89%E8%A3%85eegg%E6%96%87%E4%BB%B6%E8%BD%AC%E6%8D%A2%E4%B8%8E%E4%BC%A0%E8%BE%93%E5%8A%A9%E6%89%8Bapp%E5%88%B0%E6%82%A8%E7%9A%84%E6%89%8B%E6%9C%BA%E5%BD%93%E5%89%8D%E4%BB%85%E6%94%AF%E6%8C%81android%E6%89%8B%E6%9C%BAapk%E4%B8%8B%E8%BD%BD%E9%93%BE%E6%8E%A5">1️⃣ 下载并安装安装“<strong>eEGG文件转换与传输助手</strong>”APP到您的手机(<strong>当前仅支持Android手机</strong>),<a href="https://zonestar3d.github.io/EggAPK/"><strong>APK下载链接</strong></a>。</h4>
+<h4 id="2%EF%B8%8F%E2%83%A3-%E7%94%A93%E6%AC%A1%E6%98%BE%E7%A4%BA%E8%8F%9C%E5%8D%95%E7%84%B6%E5%90%8E%E7%94%A91%E6%AC%A1%E5%88%87%E6%8D%A2%E5%88%B0%E4%B8%8B1%E4%B8%AA%E8%8F%9C%E5%8D%95%E9%A1%B9%E7%9B%B4%E5%88%B0%E5%88%87%E6%8D%A2%E5%88%B0wifi%E8%8F%9C%E5%8D%95%E4%B8%8B%E7%84%B6%E5%90%8E%E7%94%A9%E5%8A%A82%E6%AC%A1%E8%AE%BE%E5%A4%87%E5%B0%86%E6%98%BE%E7%A4%BAwifi%E8%8F%9C%E5%8D%95%E5%86%8D%E7%94%A9%E5%8A%A8%E5%B0%8F%E7%90%83%E9%80%89%E6%8B%A9%E6%9C%89%E4%B8%AA%E5%B0%8F%E6%89%8B%E6%9C%BA%E9%82%A3%E4%B8%AA%E5%9B%BE%E6%A0%87%E9%A1%B9%E5%86%8D%E7%94%A92%E6%AC%A1%E8%BF%9B%E5%85%A5%E6%89%8B%E6%9C%BA%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E6%A8%A1%E5%BC%8F%E8%AE%BE%E5%A4%87%E5%B0%86%E6%98%BE%E7%A4%BA%E4%B8%80%E4%B8%AA%E5%B8%A6%E4%BA%8C%E7%BB%B4%E7%A0%81%E7%9A%84%E5%9B%BE%E6%A0%87%E4%B8%8B%E9%9D%A2%E6%98%BE%E7%A4%BA%E8%AE%BE%E5%A4%87%E7%9A%84ssid%E5%92%8Cip%E5%9C%B0%E5%9D%80">2️⃣ 甩3次显示菜单，然后甩1次切换到下1个菜单项，直到切换到WiFi菜单下，然后甩动2次。设备将显示WiFi菜单。再甩动小球选择有个小手机<img src="tcp.png" alt="">那个图标项，再甩2次进入手机文件传输模式。设备将显示一个带二维码的图标，下面显示设备的SSID和IP地址。</h4>
+<h4 id="3%EF%B8%8F%E2%83%A3-%E5%B0%86%E6%82%A8%E7%9A%84%E6%89%8B%E6%9C%BA%E8%AE%BE%E7%BD%AE%E5%88%B0%E4%B8%8E%E8%AE%BE%E5%A4%87%E7%9A%84%E5%90%8C%E4%B8%80%E4%B8%AA%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E4%B8%8Bssid">3️⃣ 将您的手机设置到与设备的同一个无线网络下(SSID)。</h4>
+<h4 id="4%EF%B8%8F%E2%83%A3-%E6%89%93%E5%BC%80%E6%89%8B%E6%9C%BAapp%E5%9C%A8%E8%AE%BE%E7%BD%AE%E8%8F%9C%E5%8D%95%E4%B8%8A%E9%80%89%E6%8B%A9%E5%A5%BD%E6%82%A8%E7%9A%84%E8%AE%BE%E5%A4%87%E5%9E%8B%E5%8F%B7egg50egg60egg70">4️⃣ 打开手机APP，在设置菜单上选择好您的设备型号(EGG50/EGG60/EGG70)。</h4>
+<h4 id="5%EF%B8%8F%E2%83%A3-%E7%82%B9%E5%87%BB%E6%89%8B%E6%9C%BAapp%E4%B8%8A%E7%9A%84%E6%91%84%E5%83%8F%E5%A4%B4%E5%9B%BE%E6%A0%87%E6%89%AB%E6%8F%8F%E8%AE%BE%E5%A4%87%E4%B8%8A%E7%9A%84%E4%BA%8C%E7%BB%B4%E7%A0%81%E8%AE%BE%E5%A4%87%E7%9A%84ip%E5%9C%B0%E5%9D%80%E5%B0%86%E8%87%AA%E5%8A%A8%E5%A1%AB%E5%85%A5%E6%89%8B%E6%9C%BAapp%E4%B8%8A%E7%9A%84ip%E5%9C%B0%E5%9D%80%E6%A0%8F%E7%84%B6%E5%90%8E%E7%82%B9%E5%87%BB%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5%E6%B5%8B%E8%AF%95%E5%B0%8F%E5%9B%BE%E6%A0%87%E6%89%8B%E6%9C%BA%E4%B8%8A%E5%BA%94%E8%AF%A5%E5%BE%88%E5%BF%AB%E6%98%BE%E7%A4%BA%E8%BF%9E%E6%8E%A5%E6%88%90%E5%8A%9F">5️⃣ 点击手机APP上的摄像头图标，扫描设备上的二维码。设备的IP地址将自动填入手机APP上的IP地址栏。然后点击网络连接测试小图标，手机上应该很快显示连接成功。</h4>
+<h4 id="6%EF%B8%8F%E2%83%A3-%E4%B8%8B%E9%9D%A2%E6%82%A8%E5%B0%B1%E5%8F%AF%E4%BB%A5%E7%82%B9%E5%87%BB%E6%89%8B%E6%9C%BAapk%E4%B8%8A%E7%9A%84%E6%8C%89%E9%92%AE%E9%80%89%E6%8B%A9%E6%89%8B%E6%9C%BA%E4%B8%8A%E7%9A%84%E8%A7%86%E9%A2%91%E5%9B%BE%E7%89%87%E5%92%8C%E9%9F%B3%E4%B9%90%E6%96%87%E4%BB%B6%E5%B9%B6%E4%BC%A0%E8%BE%93%E5%88%B0%E8%AE%BE%E5%A4%87%E4%B8%8A">6️⃣ 下面您就可以点击手机APK上的按钮，选择手机上的视频，图片和音乐文件，并传输到设备上。</h4>
+<ul>
+<li><strong>⚠️注1</strong>：eEGG文件转换与传输助手会在传输文件前自动转换图片和视频格式。</li>
+<li><strong>⚠️注2</strong>：eEGG文件转换与传输助手仅支持横屏格式、长度不超过60秒的视频。</li>
+<li><strong>⚠️注3</strong>：有些文件格式可能会转换失败，请拍摄时将视频的分辨率限制在1920x1080，帧率30帧/秒。</li>
+<li><strong>⚠️注4</strong>：在传输文件前先点击一下APP上的网络测试小图标测试网络连接。如果连接失败，请按以下顺序检查：
+<ul>
+<li>检查WiFi信号的强度(设备上最下面显示的RSSI要 &gt;= 80%)，如果信号弱，请将电子球靠近路由器。</li>
+<li>重启手机和APP。</li>
+<li>检查您的设备是否被路由器屏蔽。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="a-id--usbmsc%E8%BF%9E%E6%8E%A5usb%E4%BC%A0%E8%BE%93%E6%96%87%E4%BB%B6a"><a id = 'usbmsc'>连接USB传输文件</a></h2>
+<p>将设备通过USB直接连接到电脑，可以非常方便地将要播放的媒体文件直接复制到设备的内存。</p>
+<p><strong>⚠️注意</strong>：视频和图片文件复制前，需要使用<a href="#tools"><strong>视频和图片转换工具软件</strong></a>转换为设备可用的格式。<br>
+<strong>⚠️注意</strong>：不要删除设备上的目录,否则可能导致设备的某些功能无法正常工作。</p>
+<ul>
+<li>📁 <strong>.set</strong> 目录下保存产品必备的UI界面和配置文件，文件夹和文件都不允许删除‼️</li>
+<li>📁 <strong>.voice</strong> 目录下保存产品必备的语音应答文件。文件夹和文件都不允许删除‼️(仅eEGG7)</li>
+<li>📁 <strong>game</strong> 目录下保存游戏相关文件。文件夹和内部文件都不能删除‼️(eEGG7-AI没有)</li>
+<li>📁 <strong>video 或 mjpeg</strong> 目录下保存用户视频文件。文件夹不能删除，内部的文件可删除。</li>
+<li>📁 <strong>image</strong> 目录下保存用户图片文件。文件夹不能删除，内部的文件可删除。</li>
+<li>📁 <strong>audio</strong> 目录下保存用户音乐文件。文件夹不能删除，内部的文件可删除。</li>
+</ul>
+<hr>
+<h2 id="a-id--tools%E8%A7%86%E9%A2%91%E5%92%8C%E5%9B%BE%E7%89%87%E8%BD%AC%E6%8D%A2%E5%B7%A5%E5%85%B7%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8Bwindowsa"><a id = 'tools'>视频和图片转换工具软件使用教程(Windows)</a></h2>
+<h3 id="img-width%2228%22-height%2228%22-src%22httpsimgicons8comsize48id110727formatpng%22-%E4%B8%8B%E8%BD%BD%E5%B7%A5%E5%85%B7%E8%BD%AF%E4%BB%B6"><img width="28" height="28" src="https://img.icons8.com/?size=48&id=110727&format=png"/> 下载工具软件</h3>
+<h4 id="1%EF%B8%8F%E2%83%A3-%E7%82%B9%E5%87%BB%E4%B8%8B%E9%9D%A2%E7%9A%84%E9%93%BE%E6%8E%A5%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91%E5%92%8C%E5%9B%BE%E7%89%87%E8%BD%AC%E6%8D%A2%E5%B7%A5%E5%85%B7">1️⃣ 点击下面的链接下载视频和图片转换工具。</h4>
+<ul>
+<li>⬇️<a href="https://github.com/ZONESTAR3D/eEGG-Tools/archive/refs/tags/VideoConverter-V0.7.zip"><strong>下载视频转换工具</strong></a></li>
+<li>⬇️<a href="https://github.com/ZONESTAR3D/eEGG-Tools/archive/refs/tags/ImageConverter-V0.3.zip"><strong>下载图片转换工具</strong></a></li>
+</ul>
+<h4 id="2%EF%B8%8F%E2%83%A3-%E5%B0%86%E4%B8%8B%E8%BD%BD%E7%9A%84-zip-%E6%96%87%E4%BB%B6%E8%A7%A3%E5%8E%8B%E7%BC%A9%E5%88%B0%E6%82%A8%E7%94%B5%E8%84%91%E7%9A%84%E7%A3%81%E7%9B%98%E4%B8%AD%E5%BB%BA%E8%AE%AE%E6%94%BE%E7%BD%AE%E5%88%B0-d-%E7%9B%98%E6%88%96%E5%85%B6%E4%BB%96%E7%A3%81%E7%9B%98%E4%B8%8D%E8%A6%81%E4%BD%BF%E7%94%A8%E4%B8%AD%E6%96%87%E7%9B%AE%E5%BD%95">2️⃣ 将下载的 ZIP 文件解压缩到您电脑的磁盘中，建议放置到 D 盘或其他磁盘，不要使用中文目录。</h4>
+<h3 id="img-width%2228%22-height%2228%22-src%22httpsimgicons8comsize48id106323formatpng%22-%E8%A7%86%E9%A2%91%E8%BD%AC%E6%8D%A2%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E"><img width="28" height="28" src="https://img.icons8.com/?size=48&id=106323&format=png"/> 视频转换工具使用说明</h3>
+<h4 id="1%EF%B8%8F%E2%83%A3-%E6%89%93%E5%BC%80%E8%A7%86%E9%A2%91%E8%BD%AC%E6%8D%A2%E5%B7%A5%E5%85%B7%E5%BA%94%E7%94%A8%E8%BD%AF%E4%BB%B6">1️⃣ 打开视频转换工具应用软件。</h4>
+<p><img src="tools1.png" alt=""></p>
+<h4 id="2%EF%B8%8F%E2%83%A3-%E8%AE%BE%E7%BD%AE%E8%BD%AC%E6%8D%A2%E5%8F%82%E6%95%B0">2️⃣ 设置转换参数</h4>
+<ul>
+<li>若设备为 eEGG5，请按下图配置：<br>
+<img src="tools2.png" alt=""></li>
+<li>若设备为 eEGG6 / eEGG7，请按下图配置：<br>
+<img src="tools3.png" alt=""></li>
+</ul>
+<h4 id="3%EF%B8%8F%E2%83%A3-%E6%89%93%E5%BC%80%E9%9C%80%E8%A6%81%E8%BD%AC%E6%8D%A2%E7%9A%84%E6%96%87%E4%BB%B6%E6%94%AF%E6%8C%81%E5%A4%9A%E9%80%89">3️⃣ 打开需要转换的文件（支持多选）。</h4>
+<h4 id="4%EF%B8%8F%E2%83%A3-%E7%82%B9%E5%87%BB%E8%BD%AC%E6%8D%A2%E6%8C%89%E9%92%AE%E8%BD%AC%E6%8D%A2%E5%90%8E%E7%9A%84%E6%96%87%E4%BB%B6%E5%B0%86%E4%BF%9D%E5%AD%98%E5%9C%A8%E6%BA%90%E6%96%87%E4%BB%B6%E6%89%80%E5%9C%A8%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84-output-%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%AD%E6%96%87%E4%BB%B6%E8%BE%83%E5%A4%9A%E6%97%B6%E8%AF%B7%E8%80%90%E5%BF%83%E7%AD%89%E5%BE%85">4️⃣ 点击「转换」按钮，转换后的文件将保存在源文件所在目录下的 <code>output</code> 文件夹中。文件较多时请耐心等待。</h4>
+<h4 id="%E8%BD%AC%E6%8D%A2%E5%AE%8C%E6%88%90%E5%90%8E%E5%8D%B3%E5%8F%AF%E5%B0%86%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E8%87%B3%E8%AE%BE%E5%A4%87%E6%92%AD%E6%94%BE">转换完成后即可将文件上传至设备播放。</h4>
+<h3 id="img-width%2228%22-height%2228%22-src%22httpsimgicons8comsize48id88166formatpng%22-%E5%9B%BE%E7%89%87%E8%BD%AC%E6%8D%A2%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E"><img width="28" height="28" src="https://img.icons8.com/?size=48&id=88166&format=png"/> 图片转换工具使用说明</h3>
+<h4 id="1%EF%B8%8F%E2%83%A3-%E6%89%93%E5%BC%80%E5%9B%BE%E7%89%87%E8%BD%AC%E6%8D%A2%E5%B7%A5%E5%85%B7%E5%BA%94%E7%94%A8%E8%BD%AF%E4%BB%B6">1️⃣ 打开图片转换工具应用软件。</h4>
+<p><img src="tools4.png" alt=""></p>
+<h4 id="2%EF%B8%8F%E2%83%A3-%E8%AE%BE%E7%BD%AE%E6%98%BE%E7%A4%BA%E5%8F%82%E6%95%B0">2️⃣ 设置显示参数</h4>
+<ul>
+<li>eEGG5 请选择输出尺寸 <strong>240×240</strong></li>
+<li>eEGG6 / eEGG7 请选择输出尺寸 <strong>360×360</strong></li>
+</ul>
+<blockquote>
+<p>勾选「裁剪为圆形」可减小文件体积，设备显示效果相同。</p>
+</blockquote>
+<h4 id="3%EF%B8%8F%E2%83%A3-%E7%82%B9%E5%87%BB%E5%AF%BC%E5%85%A5%E6%8C%89%E9%92%AE%E9%80%89%E6%8B%A9%E6%BA%90%E6%96%87%E4%BB%B6">3️⃣ 点击「导入」按钮选择源文件。</h4>
+<h4 id="4%EF%B8%8F%E2%83%A3-%E7%82%B9%E5%87%BB%E5%AF%BC%E5%87%BA%E6%8C%89%E9%92%AE%E5%B9%B6%E8%BE%93%E5%85%A5%E6%96%87%E4%BB%B6%E5%90%8D">4️⃣ 点击「导出」按钮并输入文件名。</h4>
+<h4 id="%E8%BD%AC%E6%8D%A2%E5%AE%8C%E6%88%90%E5%90%8E%E5%8D%B3%E5%8F%AF%E5%B0%86%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E8%87%B3%E8%AE%BE%E5%A4%87%E6%92%AD%E6%94%BE">转换完成后即可将文件上传至设备播放。</h4>
+
+</body>
+</html>
