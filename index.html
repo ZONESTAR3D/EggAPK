@@ -95,12 +95,6 @@
             font-weight: bold;
         }
         
-        .lang-btn i {
-            font-size: 1.1rem;
-            margin-right: 5px;
-            vertical-align: middle;
-        }
-        
         .description {
             padding: 40px;
             text-align: center;
@@ -126,7 +120,42 @@
             border-top: 1px solid #e0e0e0;
         }
         
-        /* 移动端优化 */
+        .resources-box {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .resources-box h3 {
+            color: #2575fc;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .resources-list {
+            text-align: left;
+            display: inline-block;
+            margin: 0 auto;
+            list-style-type: none;
+        }
+        
+        .resources-list li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .resources-list li:before {
+            content: "✓";
+            color: #2575fc;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        /* 响应式设计 */
         @media (max-width: 768px) {
             header {
                 padding: 30px 15px;
@@ -152,7 +181,7 @@
             }
             
             .lang-btn {
-                padding: 8px 15px; /* 进一步减小按钮 */
+                padding: 8px 15px;
                 font-size: 0.85rem;
             }
             
@@ -190,12 +219,12 @@
                 padding: 6px 12px;
                 font-size: 0.8rem;
             }
-            
-            @media (max-width: 360px) {
-                .lang-btn {
-                    padding: 5px 10px;
-                    font-size: 0.75rem;
-                }
+        }
+        
+        @media (max-width: 360px) {
+            .lang-btn {
+                padding: 5px 10px;
+                font-size: 0.75rem;
             }
         }
     </style>
@@ -211,7 +240,7 @@
             <p>User Manual, App Downloads, Tools - All in One Place</p>
             
             <div class="language-switcher">
-                <a href="index_en.html" class="lang-btn active"> 🇬🇧 English </a>                
+                <a href="index_en.html" class="lang-btn active"> 🇺🇸 English </a>                
                 <a href="index_es.html" class="lang-btn"> 🇪🇸 Español </a>
                 <a href="index_pt.html" class="lang-btn"> 🇵🇹 Português </a>
                 <a href="index_fr.html" class="lang-btn"> 🇫🇷 Français </a>
@@ -225,9 +254,9 @@
             <p>This is the main English version of the eEGG resource center. You can access all resources including user manuals, app downloads, and conversion tools for your eEGG device.</p>
             <p>Use the language buttons above to switch to your preferred language version.</p>
             
-            <div style="margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
-                <h3 style="color: #2575fc; margin-bottom: 15px;">Available Resources</h3>
-                <ul style="text-align: left; display: inline-block; margin: 0 auto;">
+            <div class="resources-box">
+                <h3>Available Resources</h3>
+                <ul class="resources-list">
                     <li>Complete User Manual</li>
                     <li>Mobile App Download (APK)</li>
                     <li>Video Conversion Tool</li>
