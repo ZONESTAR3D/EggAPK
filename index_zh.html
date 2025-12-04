@@ -39,6 +39,7 @@
             padding: 40px 20px;
             text-align: center;
             position: relative;
+            min-height: 180px;
         }
         
         .logo{
@@ -52,25 +53,29 @@
         
         .language-switcher {
             position: absolute;
-            top: 20px;
-            right: 20px;
+            top: 15px;
+            right: 15px;
             display: flex;
-            gap: 10px;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            max-width: 500px;
         }
         
         .lang-btn {
             background: rgba(255, 255, 255, 0.2);
             border: none;
             color: white;
-            padding: 8px 16px;
-            border-radius: 15px;
+            padding: 6px 12px;
+            border-radius: 12px;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             transition: all 0.3s ease;
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
+            white-space: nowrap;
         }
         
         .lang-btn:hover {
@@ -429,6 +434,14 @@
                 position: static;
                 justify-content: center;
                 margin-top: 15px;
+                flex-wrap: wrap;
+                gap: 6px;
+                max-width: 100%;
+            }
+
+            .lang-btn {
+                padding: 5px 10px;
+                font-size: 0.75rem;
             }
             
             .feature-table table {
@@ -440,10 +453,33 @@
                 padding: 8px;
             }
         }
+
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .language-switcher {
+                top: 10px;
+                right: 10px;
+                gap: 6px;
+                max-width: 450px;
+            }
+            
+            .lang-btn {
+                padding: 5px 10px;
+                font-size: 0.75rem;
+            }
+            
+            header h1 {
+                font-size: 2rem;
+            }
+        }
         
         @media (max-width: 480px) {
             .container {
                 border-radius: 15px;
+            }
+
+            .lang-btn {
+                padding: 5px 10px;
+                font-size: 0.8rem;
             }
             
             .tab-content h2 {
@@ -500,14 +536,12 @@
         <header>
             <img class="logo" src="eEGGlogo.svg" alt="eEGG Logo">
             <div class="language-switcher">
-                <a href="index_en.html" class="lang-btn">
-                    <!-- <i class="fas fa-globe"></i> -->
-                    🇺🇸 English
-                </a>
-                <a href="index_zh.html" class="lang-btn active">
-                    <!-- <i class="fas fa-globe-asia"></i> -->
-                    🇨🇳 中文
-                </a>
+                <a href="index_en.html" class="lang-btn"> 🇺🇸 English </a>                
+                <a href="index_es.html" class="lang-btn"> 🇪🇸 Español </a>
+                <a href="index_pt.html" class="lang-btn"> 🇵🇹 Português </a>
+                <a href="index_fr.html" class="lang-btn"> 🇫🇷 Français </a>
+                <a href="index_ru.html" class="lang-btn active"> 🇷🇺 Русский </a>
+                <a href="index_zh.html" class="lang-btn active"> 🇨🇳 中文 </a>
             </div>
             <h1>eEGG电子球资源中心</h1>
             <p>用户手册、应用下载、工具软件一站式获取</p>
@@ -535,7 +569,7 @@
             <div class="content-wrapper">
                 <!-- Language switch links -->
                 <div style="margin-bottom: 20px; text-align: center;">                    
-                    <a href="./manual/usermanual.html" class="manual-link" target="_blank">
+                    <a href="./manual/usermanual_zh.html" class="manual-link" target="_blank">
                         <i class="fas fa-file-alt"></i> 查看完整版用户手册
                     </a>
                 </div>
