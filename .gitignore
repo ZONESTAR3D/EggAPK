@@ -1,3 +1,4 @@
+.backup/
 apk/
 tools/
 gitpush.sh
