@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/github/*",
+      "destination": "https://github.com/ZONESTAR3D/eEGG-Tools/archive/refs/tags/:splat"
+    }
+  ]
+}
