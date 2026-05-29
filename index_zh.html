@@ -381,6 +381,35 @@
             color: white;
         }
         
+        /* 新增：按钮组样式 */
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-china {
+            background: #28a745;
+        }
+        
+        .btn-china:hover {
+            background: #218838;
+        }
+        
+        .btn-backup {
+            background: #6c757d;
+        }
+        
+        .btn-backup:hover {
+            background: #5a6268;
+        }
+        
+        .download-hint {
+            margin-top: 10px;
+            font-size: 0.75rem;
+            color: #999;
+        }
+        
         @media (max-width: 768px) {
             .logo {
                 width: 60px;
@@ -449,6 +478,10 @@
             .feature-table th, 
             .feature-table td {
                 padding: 8px;
+            }
+            
+            .btn-group {
+                flex-direction: column;
             }
         }
 
@@ -697,9 +730,16 @@
                         </select>
                     </div>
                     
-                    <a href="#" class="download-btn" id="directDownload" style="display: inline-block; width: auto; min-width: 200px;">
-                        <i class="fas fa-download"></i> 直接下载APK
-                    </a>
+                    <!-- 国内下载按钮 + 备用按钮 -->
+                    <div class="btn-group" style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin-top: 20px;">
+                        <a href="./apk/eEGG_Assistant_V1_0_0.apk" class="download-btn btn-china" id="chinaDownload" style="display: inline-block; width: auto; min-width: 200px; background: #28a745;">
+                            <i class="fas fa-download"></i> 🇨🇳 国内用户下载
+                        </a>
+                        <a href="#" class="download-btn btn-backup" id="directDownload" style="display: inline-block; width: auto; min-width: 200px; background: #6c757d;">
+                            <i class="fas fa-globe"></i> 备用(GitHub)
+                        </a>
+                    </div>
+                    <p class="download-hint">提示：国内用户请优先点击绿色按钮下载，速度更快</p>
                 </div>
                 
                 <div class="manual-section">
@@ -762,9 +802,16 @@
                                 <!-- Video formats will be loaded dynamically -->
                             </ul>
                         </div>
-                        <a href="/github/VideoConverter-V0.7.zip" class="download-btn">
-                            <i class="fas fa-download"></i> 下载视频转换工具
-                        </a>
+                        <!-- 国内下载按钮 + 备用按钮 -->
+                        <div class="btn-group" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <a href="./tools/VideoConvert_V0.7.exe" class="download-btn btn-china" style="background: #28a745;">
+                                <i class="fas fa-download"></i> 🇨🇳 国内用户下载
+                            </a>
+                            <a href="/github/VideoConverter-V0.7.zip" class="download-btn btn-backup" style="background: #6c757d;">
+                                <i class="fas fa-globe"></i> 备用(GitHub)
+                            </a>
+                        </div>
+                        <p class="download-hint">提示：国内用户请优先点击绿色按钮下载</p>
                     </div>
                     
                     <!-- Image Converter -->
@@ -777,9 +824,16 @@
                                 <!-- Image features will be loaded dynamically -->
                             </ul>
                         </div>
-                        <a href="/github/ImageConverter-V0.3.zip" class="download-btn">
-                            <i class="fas fa-download"></i> 下载图片转换工具
-                        </a>
+                        <!-- 国内下载按钮 + 备用按钮 -->
+                        <div class="btn-group" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <a href="./tools/ImageConvert_V0.3.exe" class="download-btn btn-china" style="background: #28a745;">
+                                <i class="fas fa-download"></i> 🇨🇳 国内用户下载
+                            </a>
+                            <a href="/github/ImageConverter-V0.3.zip" class="download-btn btn-backup" style="background: #6c757d;">
+                                <i class="fas fa-globe"></i> 备用(GitHub)
+                            </a>
+                        </div>
+                        <p class="download-hint">提示：国内用户请优先点击绿色按钮下载</p>
                     </div>
                 </div>
                 
