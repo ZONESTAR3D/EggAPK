@@ -8,7 +8,7 @@ export function middleware(context) {
     // 提取请求路径，例如 /download/apk/file.apk  → /apk/file.apk
     const cosPath = url.pathname.replace('/download', '');
     // 重写到 COS 的真实地址
-    const cosUrl = `https://eegg-1331241757.cos.ap-hongkong.myqcloud.com${cosPath}`;
+    const cosUrl = `https://eegg-1331241757.cos-website.ap-hongkong.myqcloud.com${cosPath}`;
     return rewrite(cosUrl);
   }
 
